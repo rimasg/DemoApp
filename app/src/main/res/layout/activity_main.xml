@@ -32,4 +32,13 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_corners"
         android:layout_below="@+id/btnOk"/>
+
+    <Button
+        android:id="@+id/btnBoltsTask"
+        android:text="Bolts Task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvRoundedText" />
+
 </RelativeLayout>
