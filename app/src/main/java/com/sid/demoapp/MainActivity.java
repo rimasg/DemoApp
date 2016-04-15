@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Task.callInBackground(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                final String strToReturn = "I was call by BoltsTask";
+                final String strToReturn = "I was called by BoltsTask";
                 return strToReturn;
             }
         }).onSuccess(new Continuation<String, Void>() {
