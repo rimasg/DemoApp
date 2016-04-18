@@ -141,8 +141,9 @@ public class ImageDragFragment extends Fragment {
 //                v.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onTouch:");
                 return true;
+            } else {
+                return false;
             }
-            return false;
         }
     }
 
