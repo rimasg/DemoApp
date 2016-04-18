@@ -84,23 +84,32 @@ public class ImageDragFragment extends Fragment {
             @Override
             public boolean onDrag(View v, DragEvent event) {
                 // FIXME: 2016.04.17 complete code
+                final View localState = (View) event.getLocalState();
                 final float x = event.getX();
                 final float y = event.getY();
                 switch (event.getAction()) {
                     case DragEvent.ACTION_DRAG_ENTERED:
                         Log.i(TAG, "onDrag: Entered");
                         break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        Log.i(TAG, "onDrag: Drag Exited");
+                        break;
+                    case DragEvent.ACTION_DRAG_LOCATION:
+//                        Log.i(TAG, "onDrag: Drag Location");
+                        Log.i(TAG, "onDrag: Drag Location -> X: " + localState.getX() + " Y: " + localState.getY());
+
+//                        v.setX(x);
+//                        v.setY(y);
+//                        v.invalidate();
+                        break;
                     case DragEvent.ACTION_DRAG_ENDED:
-                        Log.i(TAG, "onDrag: Ended");
+//                        Log.i(TAG, "onDrag: Ended -> X: " + localState.getX() + " Y: " + localState.getY());
+//                        Log.i(TAG, "onDrag: Ended -> X: " + x + " Y: " + y);
                         break;
                     case DragEvent.ACTION_DROP:
                         Log.i(TAG, "onDrag: Dropped");
-                        v.setX(x);
-                        v.setY(y);
-                        v.invalidate();
                         break;
                 }
-                Log.i(TAG, "onDrag: I'm dragged");
                 return true;
             }
         });
@@ -138,7 +147,6 @@ public class ImageDragFragment extends Fragment {
                 final ClipData clipData = ClipData.newPlainText("", "");
                 final View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(clipData, dragShadowBuilder, v, 0);
-//                v.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onTouch:");
                 return true;
             } else {
