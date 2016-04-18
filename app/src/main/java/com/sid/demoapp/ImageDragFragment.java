@@ -1,5 +1,6 @@
 package com.sid.demoapp;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -77,17 +79,29 @@ public class ImageDragFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         draggableImageView = (ImageView) getView().findViewById(R.id.imageView);
+        draggableImageView.setOnTouchListener(new TouchListener());
         draggableImageView.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
                 // FIXME: 2016.04.17 complete code
                 final float x = event.getX();
                 final float y = event.getY();
-                v.setX(x);
-                v.setY(y);
-                v.invalidate();
-                Log.i(TAG, "onDrag: ");
-                return false;
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        Log.i(TAG, "onDrag: Entered");
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        Log.i(TAG, "onDrag: Ended");
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        Log.i(TAG, "onDrag: Dropped");
+                        v.setX(x);
+                        v.setY(y);
+                        v.invalidate();
+                        break;
+                }
+                Log.i(TAG, "onDrag: I'm dragged");
+                return true;
             }
         });
     }
@@ -114,6 +128,22 @@ public class ImageDragFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private final class TouchListener implements View.OnTouchListener{
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                final ClipData clipData = ClipData.newPlainText("", "");
+                final View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
+                v.startDrag(clipData, dragShadowBuilder, v, 0);
+//                v.setVisibility(View.INVISIBLE);
+                Log.i(TAG, "onTouch:");
+                return true;
+            }
+            return false;
+        }
     }
 
     /**

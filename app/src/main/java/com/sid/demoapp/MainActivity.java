@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
                 runBoltsTask();
             }
         });
+
         final Button btnImageDrag = (Button) findViewById(R.id.btnImageDrag);
         btnImageDrag.setOnClickListener(new View.OnClickListener() {
             @Override
