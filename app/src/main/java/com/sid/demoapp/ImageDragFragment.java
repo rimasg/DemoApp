@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 
@@ -34,6 +35,7 @@ public class ImageDragFragment extends Fragment {
     private String mParam2;
 
     private ImageView draggableImageView;
+    private FrameLayout container;
 
     private OnFragmentInteractionListener mListener;
 
@@ -80,7 +82,9 @@ public class ImageDragFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         draggableImageView = (ImageView) getView().findViewById(R.id.imageView);
         draggableImageView.setOnTouchListener(new TouchListener());
-        draggableImageView.setOnDragListener(new View.OnDragListener() {
+        container = (FrameLayout) getView().findViewById(R.id.container);
+//        draggableImageView.setOnDragListener(new View.OnDragListener() {
+        container.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
                 // FIXME: 2016.04.17 complete code
@@ -94,20 +98,15 @@ public class ImageDragFragment extends Fragment {
                     case DragEvent.ACTION_DRAG_EXITED:
                         Log.i(TAG, "onDrag: Drag Exited");
                         break;
-                    case DragEvent.ACTION_DRAG_LOCATION:
-//                        Log.i(TAG, "onDrag: Drag Location");
-                        Log.i(TAG, "onDrag: Drag Location -> X: " + localState.getX() + " Y: " + localState.getY());
-
-//                        v.setX(x);
-//                        v.setY(y);
-//                        v.invalidate();
-                        break;
                     case DragEvent.ACTION_DRAG_ENDED:
-//                        Log.i(TAG, "onDrag: Ended -> X: " + localState.getX() + " Y: " + localState.getY());
 //                        Log.i(TAG, "onDrag: Ended -> X: " + x + " Y: " + y);
+//                        Log.i(TAG, "onDrag: Ended -> X: " + localState.getX() + " Y: " + localState.getY());
                         break;
                     case DragEvent.ACTION_DROP:
-                        Log.i(TAG, "onDrag: Dropped");
+                        Log.i(TAG, "onDrag: Dropped -> X: " + x + " Y: " + y);
+                        v.setX(x);
+                        v.setY(y);
+                        v.invalidate();
                         break;
                 }
                 return true;
