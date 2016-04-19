@@ -5,12 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -83,30 +85,40 @@ public class ImageDragFragment extends Fragment {
         draggableImageView = (ImageView) getView().findViewById(R.id.imageView);
         draggableImageView.setOnTouchListener(new TouchListener());
         container = (FrameLayout) getView().findViewById(R.id.container);
-//        draggableImageView.setOnDragListener(new View.OnDragListener() {
         container.setOnDragListener(new View.OnDragListener() {
             @Override
-            public boolean onDrag(View v, DragEvent event) {
-                // FIXME: 2016.04.17 complete code
-                final View localState = (View) event.getLocalState();
-                final float x = event.getX();
-                final float y = event.getY();
+            public boolean onDrag(View v, final DragEvent event) {
+                // TODO: 2016-04-19 review code
                 switch (event.getAction()) {
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        Log.i(TAG, "onDrag: Entered");
-                        break;
-                    case DragEvent.ACTION_DRAG_EXITED:
-                        Log.i(TAG, "onDrag: Drag Exited");
-                        break;
-                    case DragEvent.ACTION_DRAG_ENDED:
-//                        Log.i(TAG, "onDrag: Ended -> X: " + x + " Y: " + y);
-//                        Log.i(TAG, "onDrag: Ended -> X: " + localState.getX() + " Y: " + localState.getY());
-                        break;
                     case DragEvent.ACTION_DROP:
-                        Log.i(TAG, "onDrag: Dropped -> X: " + x + " Y: " + y);
-                        v.setX(x);
-                        v.setY(y);
-                        v.invalidate();
+                        final float x = event.getX() - draggableImageView.getWidth() / 2;
+                        final float y = event.getY() - draggableImageView.getHeight() / 2;
+                        final float dx = event.getX() - draggableImageView.getWidth() / 2 - draggableImageView.getX();
+                        final float dy = event.getY() - draggableImageView.getHeight() / 2 - draggableImageView.getY();
+
+                        Animation animation = new TranslateAnimation(0, dx, 0, dy);
+                        animation.setDuration(500L);
+                        animation.setInterpolator(new DecelerateInterpolator());
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                draggableImageView.setX(x);
+                                draggableImageView.setY(y);
+                                draggableImageView.invalidate();
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+                        draggableImageView.setAnimation(animation);
+                        draggableImageView.startAnimation(animation);
                         break;
                 }
                 return true;
@@ -146,7 +158,6 @@ public class ImageDragFragment extends Fragment {
                 final ClipData clipData = ClipData.newPlainText("", "");
                 final View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(clipData, dragShadowBuilder, v, 0);
-                Log.i(TAG, "onTouch:");
                 return true;
             } else {
                 return false;
