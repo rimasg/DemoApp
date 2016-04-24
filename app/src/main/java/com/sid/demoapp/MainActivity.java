@@ -79,8 +79,4 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
     public void onFragmentInteraction() {
 
     }
-
-    public void foo() {
-
-    }
 }
