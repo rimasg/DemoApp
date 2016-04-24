@@ -77,6 +77,6 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
 
     @Override
     public void onFragmentInteraction() {
-
+        /* no-op */
     }
 }
