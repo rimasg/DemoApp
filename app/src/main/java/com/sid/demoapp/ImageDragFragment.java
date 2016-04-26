@@ -99,24 +99,7 @@ public class ImageDragFragment extends Fragment {
                         Animation animation = new TranslateAnimation(0, dx, 0, dy);
                         animation.setDuration(500L);
                         animation.setInterpolator(new DecelerateInterpolator());
-                        animation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                draggableImageView.setX(x);
-                                draggableImageView.setY(y);
-                                draggableImageView.invalidate();
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
+                        animation.setAnimationListener(new ImageDragAnimationListener(x, y));
                         draggableImageView.setAnimation(animation);
                         draggableImageView.startAnimation(animation);
                         break;
@@ -150,6 +133,22 @@ public class ImageDragFragment extends Fragment {
         mListener = null;
     }
 
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction();
+    }
+
     private final class TouchListener implements View.OnTouchListener{
 
         @Override
@@ -165,18 +164,30 @@ public class ImageDragFragment extends Fragment {
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
+    private final class ImageDragAnimationListener implements Animation.AnimationListener {
+        private final float x;
+        private final float y;
+
+        public ImageDragAnimationListener(float x, float y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            draggableImageView.setX(x);
+            draggableImageView.setY(y);
+            draggableImageView.invalidate();
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
 }
