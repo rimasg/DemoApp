@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import com.sid.demoapp.dummy.DummyContent;
 import com.sid.demoapp.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -22,7 +20,7 @@ import java.util.List;
  * interface.
  */
 public class MainMenuFragment extends Fragment {
-
+    public static final String TAG = "MainMenuFragment";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -105,5 +103,6 @@ public class MainMenuFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
+
     }
 }

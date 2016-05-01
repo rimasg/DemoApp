@@ -14,23 +14,43 @@
     <Button
         android:id="@+id/btnBoltsTask"
         android:text="Bolts Task"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/btnImageDrag"
-        android:text="Image Drag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnBoltsTask" />
+    <LinearLayout
+        android:id="@+id/btnContainer"
+        android:layout_below="@+id/btnBoltsTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnImageDrag"
+            android:text="Image Drag"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnListView"
+            android:text="List View"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btnImageDrag">
+        android:layout_below="@+id/btnContainer">
     </FrameLayout>
 
 </RelativeLayout>

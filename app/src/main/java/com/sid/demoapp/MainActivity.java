@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.sid.demoapp.dummy.DummyContent;
+
 import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;
 
-public class MainActivity extends AppCompatActivity implements ImageDragFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements
+        ImageDragFragment.OnFragmentInteractionListener, MainMenuFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private RelativeLayout frame;
 
@@ -39,6 +42,15 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
                 setImageDragFragment();
             }
         });
+
+        final Button btnListView = (Button) findViewById(R.id.btnListView);
+        assert btnListView != null;
+        btnListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setMainMenuFragment();
+            }
+        });
     }
 
     private void setImageDragFragment() {
@@ -48,12 +60,30 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
                 imageDragFragment = ImageDragFragment.newInstance();
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragment_container, imageDragFragment, ImageDragFragment.TAG)
+                        .replace(R.id.fragment_container, imageDragFragment, ImageDragFragment.TAG)
                         .commit();
             } else {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .show(imageDragFragment)
+                        .commit();
+            }
+        }
+    }
+
+    private void setMainMenuFragment() {
+        if (findViewById(R.id.fragment_container) != null) {
+            Fragment listViewFragment = getSupportFragmentManager().findFragmentByTag(MainMenuFragment.TAG);
+            if (listViewFragment == null) {
+                listViewFragment = MainMenuFragment.newInstance(0);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, listViewFragment, MainMenuFragment.TAG)
+                        .commit();
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .show(listViewFragment)
                         .commit();
             }
         }
@@ -77,6 +107,15 @@ public class MainActivity extends AppCompatActivity implements ImageDragFragment
 
     @Override
     public void onFragmentInteraction() {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
+
+    public void foo() {
 
     }
 }
