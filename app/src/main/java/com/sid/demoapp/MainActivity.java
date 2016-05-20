@@ -116,6 +116,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void foo() {
-
+        // TODO: 2016-05-17 just foo() method
     }
 }
