@@ -100,7 +100,6 @@ public class ImageDragFragment extends Fragment {
                         animation.setDuration(500L);
                         animation.setInterpolator(new DecelerateInterpolator());
                         animation.setAnimationListener(new ImageDragAnimationListener(x, y));
-                        draggableImageView.setAnimation(animation);
                         draggableImageView.startAnimation(animation);
                         break;
                 }
