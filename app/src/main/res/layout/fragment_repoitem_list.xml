@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.RecyclerView
-    android:name="com.sid.demoapp.MainMenuFragment"
+    android:name="com.sid.demoapp.github.GitHubFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,5 +10,5 @@
     android:layout_marginRight="16dp"
     android:background="@drawable/rounded_corners"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.sid.demoapp.MainMenuFragment"
-    tools:listitem="@layout/fragment_mainmenu"/>
+    tools:context="com.sid.demoapp.github.GitHubFragment"
+    tools:listitem="@layout/fragment_repoitem"/>

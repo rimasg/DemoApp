@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.sid.demoapp.dummy.DummyContent;
+import com.sid.demoapp.github.GitHubFragment;
+import com.sid.demoapp.github.data.RepoData;
 
 import java.util.concurrent.Callable;
 
@@ -15,16 +17,16 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class MainActivity extends AppCompatActivity implements
-        ImageDragFragment.OnFragmentInteractionListener, MainMenuFragment.OnListFragmentInteractionListener {
+        ImageDragFragment.OnFragmentInteractionListener,
+        MainMenuFragment.OnListFragmentInteractionListener,
+        GitHubFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private RelativeLayout frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        frame = (RelativeLayout) findViewById(R.id.relative_layout);
         final Button btnBoltsTask = (Button) findViewById(R.id.btnBoltsTask);
         assert btnBoltsTask != null;
         btnBoltsTask.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 setMainMenuFragment();
+            }
+        });
+
+        final Button btnGitHubRepos = (Button) findViewById(R.id.btnGitHubRepos);
+        assert btnGitHubRepos != null;
+        btnGitHubRepos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setGitHubFragment();
             }
         });
     }
@@ -89,6 +100,24 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    private void setGitHubFragment() {
+        if (findViewById(R.id.fragment_container) != null) {
+            Fragment listViewFragment = getSupportFragmentManager().findFragmentByTag(GitHubFragment.TAG);
+            if (listViewFragment == null) {
+                listViewFragment = GitHubFragment.newInstance(0);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, listViewFragment, GitHubFragment.TAG)
+                        .commit();
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .show(listViewFragment)
+                        .commit();
+            }
+        }
+    }
+
     public void runBoltsTask() {
         Task.callInBackground(new Callable<String>() {
             @Override
@@ -106,16 +135,17 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentInteraction() {
-
+    public void onImageDragFragmentInteraction() {
+        Toast.makeText(MainActivity.this, "Image Drag Item", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+    public void onMainMenuListFragmentInteraction(DummyContent.DummyItem item) {
+        Toast.makeText(MainActivity.this, "Main Menu Item", Toast.LENGTH_SHORT).show();
     }
 
-    public void foo() {
-        // TODO: 2016-05-17 just foo() method
+    @Override
+    public void onGitHubListFragmentInteraction(RepoData item) {
+        Toast.makeText(MainActivity.this, "Git Hub Repo: " + item.name, Toast.LENGTH_SHORT).show();
     }
 }

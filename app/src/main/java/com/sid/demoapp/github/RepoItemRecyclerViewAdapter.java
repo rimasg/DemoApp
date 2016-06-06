@@ -1,4 +1,4 @@
-package com.sid.demoapp;
+package com.sid.demoapp.github;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,23 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sid.demoapp.dummy.DummyContent.DummyItem;
+import com.sid.demoapp.R;
+import com.sid.demoapp.github.data.RepoData;
 
 import java.util.List;
 
-import static com.sid.demoapp.MainMenuFragment.*;
+import static com.sid.demoapp.github.GitHubFragment.OnListFragmentInteractionListener;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link RepoData} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
+public class RepoItemRecyclerViewAdapter extends RecyclerView.Adapter<RepoItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private List<RepoData> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MainMenuRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public RepoItemRecyclerViewAdapter(List<RepoData> items, OnListFragmentInteractionListener
+            listener) {
         mValues = items;
         mListener = listener;
     }
@@ -30,15 +32,15 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_mainmenu, parent, false);
+                .inflate(R.layout.fragment_repoitem, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).name);
+//        holder.mContentView.setText(mValues.get(position).name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +48,7 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onMainMenuListFragmentInteraction(holder.mItem);
+                    mListener.onGitHubListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -57,11 +59,15 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
         return mValues.size();
     }
 
+    public void setValues(List<RepoData> values) {
+        this.mValues = values;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public RepoData mItem;
 
         public ViewHolder(View view) {
             super(view);

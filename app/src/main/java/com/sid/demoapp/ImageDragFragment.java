@@ -82,6 +82,7 @@ public class ImageDragFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         draggableImageView = (ImageView) getView().findViewById(R.id.imageView);
         draggableImageView.setOnTouchListener(new TouchListener());
         container = (FrameLayout) getView().findViewById(R.id.container);
@@ -112,7 +113,7 @@ public class ImageDragFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onFragmentInteraction();
+            mListener.onImageDragFragmentInteraction();
         }
     }
 
@@ -146,7 +147,7 @@ public class ImageDragFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction();
+        void onImageDragFragmentInteraction();
     }
 
     private final class TouchListener implements View.OnTouchListener{
