@@ -2,7 +2,6 @@
 <manifest package="com.sid.demoapp"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
@@ -19,14 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".contacts.ContactsList"/>
-        <service
-            android:name=".services.MyIntentService"
-            android:exported="false">
-        </service>
-
-        <activity android:name=".databinding.DataBindingActivity">
-        </activity>
+        <activity android:name=".databinding.DataBindingActivity"/>
         <activity
             android:name=".tabbed.TabbedSwipeActivity"
             android:label="@string/title_activity_tabbed_swipe"
@@ -37,6 +29,10 @@
             android:label="@string/title_activity_tabbed_action_bar"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <service
+            android:name=".services.MyIntentService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>
