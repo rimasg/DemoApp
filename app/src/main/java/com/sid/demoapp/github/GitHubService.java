@@ -25,7 +25,6 @@ public class GitHubService {
         } catch (ClassCastException e) {
             throw new ClassCastException(reposListCallback.toString() + " must implement Callback listener");
         }
-        getRepos();
     }
 
     public void getRepos() {

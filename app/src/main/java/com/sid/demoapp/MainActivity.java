@@ -1,8 +1,13 @@
 package com.sid.demoapp;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -62,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements
                 setGitHubFragment();
             }
         });
+        //
+        dummyActivity();
     }
 
     private void setImageDragFragment() {
@@ -147,5 +154,30 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onGitHubListFragmentInteraction(RepoData item) {
         Toast.makeText(MainActivity.this, "Git Hub Repo: " + item.name, Toast.LENGTH_SHORT).show();
+    }
+
+    public void dummyActivity() {
+        final ContentResolver resolver = getContentResolver();
+        final String[] columnsToExtract = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME};
+        final Cursor cursor = resolver.query(ContactsContract.Contacts.CONTENT_URI,
+                columnsToExtract, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i(TAG, "dummyActivity: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+            } while (cursor.moveToNext());
+        }
+        final SQLiteDatabase db = openOrCreateDatabase("MyDB", MODE_PRIVATE, null);
+//        db.execSQL("CREATE TABLE IF NOT EXISTS MyTable (FirstName VARCHAR, LastName VARCHAR, Age INT(3))");
+//        db.execSQL("INSERT INTO MyTable VALUES ('Jonas', 'Batonas', '66')");
+/*
+        final Cursor c = db.rawQuery("SELECT * FROM MyTable", null);
+
+        if (c.moveToFirst()) {
+            do {
+                Log.i(TAG, "dummyActivity: " + c.getString(c.getColumnIndex("FirstName")));
+            } while (c.moveToNext());
+        }
+*/
+        db.close();
     }
 }
