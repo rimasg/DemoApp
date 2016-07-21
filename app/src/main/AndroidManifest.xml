@@ -3,6 +3,7 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,9 @@
             android:name=".services.MyIntentService"
             android:exported="false">
         </service>
+
+        <activity android:name=".databinding.DataBindingActivity">
+        </activity>
     </application>
 
 </manifest>

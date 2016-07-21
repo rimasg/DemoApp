@@ -1,4 +1,4 @@
-package com.sid.demoapp;
+package com.sid.demoapp.github;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,9 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.sid.demoapp.dummy.DummyContent;
-import com.sid.demoapp.dummy.DummyContent.DummyItem;
+import com.sid.demoapp.R;
+import com.sid.demoapp.github.data.RepoData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A fragment representing a list of Items.
@@ -19,25 +27,27 @@ import com.sid.demoapp.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MainMenuFragment extends Fragment {
-    public static final String TAG = "MainMenuFragment";
+public class GitHubFragment extends Fragment implements Callback<List<RepoData>> {
+    public static final String TAG = "GitHubFragment";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private List<RepoData> mItems = new ArrayList<>();
+    private RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MainMenuFragment() {
+    public GitHubFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MainMenuFragment newInstance(int columnCount) {
-        MainMenuFragment fragment = new MainMenuFragment();
+    public static GitHubFragment newInstance(int columnCount) {
+        GitHubFragment fragment = new GitHubFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -51,23 +61,25 @@ public class MainMenuFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        GitHubService gitHubService = new GitHubService(this);
+        gitHubService.getRepos();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mainmenu_list, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_repoitem_list, container, false);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MainMenuRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new RepoItemRecyclerViewAdapter(mItems, mListener));
         }
         return view;
     }
@@ -90,6 +102,22 @@ public class MainMenuFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResponse(Call<List<RepoData>> call, Response<List<RepoData>> response) {
+        if (response.isSuccessful()) {
+            final List<RepoData> repoDatas = response.body();
+            final RepoItemRecyclerViewAdapter adapter = (RepoItemRecyclerViewAdapter) recyclerView.getAdapter();
+            adapter.setValues(repoDatas);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onFailure(Call<List<RepoData>> call, Throwable t) {
+        Toast.makeText(getActivity(), "Getting Repos failed!\nTray again later.", Toast
+                .LENGTH_SHORT).show();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -102,7 +130,6 @@ public class MainMenuFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onMainMenuListFragmentInteraction(DummyItem item);
-
+        void onGitHubListFragmentInteraction(RepoData item);
     }
 }

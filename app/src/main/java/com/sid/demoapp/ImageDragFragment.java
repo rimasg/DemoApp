@@ -82,6 +82,7 @@ public class ImageDragFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //noinspection ConstantConditions
         draggableImageView = (ImageView) getView().findViewById(R.id.imageView);
         draggableImageView.setOnTouchListener(new TouchListener());
         container = (FrameLayout) getView().findViewById(R.id.container);
@@ -91,17 +92,17 @@ public class ImageDragFragment extends Fragment {
                 // TODO: 2016-04-19 review code
                 switch (event.getAction()) {
                     case DragEvent.ACTION_DROP:
-                        final float x = event.getX() - draggableImageView.getWidth() / 2;
-                        final float y = event.getY() - draggableImageView.getHeight() / 2;
-                        final float dx = event.getX() - draggableImageView.getWidth() / 2 - draggableImageView.getX();
-                        final float dy = event.getY() - draggableImageView.getHeight() / 2 - draggableImageView.getY();
+                        final View draggableView = (View) event.getLocalState();
+                        final float x = event.getX() - draggableView.getWidth() / 2;
+                        final float y = event.getY() - draggableView.getHeight() / 2;
+                        final float dx = event.getX() - draggableView.getWidth() / 2 - draggableView.getX();
+                        final float dy = event.getY() - draggableView.getHeight() / 2 - draggableView.getY();
 
                         Animation animation = new TranslateAnimation(0, dx, 0, dy);
                         animation.setDuration(500L);
                         animation.setInterpolator(new DecelerateInterpolator());
                         animation.setAnimationListener(new ImageDragAnimationListener(x, y));
-                        draggableImageView.setAnimation(animation);
-                        draggableImageView.startAnimation(animation);
+                        draggableView.startAnimation(animation);
                         break;
                 }
                 return true;
@@ -112,7 +113,7 @@ public class ImageDragFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onFragmentInteraction();
+            mListener.onImageDragFragmentInteraction();
         }
     }
 
@@ -146,7 +147,7 @@ public class ImageDragFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction();
+        void onImageDragFragmentInteraction();
     }
 
     private final class TouchListener implements View.OnTouchListener{
