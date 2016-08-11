@@ -11,17 +11,37 @@
     android:background="@drawable/rounded_corners"
     tools:context="com.sid.demoapp.MainActivity">
 
-    <Button
-        android:id="@+id/btnBoltsTask"
-        android:text="Bolts Task"
-        style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
+    <LinearLayout
+        android:id="@+id/top_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnBoltsTask"
+            android:text="Bolts Task"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/action_list_packages"
+            android:text="List Packages"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/action_launch_calc"
+            android:text="Launch Gallery"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/btnContainer"
-        android:layout_below="@+id/btnBoltsTask"
+        android:layout_below="@+id/top_layer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

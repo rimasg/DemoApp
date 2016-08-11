@@ -1,8 +1,10 @@
 package com.sid.demoapp;
 
 import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import com.sid.demoapp.dummy.DummyContent;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import bolts.Continuation;
@@ -38,6 +41,22 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 runBoltsTask();
+            }
+        });
+
+        final Button btnListPackages = (Button) findViewById(R.id.action_list_packages);
+        btnListPackages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listPackages();
+            }
+        });
+
+        final Button btnLaunchCalc = (Button) findViewById(R.id.action_launch_calc);
+        btnLaunchCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCalc();
             }
         });
 
@@ -68,7 +87,13 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
         //
-        dummyActivity();
+//        dummyActivity();
+    }
+
+    private void launchCalc() {
+        final Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_GALLERY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, "Select App to Run"));
     }
 
     private void setImageDragFragment() {
@@ -156,6 +181,17 @@ public class MainActivity extends AppCompatActivity implements
         Toast.makeText(MainActivity.this, "Git Hub Repo: " + item.name, Toast.LENGTH_SHORT).show();
     }
 
+    private void listPackages(){
+        int counter = 0;
+        PackageManager packageManager = getPackageManager();
+        List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
+        for (ApplicationInfo applicationInfo : installedApplications) {
+            Log.d(TAG, counter + " Package Name: " + applicationInfo.packageName);
+            Log.d(TAG, counter + " Source Dir: " + applicationInfo.sourceDir);
+            counter++;
+        }
+    }
+
     public void dummyActivity() {
         final ContentResolver resolver = getContentResolver();
         final String[] columnsToExtract = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME};
@@ -166,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements
                 Log.i(TAG, "dummyActivity: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
             } while (cursor.moveToNext());
         }
-        final SQLiteDatabase db = openOrCreateDatabase("MyDB", MODE_PRIVATE, null);
+//        final SQLiteDatabase db = openOrCreateDatabase("MyDB", MODE_PRIVATE, null);
 //        db.execSQL("CREATE TABLE IF NOT EXISTS MyTable (FirstName VARCHAR, LastName VARCHAR, Age INT(3))");
 //        db.execSQL("INSERT INTO MyTable VALUES ('Jonas', 'Batonas', '66')");
 /*
@@ -178,6 +214,6 @@ public class MainActivity extends AppCompatActivity implements
             } while (c.moveToNext());
         }
 */
-        db.close();
+//        db.close();
     }
 }

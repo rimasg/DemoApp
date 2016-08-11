@@ -38,7 +38,8 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Pasirinktas variantas " + position,
+                makeDetails(position));
     }
 
     private static String makeDetails(int position) {

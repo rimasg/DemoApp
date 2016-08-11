@@ -33,6 +33,21 @@
             android:name=".services.MyIntentService"
             android:exported="false">
         </service>
+
+        <provider
+            android:name=".provider.DataProvider"
+            android:authorities="com.sid.demoapp.provider"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
+
+        <activity android:name=".provider.DataProviderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
