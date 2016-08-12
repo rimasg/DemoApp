@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.sid.demoapp.R;
+import com.sid.demoapp.databinding.ActivityDataProviderBinding;
 
 public class DataProviderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -26,7 +28,8 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_provider);
+        ActivityDataProviderBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_data_provider);
+        binding.setClickHandler(new ClickHandler(this));
 
         final EditText vDataEntry = (EditText) findViewById(R.id.data_entry);
         final Button vDataSubmit = (Button) findViewById(R.id.action_data_submit);
@@ -45,20 +48,20 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
             }
         });
         final ListView vDataList = (ListView) findViewById(R.id.data_list);
-        adapter = new SimpleCursorAdapter(this, R.layout.data_layout, null, columnsToDisplay, resourceIds, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter = new SimpleCursorAdapter(this, R.layout.data_item, null, columnsToDisplay, resourceIds, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         vDataList.setAdapter(adapter);
 
         getLoaderManager().initLoader(0, null, this);
     }
 
-    private void enterData(String s) {
+    public void enterData(String s) {
         if (TextUtils.isEmpty(s)) return;
         ContentValues content = new ContentValues();
         content.put(DataProviderContract.DATA, s);
         getContentResolver().insert(DataProviderContract.CONTENT_URI, content);
     }
 
-    private void deleteData() {
+    public void deleteData() {
         getContentResolver().delete(DataProviderContract.CONTENT_URI, null, null);
     }
 

@@ -89,6 +89,7 @@ public class DataProvider extends ContentProvider {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + DataProviderContract.TABLE_NAME);
+            onCreate(db);
         }
     }
 }
