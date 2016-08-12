@@ -3,6 +3,7 @@ package com.sid.demoapp.provider;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,16 +11,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
 public class DataProvider extends ContentProvider {
-    public DataProvider() {
-    }
 
     private static final String DATABASE_NAME = "data.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String CREATE_TABLE = "CREATE TABLE "
-            + DataProviderContract.TABLE_NAME + "("
-            + DataProviderContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + DataProviderContract.DATA + " TEXT"
+    private static final String CREATE_SQL = "CREATE TABLE "
+            + DataProviderContract.TABLE_NAME + " ("
+            + DataProviderContract._ID + " INTEGER PRIMARY KEY,"
+            + DataProviderContract.COLUMN_NAME_DATA + " TEXT"
             + ")";
+    private static final String DELETE_SQL = "DROP TABLE IF EXISTS " + DataProviderContract.TABLE_NAME;
+    private static UriMatcher uriMatcher;
+
+    public DataProvider() {
+    }
+
+    static {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    }
 
     private SQLiteOpenHelper dbHelper;
 
@@ -33,7 +41,7 @@ public class DataProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         final SQLiteDatabase db = dbHelper.getReadableDatabase();
-        final Cursor cursor = db.query(DataProviderContract.TABLE_NAME, projection, null, null, null, null, null);
+        final Cursor cursor = db.query(DataProviderContract.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
@@ -83,12 +91,12 @@ public class DataProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_TABLE);
+            db.execSQL(CREATE_SQL);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + DataProviderContract.TABLE_NAME);
+            db.execSQL(DELETE_SQL);
             onCreate(db);
         }
     }

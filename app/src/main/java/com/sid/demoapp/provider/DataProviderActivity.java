@@ -11,8 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -21,7 +21,7 @@ import com.sid.demoapp.databinding.ActivityDataProviderBinding;
 
 public class DataProviderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String columnsToDisplay[] = new String[] { DataProviderContract.DATA };
+    private static final String columnsToDisplay[] = new String[] { DataProviderContract.COLUMN_NAME_DATA};
     private static final int[] resourceIds = new int[] { R.id.data_item };
     private SimpleCursorAdapter adapter;
 
@@ -47,8 +47,16 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
                 deleteData();
             }
         });
+        final Button vSearch = (Button) findViewById(R.id.action_search);
+        vSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search(vDataEntry.getText().toString());
+            }
+        });
         final ListView vDataList = (ListView) findViewById(R.id.data_list);
-        adapter = new SimpleCursorAdapter(this, R.layout.data_item, null, columnsToDisplay, resourceIds, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter = new SimpleCursorAdapter(this, R.layout.data_item, null, columnsToDisplay, resourceIds, 0);
+        setAdapterFilter();
         vDataList.setAdapter(adapter);
 
         getLoaderManager().initLoader(0, null, this);
@@ -57,12 +65,28 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
     public void enterData(String s) {
         if (TextUtils.isEmpty(s)) return;
         ContentValues content = new ContentValues();
-        content.put(DataProviderContract.DATA, s);
+        content.put(DataProviderContract.COLUMN_NAME_DATA, s);
         getContentResolver().insert(DataProviderContract.CONTENT_URI, content);
     }
 
     public void deleteData() {
         getContentResolver().delete(DataProviderContract.CONTENT_URI, null, null);
+    }
+
+    private void search(String s) {
+        adapter.getFilter().filter(s);
+    }
+
+    private void setAdapterFilter() {
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+            @Override
+            public Cursor runQuery(CharSequence constraint) {
+                final Cursor cursor = getContentResolver().query(DataProviderContract.CONTENT_URI,
+                        DataProviderContract.PROJECTION,
+                        DataProviderContract.COLUMN_NAME_DATA + " LIKE ?", new String[]{"%" + constraint + "%"}, null);
+                return cursor;
+            }
+        });
     }
 
     @Override
