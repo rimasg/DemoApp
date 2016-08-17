@@ -1,11 +1,19 @@
 package com.sid.demoapp;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +25,8 @@ import android.widget.Toast;
 import com.sid.demoapp.dummy.DummyContent;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
+import com.sid.demoapp.jobscheduler.ScheduledJobService;
+import com.sid.demoapp.utils.BatteryStatusListener;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -29,6 +39,28 @@ public class MainActivity extends AppCompatActivity implements
         MainMenuFragment.OnListFragmentInteractionListener,
         GitHubFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
+
+    public static final int MSG_START = 1;
+    public static final int MSG_END = 2;
+
+    private BatteryStatusListener batteryStatus;
+    private ComponentName serviceComponent;
+    private ScheduledJobService jobService;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_START:
+                    Toast.makeText(MainActivity.this, "Message Object received", Toast.LENGTH_SHORT).show();
+                    jobService = (ScheduledJobService) msg.obj;
+                    jobService.setUiCallback(MainActivity.this);
+                    break;
+                case MSG_END:
+                    break;
+            }
+        }
+    };
+    private Button btnSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +118,55 @@ public class MainActivity extends AppCompatActivity implements
                 setGitHubFragment();
             }
         });
+        btnSchedule = (Button) findViewById(R.id.action_job_scheduler);
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scheduleJob();
+            }
+        });
         //
-//        dummyActivity();
+        batteryStatus = new BatteryStatusListener();
+        //
+        serviceComponent = new ComponentName(this, ScheduledJobService.class);
+        final Intent intent = new Intent(this, ScheduledJobService.class);
+        intent.putExtra("messenger", new Messenger(handler));
+        startService(intent);
+
+//        dummyMethod();
+    }
+
+    private void scheduleJob() {
+        final JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+
+        final JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        jobScheduler.schedule(builder.build());
+    }
+
+    public void jobStarted() {
+        Toast.makeText(MainActivity.this, "Job started", Toast.LENGTH_SHORT).show();
+        btnSchedule.setText("Job started");
+        btnSchedule.setBackgroundColor(Color.RED);
+    }
+
+    public void jobStopped() {
+        Toast.makeText(MainActivity.this, "Job stopped", Toast.LENGTH_SHORT).show();
+        btnSchedule.setText("Job stopped");
+        btnSchedule.setBackgroundColor(Color.GREEN);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryStatus, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(batteryStatus);
+        super.onPause();
     }
 
     private void launchCalc() {
@@ -192,14 +271,14 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    public void dummyActivity() {
+    private void dummyMethod() {
         final ContentResolver resolver = getContentResolver();
         final String[] columnsToExtract = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME};
         final Cursor cursor = resolver.query(ContactsContract.Contacts.CONTENT_URI,
                 columnsToExtract, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                Log.i(TAG, "dummyActivity: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+                Log.i(TAG, "dummyMethod: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
             } while (cursor.moveToNext());
         }
 //        final SQLiteDatabase db = openOrCreateDatabase("MyDB", MODE_PRIVATE, null);
@@ -210,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if (c.moveToFirst()) {
             do {
-                Log.i(TAG, "dummyActivity: " + c.getString(c.getColumnIndex("FirstName")));
+                Log.i(TAG, "dummyMethod: " + c.getString(c.getColumnIndex("FirstName")));
             } while (c.moveToNext());
         }
 */

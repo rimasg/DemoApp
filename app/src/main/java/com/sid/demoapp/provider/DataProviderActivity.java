@@ -69,8 +69,8 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
         getContentResolver().insert(DataProviderContract.CONTENT_URI, content);
     }
 
-    public void deleteData() {
-        getContentResolver().delete(DataProviderContract.CONTENT_URI, null, null);
+    public int deleteData() {
+        return getContentResolver().delete(DataProviderContract.CONTENT_URI, null, null);
     }
 
     private void search(String s) {
@@ -81,7 +81,8 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             @Override
             public Cursor runQuery(CharSequence constraint) {
-                final Cursor cursor = getContentResolver().query(DataProviderContract.CONTENT_URI,
+                final Cursor cursor = getContentResolver().query(
+                        DataProviderContract.CONTENT_URI,
                         DataProviderContract.PROJECTION,
                         DataProviderContract.COLUMN_NAME_DATA + " LIKE ?", new String[]{"%" + constraint + "%"}, null);
                 return cursor;

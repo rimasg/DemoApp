@@ -34,6 +34,10 @@
             android:exported="false">
         </service>
 
+        <service android:name=".jobscheduler.ScheduledJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE"
+                 android:exported="false"/>
+
         <provider
             android:name=".provider.DataProvider"
             android:authorities="com.sid.demoapp.provider"
