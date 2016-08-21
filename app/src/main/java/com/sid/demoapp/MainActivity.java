@@ -27,6 +27,7 @@ import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.utils.BatteryStatusListener;
+import com.sid.demoapp.web.WebLoaderFragment;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -125,12 +126,20 @@ public class MainActivity extends AppCompatActivity implements
                 scheduleJob();
             }
         });
+
+        final Button btnLoadDataFromWeb = (Button) findViewById(R.id.action_load_data_from_web);
+        btnLoadDataFromWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWebLoaderFragment();
+            }
+        });
         //
         batteryStatus = new BatteryStatusListener();
         //
         serviceComponent = new ComponentName(this, ScheduledJobService.class);
         final Intent intent = new Intent(this, ScheduledJobService.class);
-        intent.putExtra("messenger", new Messenger(handler));
+        intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
         startService(intent);
 
 //        dummyMethod();
@@ -219,6 +228,24 @@ public class MainActivity extends AppCompatActivity implements
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, listViewFragment, GitHubFragment.TAG)
+                        .commit();
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .show(listViewFragment)
+                        .commit();
+            }
+        }
+    }
+
+    private void setWebLoaderFragment() {
+        if (findViewById(R.id.fragment_container) != null) {
+            Fragment listViewFragment = getSupportFragmentManager().findFragmentByTag(WebLoaderFragment.TAG);
+            if (listViewFragment == null) {
+                listViewFragment = WebLoaderFragment.newInstance();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, listViewFragment, WebLoaderFragment.TAG)
                         .commit();
             } else {
                 getSupportFragmentManager()

@@ -56,8 +56,8 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
         });
         final ListView vDataList = (ListView) findViewById(R.id.data_list);
         adapter = new SimpleCursorAdapter(this, R.layout.data_item, null, columnsToDisplay, resourceIds, 0);
-        setAdapterFilter();
         vDataList.setAdapter(adapter);
+        setAdapterFilter();
 
         getLoaderManager().initLoader(0, null, this);
     }

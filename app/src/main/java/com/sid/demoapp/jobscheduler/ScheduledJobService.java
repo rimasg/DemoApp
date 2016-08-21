@@ -16,11 +16,12 @@ import com.sid.demoapp.MainActivity;
 
 public class ScheduledJobService extends JobService {
     private static final String TAG = "ScheduledJobService";
+    public static final String MESSENGER = "messenger";
     private MainActivity activity;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final Messenger callback = intent.getParcelableExtra("messenger");
+        final Messenger callback = intent.getParcelableExtra(MESSENGER);
         final Message message = Message.obtain();
         message.what = MainActivity.MSG_START;
         message.obj = this;
