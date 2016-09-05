@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void scheduleJob() {
         final JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent)
+                .setOverrideDeadline(0)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
 
         final JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);

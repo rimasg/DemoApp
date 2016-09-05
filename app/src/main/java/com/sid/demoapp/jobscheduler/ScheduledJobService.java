@@ -34,9 +34,20 @@ public class ScheduledJobService extends JobService {
     }
 
     @Override
-    public boolean onStartJob(JobParameters params) {
+    public boolean onStartJob(final JobParameters params) {
         activity.jobStarted();
-        return false;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    java.util.concurrent.TimeUnit.MILLISECONDS.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                jobFinished(params, false);
+            }
+        }).start();
+        return true;
     }
 
     @Override
