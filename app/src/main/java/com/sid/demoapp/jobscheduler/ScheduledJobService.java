@@ -3,6 +3,7 @@ package com.sid.demoapp.jobscheduler;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
@@ -36,17 +37,7 @@ public class ScheduledJobService extends JobService {
     @Override
     public boolean onStartJob(final JobParameters params) {
         activity.jobStarted();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    java.util.concurrent.TimeUnit.MILLISECONDS.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                jobFinished(params, false);
-            }
-        }).start();
+        new JobTask().execute(params);
         return true;
     }
 
@@ -58,5 +49,31 @@ public class ScheduledJobService extends JobService {
 
     public void setUiCallback(MainActivity activity) {
         this.activity = activity;
+    }
+
+    private class JobTask extends AsyncTask<JobParameters, Void, Void> {
+        protected JobParameters param;
+
+        @Override
+        protected Void doInBackground(JobParameters... params) {
+            param = params[0];
+
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.run();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            jobFinished(param, false);
+        }
     }
 }
