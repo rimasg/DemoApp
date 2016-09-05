@@ -26,6 +26,7 @@ import com.sid.demoapp.dummy.DummyContent;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
+import com.sid.demoapp.scheduledjobs.ScheduleAlarmManager;
 import com.sid.demoapp.utils.BatteryStatusListener;
 import com.sid.demoapp.web.WebLoaderFragment;
 
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements
         startService(intent);
 
 //        dummyMethod();
+        scheduleAlarmJobAfter(15);
     }
 
     private void scheduleJob() {
@@ -297,6 +299,11 @@ public class MainActivity extends AppCompatActivity implements
             Log.d(TAG, counter + " Source Dir: " + applicationInfo.sourceDir);
             counter++;
         }
+    }
+
+    private void scheduleAlarmJobAfter(int seconds) {
+        Toast.makeText(this, "Job Scheduled to start after " + seconds + " seconds", Toast.LENGTH_SHORT).show();
+        new ScheduleAlarmManager(this).scheduleAlarmAfter(seconds);
     }
 
     private void dummyMethod() {
