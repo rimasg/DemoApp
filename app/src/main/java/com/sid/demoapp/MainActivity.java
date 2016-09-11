@@ -135,6 +135,14 @@ public class MainActivity extends AppCompatActivity implements
                 setWebLoaderFragment();
             }
         });
+
+        final Button bntAnimate = (Button) findViewById(R.id.action_animate);
+        bntAnimate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DummyActivity.class));
+            }
+        });
         //
         batteryStatus = new BatteryStatusListener();
         //
