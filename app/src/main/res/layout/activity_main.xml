@@ -97,8 +97,8 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/action_animate"
-            android:text="Animate"
+            android:id="@+id/action_fetch_data_from_web"
+            android:text="Fetch AIDL"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

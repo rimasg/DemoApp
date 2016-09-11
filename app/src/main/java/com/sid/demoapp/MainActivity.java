@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        final Button bntAnimate = (Button) findViewById(R.id.action_animate);
+        final Button bntAnimate = (Button) findViewById(R.id.action_fetch_data_from_web);
         bntAnimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

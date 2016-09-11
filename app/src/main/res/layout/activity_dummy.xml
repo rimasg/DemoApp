@@ -14,19 +14,35 @@
         android:orientation="vertical"
         tools:context="com.sid.demoapp.DummyActivity">
 
-        <Button
-            android:id="@+id/action_animate"
-            android:text="Animate"
-            style="@style/ButtonStyle"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/action_animate"
+                android:text="Animate"
+                style="@style/ButtonStyle"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/action_fetch_data_from_web"
+                android:text="Fetch Data from AIDL"
+                style="@style/ButtonStyle"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/animated_text"
             android:text="@android:string/ok"
             style="?android:attr/textAppearanceMedium"
             android:layout_gravity="center"
+            android:visibility="invisible"
             android:background="@drawable/rounded_corners"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
