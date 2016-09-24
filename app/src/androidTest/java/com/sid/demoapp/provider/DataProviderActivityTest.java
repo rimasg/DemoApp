@@ -42,7 +42,7 @@ public class DataProviderActivityTest {
     public void checkDataEntry() throws Exception {
         activity.deleteData();
         activity.enterData("x");
-        activity.enterData("z");
+        activity.enterData("y");
         activity.enterData("z");
         final int count = activity.deleteData();
         assertThat("Wrong number of records deleted", count, is(3));

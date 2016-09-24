@@ -143,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(new Intent(MainActivity.this, DummyActivity.class));
             }
         });
+
+        final Button btnActionBar = (Button) findViewById(R.id.action_bar_activity);
+        btnActionBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActinBarActivity();
+            }
+        });
         //
         batteryStatus = new BatteryStatusListener();
         //
@@ -153,6 +161,10 @@ public class MainActivity extends AppCompatActivity implements
 
 //        dummyMethod();
         scheduleAlarmJobAfter(15);
+    }
+
+    private void launchActinBarActivity() {
+        startActivity(new Intent(MainActivity.this, ActionBarActivity.class));
     }
 
     private void scheduleJob() {

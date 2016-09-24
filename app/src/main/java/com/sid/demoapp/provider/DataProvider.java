@@ -9,8 +9,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.util.Log;
 
 public class DataProvider extends ContentProvider {
+    private static final String TAG = "DataProvider";
 
     private static final String DATABASE_NAME = "data.db";
     private static final int DATABASE_VERSION = 1;
@@ -20,13 +22,14 @@ public class DataProvider extends ContentProvider {
             + DataProviderContract.COLUMN_NAME_DATA + " TEXT"
             + ")";
     private static final String DELETE_SQL = "DROP TABLE IF EXISTS " + DataProviderContract.TABLE_NAME;
-    private static UriMatcher uriMatcher;
+    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     public DataProvider() {
     }
 
     static {
-        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(DataProviderContract.AUTHORITY, DataProviderContract.TABLE_NAME, 1);
+        uriMatcher.addURI(DataProviderContract.AUTHORITY, DataProviderContract.TABLE_NAME + "/#", 2);
     }
 
     private SQLiteOpenHelper dbHelper;
@@ -40,6 +43,15 @@ public class DataProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
+        // TODO: 2016.09.24 Tesing UriMatcher, remove later
+        switch (uriMatcher.match(uri)) {
+            case 1:
+                Log.d(TAG, "query: Table selected");
+                break;
+            case 2:
+                Log.d(TAG, "query: Item selected");
+                break;
+        }
         final SQLiteDatabase db = dbHelper.getReadableDatabase();
         final Cursor cursor = db.query(DataProviderContract.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -66,7 +78,7 @@ public class DataProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        final int count = db.delete(DataProviderContract.TABLE_NAME, null, null);
+        final int count = db.delete(DataProviderContract.TABLE_NAME, selection, selectionArgs);
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }

@@ -63,10 +63,16 @@
 
         <service
             android:name=".services.WebDataFetchService"
-            android:process=":my_process"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            android:process=":my_process">
         </service>
+
+        <activity
+            android:name=".ActionBarActivity"
+            android:label="@string/title_activity_action_bar"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

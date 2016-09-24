@@ -1,15 +1,19 @@
 package com.sid.demoapp.provider;
 
 import android.app.LoaderManager;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
@@ -57,6 +61,19 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
         final ListView vDataList = (ListView) findViewById(R.id.data_list);
         adapter = new SimpleCursorAdapter(this, R.layout.data_item, null, columnsToDisplay, resourceIds, 0);
         vDataList.setAdapter(adapter);
+        vDataList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                deleteItem(id);
+                return true;
+            }
+        });
+        vDataList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showItemInfo(id);
+            }
+        });
         setAdapterFilter();
 
         getLoaderManager().initLoader(0, null, this);
@@ -69,8 +86,20 @@ public class DataProviderActivity extends AppCompatActivity implements LoaderMan
         getContentResolver().insert(DataProviderContract.CONTENT_URI, content);
     }
 
+    private void showItemInfo(long rowId) {
+        final Uri itemUri = DataProviderContract.CONTENT_URI.buildUpon().appendPath(String.valueOf(rowId)).build();
+        getContentResolver().query(
+                itemUri,
+                DataProviderContract.PROJECTION,
+                "_ID = ?", new String[]{String.valueOf(rowId)}, null);
+    }
+
     public int deleteData() {
         return getContentResolver().delete(DataProviderContract.CONTENT_URI, null, null);
+    }
+
+    private int deleteItem(long rowId) {
+        return getContentResolver().delete(DataProviderContract.CONTENT_URI, "_ID = ?", new String[]{String.valueOf(rowId)});
     }
 
     private void search(String s) {
