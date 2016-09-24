@@ -26,7 +26,7 @@ captures/
 out/
 com_crashlytics_export_strings.xml
 
-## Eclipse
+# Eclipse
 .classpath
 .project
 .metadata
