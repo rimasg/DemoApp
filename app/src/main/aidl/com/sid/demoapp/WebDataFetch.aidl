@@ -3,4 +3,5 @@ package com.sid.demoapp;
 
 interface WebDataFetch {
     String getWebData();
+    String getLocation();
 }

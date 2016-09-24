@@ -16,6 +16,11 @@ public class WebDataFetchService extends Service {
         public String getWebData() throws RemoteException {
             return getRandomString();
         }
+
+        @Override
+        public String getLocation() throws RemoteException {
+            return null;
+        }
     };
 
     private String getRandomString() {

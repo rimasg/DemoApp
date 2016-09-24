@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.sid.demoapp.databinding.ActivityDummyBinding;
 import com.sid.demoapp.services.WebDataFetchService;
 
-public class DummyActivity extends AppCompatActivity implements View.OnClickListener{
+public class DummyActivity extends AppCompatActivity implements View.OnClickListener, BaseView<BasePresenter> {
 
     private ActivityDummyBinding binding;
     private WebDataFetch dataFetch;
@@ -88,5 +88,10 @@ public class DummyActivity extends AppCompatActivity implements View.OnClickList
                 fetchDataFromWeb();
                 break;
         }
+    }
+
+    @Override
+    public void setPresenter(BasePresenter presenter) {
+
     }
 }
