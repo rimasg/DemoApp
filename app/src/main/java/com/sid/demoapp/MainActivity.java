@@ -18,7 +18,6 @@ import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -67,8 +66,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // TODO: 2016.09.26 in progress to replace Main layout
+//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_new);
 
+/*
         final Button btnBoltsTask = (Button) findViewById(R.id.btnBoltsTask);
         assert btnBoltsTask != null;
         btnBoltsTask.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         final Button btnListPackages = (Button) findViewById(R.id.action_list_packages);
+        assert btnListPackages != null;
         btnListPackages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         final Button btnLaunchCalc = (Button) findViewById(R.id.action_launch_calc);
+        assert btnLaunchCalc != null;
         btnLaunchCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,15 +124,9 @@ public class MainActivity extends AppCompatActivity implements
                 setGitHubFragment();
             }
         });
-        btnSchedule = (Button) findViewById(R.id.action_job_scheduler);
-        btnSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scheduleJob();
-            }
-        });
 
         final Button btnLoadDataFromWeb = (Button) findViewById(R.id.action_load_data_from_web);
+        assert btnLoadDataFromWeb != null;
         btnLoadDataFromWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         final Button bntAnimate = (Button) findViewById(R.id.action_fetch_data_from_web);
+        assert bntAnimate != null;
         bntAnimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,12 +144,22 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         final Button btnActionBar = (Button) findViewById(R.id.action_bar_activity);
+        assert btnActionBar != null;
         btnActionBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchActinBarActivity();
             }
         });
+
+        btnSchedule = (Button) findViewById(R.id.action_job_scheduler);
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scheduleJob();
+            }
+        });
+*/
         //
         batteryStatus = new BatteryStatusListener();
         //
@@ -214,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements
                 imageDragFragment = ImageDragFragment.newInstance();
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.fragment_container, imageDragFragment, ImageDragFragment.TAG)
                         .commit();
             } else {
@@ -232,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements
                 listViewFragment = MainMenuFragment.newInstance(0);
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.fragment_container, listViewFragment, MainMenuFragment.TAG)
                         .commit();
             } else {
@@ -250,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements
                 listViewFragment = GitHubFragment.newInstance(0);
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.fragment_container, listViewFragment, GitHubFragment.TAG)
                         .commit();
             } else {
@@ -268,6 +280,7 @@ public class MainActivity extends AppCompatActivity implements
                 listViewFragment = WebLoaderFragment.newInstance();
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.fragment_container, listViewFragment, WebLoaderFragment.TAG)
                         .commit();
             } else {
@@ -301,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMainMenuListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onMainMenuListFragmentInteraction(DummyContent.MenuItem item) {
         Toast.makeText(MainActivity.this, "Main Menu Item", Toast.LENGTH_SHORT).show();
     }
 

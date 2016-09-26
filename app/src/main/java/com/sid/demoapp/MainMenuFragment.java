@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sid.demoapp.dummy.DummyContent;
-import com.sid.demoapp.dummy.DummyContent.DummyItem;
+import com.sid.demoapp.dummy.DummyContent.MenuItem;
 
 /**
  * A fragment representing a list of Items.
@@ -102,7 +102,7 @@ public class MainMenuFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onMainMenuListFragmentInteraction(DummyItem item);
+        void onMainMenuListFragmentInteraction(MenuItem item);
 
     }
 }

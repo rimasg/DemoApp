@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.RecyclerView
-    android:name="com.sid.demoapp.MainMenuFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.sid.demoapp.MainMenuFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
@@ -11,4 +11,4 @@
     android:background="@drawable/rounded_corners"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.sid.demoapp.MainMenuFragment"
-    tools:listitem="@layout/fragment_mainmenu"/>
+    tools:listitem="@layout/fragment_mainmenu_item"/>

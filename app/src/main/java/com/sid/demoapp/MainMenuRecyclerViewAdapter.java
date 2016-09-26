@@ -6,23 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sid.demoapp.dummy.DummyContent.DummyItem;
+import com.sid.demoapp.dummy.DummyContent.MenuItem;
 
 import java.util.List;
 
 import static com.sid.demoapp.MainMenuFragment.*;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link MenuItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<MenuItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MainMenuRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -30,14 +30,13 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_mainmenu, parent, false);
+                .inflate(R.layout.fragment_mainmenu_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +60,7 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public MenuItem mItem;
 
         public ViewHolder(View view) {
             super(view);
