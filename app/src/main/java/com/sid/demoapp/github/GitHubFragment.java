@@ -46,10 +46,10 @@ public class GitHubFragment extends Fragment implements Callback<List<RepoData>>
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static GitHubFragment newInstance(int columnCount) {
+    public static GitHubFragment newInstance() {
         GitHubFragment fragment = new GitHubFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -129,7 +129,6 @@ public class GitHubFragment extends Fragment implements Callback<List<RepoData>>
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onGitHubListFragmentInteraction(RepoData item);
     }
 }

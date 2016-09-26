@@ -9,7 +9,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.sid.demoapp.MainActivity;
+import com.sid.demoapp.OtherFragment;
 
 /**
  * Created by Okis on 2016.08.16 @ 23:12.
@@ -18,37 +18,37 @@ import com.sid.demoapp.MainActivity;
 public class ScheduledJobService extends JobService {
     private static final String TAG = "ScheduledJobService";
     public static final String MESSENGER = "messenger";
-    private MainActivity activity;
+    private OtherFragment fragment;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         final Messenger callback = intent.getParcelableExtra(MESSENGER);
         final Message message = Message.obtain();
-        message.what = MainActivity.MSG_START;
+        message.what = OtherFragment.MSG_START;
         message.obj = this;
         try {
             callback.send(message);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error passing service object back to activity.");
+            Log.e(TAG, "Error passing service object back to fragment.");
         }
         return START_NOT_STICKY;
     }
 
     @Override
     public boolean onStartJob(final JobParameters params) {
-        activity.jobStarted();
+        fragment.jobStarted();
         new JobTask().execute(params);
         return true;
     }
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        activity.jobStopped();
+        fragment.jobStopped();
         return false;
     }
 
-    public void setUiCallback(MainActivity activity) {
-        this.activity = activity;
+    public void setUiCallback(OtherFragment fragment) {
+        this.fragment = fragment;
     }
 
     private class JobTask extends AsyncTask<JobParameters, Void, Void> {

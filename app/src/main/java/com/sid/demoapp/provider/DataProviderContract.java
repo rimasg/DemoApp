@@ -19,7 +19,7 @@ public final class DataProviderContract implements BaseColumns {
     };
     private static final int PROJECTION_DATA_INDEX = 1;
 
-    public static final String SCHEME = "content";
+    public static final String SCHEME = "name";
     public static final String AUTHORITY = "com.sid.demoapp.provider";
 
     public static final Uri BASE_URI = Uri.parse(SCHEME + "://" + AUTHORITY);

@@ -39,45 +39,9 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/btnContainer"
-        android:layout_below="@+id/top_layer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnImageDrag"
-            android:text="Image Drag"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btnListView"
-            android:text="List View"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btnGitHubRepos"
-            android:text="Git Hub Repos"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/second_layer"
-        android:layout_below="@+id/btnContainer"
+        android:layout_below="@+id/top_layer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -90,27 +54,11 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/action_load_data_from_web"
-            android:text="Load Data"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
             android:id="@+id/action_fetch_data_from_web"
             android:text="Fetch AIDL"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/third_layer"
-        android:layout_below="@+id/second_layer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/action_bar_activity"
@@ -120,12 +68,5 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/third_layer">
-    </FrameLayout>
 
 </RelativeLayout>

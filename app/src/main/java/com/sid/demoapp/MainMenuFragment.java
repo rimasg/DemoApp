@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sid.demoapp.dummy.DummyContent;
-import com.sid.demoapp.dummy.DummyContent.MenuItem;
+import com.sid.demoapp.dummy.MenuContent;
+import com.sid.demoapp.dummy.MenuContent.MenuItem;
 
 /**
  * A fragment representing a list of Items.
@@ -36,10 +36,10 @@ public class MainMenuFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MainMenuFragment newInstance(int columnCount) {
+    public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,7 +67,7 @@ public class MainMenuFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MainMenuRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MainMenuRecyclerViewAdapter(MenuContent.ITEMS, mListener));
         }
         return view;
     }
@@ -101,8 +101,6 @@ public class MainMenuFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onMainMenuListFragmentInteraction(MenuItem item);
-
     }
 }

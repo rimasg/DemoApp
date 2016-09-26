@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sid.demoapp.dummy.DummyContent.MenuItem;
+import com.sid.demoapp.dummy.MenuContent.MenuItem;
 
 import java.util.List;
 
@@ -19,33 +19,32 @@ import static com.sid.demoapp.MainMenuFragment.*;
  */
 public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
 
-    private final List<MenuItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<MenuItem> items;
+    private final OnListFragmentInteractionListener listener;
 
     public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+        this.items = items;
+        this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_mainmenu_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_mainmenu_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.menuItem = items.get(position);
+        holder.name.setText(items.get(position).name);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.layoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
+                if (null != listener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onMainMenuListFragmentInteraction(holder.mItem);
+                    listener.onMainMenuListFragmentInteraction(holder.menuItem);
                 }
             }
         });
@@ -53,25 +52,18 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public MenuItem mItem;
+        public final View layoutView;
+        public final TextView name;
+        public MenuItem menuItem;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            layoutView = view;
+            name = (TextView) view.findViewById(R.id.name);
         }
     }
 }
