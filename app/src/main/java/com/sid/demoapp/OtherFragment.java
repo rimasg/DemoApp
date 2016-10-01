@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
+import com.sid.demoapp.services.PlayMusicService;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -131,6 +132,22 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnPlayMusicService = (Button) view.findViewById(R.id.action_play_music);
+        btnPlayMusicService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMusicService();
+            }
+        });
+
+        final Button btnStopMusicService = (Button) view.findViewById(R.id.action_stop_music);
+        btnStopMusicService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMusicService();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +155,14 @@ public class OtherFragment extends Fragment {
                 scheduleJob();
             }
         });
+    }
+
+    private void startMusicService() {
+        getActivity().startService(new Intent(getActivity(), PlayMusicService.class));
+    }
+
+    private void stopMusicService() {
+        getActivity().stopService(new Intent(getActivity(), PlayMusicService.class));
     }
 
     @Override

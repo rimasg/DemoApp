@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: 2016.09.26 in progress to replace Main layout
-//        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main_new);
 
         final MainMenuFragment fragment = MainMenuFragment.newInstance();

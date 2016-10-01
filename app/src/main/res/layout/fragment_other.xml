@@ -66,7 +66,30 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/third_layer"
+        android:layout_below="@+id/second_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/action_play_music"
+            android:text="Start Music Service"
+            style="@style/ButtonStyle"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/action_stop_music"
+            android:text="Stop Music Service"
+            style="@style/ButtonStyle"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </RelativeLayout>

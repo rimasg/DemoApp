@@ -14,4 +14,10 @@
     tools:context="com.sid.demoapp.ActionBarActivity"
     tools:showIn="@layout/activity_action_bar">
 
+    <ListView
+        android:id="@+id/item_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
 </RelativeLayout>

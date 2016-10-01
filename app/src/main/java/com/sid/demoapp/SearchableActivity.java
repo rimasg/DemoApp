@@ -3,12 +3,15 @@ package com.sid.demoapp;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import com.sid.demoapp.provider.SearchSuggestionProvider;
 
 public class SearchableActivity extends AppCompatActivity {
     TextView searchQuery;
@@ -35,8 +38,15 @@ public class SearchableActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
+            addQueryToRecentSuggestions(query);
             doSearch(query);
         }
+    }
+
+    private void addQueryToRecentSuggestions(String query) {
+        final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                SearchSuggestionProvider.AUTHORITY, SearchSuggestionProvider.MODE);
+        suggestions.saveRecentQuery(query, null);
     }
 
     private void doSearch(String query) {

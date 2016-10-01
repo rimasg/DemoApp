@@ -13,8 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class ActionBarActivity extends AppCompatActivity {
+    private static final String TAG = "ActionBarActivity";
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,11 @@ public class ActionBarActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        String[] items = {"Sun", "Earth", "Moon", "Mars", "Saturn", "Veneer", "Neptune"};
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        listView = (ListView) findViewById(R.id.item_list);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -48,6 +60,14 @@ public class ActionBarActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 // Text has changed, apply filtering?
+                adapter.getFilter().filter(newText, new Filter.FilterListener() {
+                    @Override
+                    public void onFilterComplete(int count) {
+                        if (count < 1) {
+                            Toast.makeText(ActionBarActivity.this, "Nothing was found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 return false;
             }
         });
