@@ -13,7 +13,7 @@
 
     <Button
         android:id="@+id/action_load_data_from_web"
-        android:text="load data"
+        android:text="@string/load_data_text"
         android:drawableLeft="@android:drawable/arrow_down_float"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_width="wrap_content"
