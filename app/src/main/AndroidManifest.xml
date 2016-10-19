@@ -71,8 +71,30 @@
         <activity
             android:name=".ActionBarActivity"
             android:label="@string/title_activity_action_bar"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SearchableActivity"
+            android:label="@string/title_activity_searchable"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
+
+        <provider
+            android:name=".provider.SearchSuggestionProvider"
+            android:authorities="com.sid.demoapp.provider.SearchSuggestionProvider"/>
+
+        <service
+            android:name=".services.PlayMusicService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

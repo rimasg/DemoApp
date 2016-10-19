@@ -14,8 +14,6 @@ import android.util.Log;
 public class DataProvider extends ContentProvider {
     private static final String TAG = "DataProvider";
 
-    private static final String DATABASE_NAME = "data.db";
-    private static final int DATABASE_VERSION = 1;
     private static final String CREATE_SQL = "CREATE TABLE "
             + DataProviderContract.TABLE_NAME + " ("
             + DataProviderContract._ID + " INTEGER PRIMARY KEY,"
@@ -97,6 +95,9 @@ public class DataProvider extends ContentProvider {
     }
 
     static class DatabaseHelper extends SQLiteOpenHelper{
+        static final String DATABASE_NAME = "data.db";
+        static final int DATABASE_VERSION = 1;
+
         DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
