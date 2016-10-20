@@ -2,6 +2,7 @@ package com.sid.demoapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -81,8 +82,8 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(1, null, this);
     }
 
@@ -110,7 +111,6 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<List<MenuItem>> loader, List<MenuItem> data) {
-        // FIXME: 2016-10-20 this method is never gets called
         adapter.setData(data);
         adapter.notifyDataSetChanged();
     }

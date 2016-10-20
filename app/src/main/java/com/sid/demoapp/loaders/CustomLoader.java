@@ -8,7 +8,7 @@ import com.sid.demoapp.dummy.MenuContent;
 import java.util.List;
 
 /**
- * Created by S86335 on 2016-10-19.
+ * Created by SID on 2016-10-19.
  */
 
 public class CustomLoader extends AsyncTaskLoader<List<MenuContent.MenuItem>> {
@@ -19,7 +19,6 @@ public class CustomLoader extends AsyncTaskLoader<List<MenuContent.MenuItem>> {
 
     @Override
     public List<MenuContent.MenuItem> loadInBackground() {
-        // FIXME: 2016-10-20 this method is never gets called
         return MenuContent.ITEMS;
     }
 
@@ -28,6 +27,10 @@ public class CustomLoader extends AsyncTaskLoader<List<MenuContent.MenuItem>> {
         super.onStartLoading();
         if (MenuContent.ITEMS != null) {
             deliverResult(MenuContent.ITEMS);
+        }
+
+        if (MenuContent.ITEMS == null || takeContentChanged()) {
+            forceLoad();
         }
     }
 }
