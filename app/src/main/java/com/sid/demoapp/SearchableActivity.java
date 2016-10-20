@@ -127,7 +127,7 @@ public class SearchableActivity extends AppCompatActivity {
     private void handleViewSwipingIn(final View child, float deltaX, float deltaY) {
         float deltaXAbs = Math.abs(deltaX);
         float fractionCovered = 1.f - (deltaXAbs / child.getWidth());
-        long duration = Math.abs((int) (1 - fractionCovered) * 400);
+        long duration = Math.abs((int) (1 - fractionCovered) * 200);
 
         final ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(child,
                 PropertyValuesHolder.ofFloat("alpha", 1.f),
