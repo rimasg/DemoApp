@@ -77,8 +77,13 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
 //            adapter = new MainMenuRecyclerViewAdapter(MenuContent.ITEMS, mListener);
             recyclerView.setAdapter(adapter);
         }
-        getLoaderManager().initLoader(101, null, this);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getLoaderManager().initLoader(1, null, this);
     }
 
     @Override
@@ -105,13 +110,14 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<List<MenuItem>> loader, List<MenuItem> data) {
+        // FIXME: 2016-10-20 this method is never gets called
         adapter.setData(data);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<List<MenuItem>> loader) {
-        adapter.setData(null);
+        adapter.setData(new ArrayList<MenuItem>());
         adapter.notifyDataSetChanged();
     }
 
