@@ -2,7 +2,10 @@ package com.sid.demoapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sid.demoapp.dummy.MenuContent;
 import com.sid.demoapp.dummy.MenuContent.MenuItem;
+import com.sid.demoapp.loaders.CustomLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -19,13 +25,14 @@ import com.sid.demoapp.dummy.MenuContent.MenuItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MainMenuFragment extends Fragment {
+public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<MenuItem>>{
     public static final String TAG = "MainMenuFragment";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private MainMenuRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -67,11 +74,18 @@ public class MainMenuFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MainMenuRecyclerViewAdapter(MenuContent.ITEMS, mListener));
+            adapter = new MainMenuRecyclerViewAdapter(new ArrayList<MenuItem>(), mListener);
+//            adapter = new MainMenuRecyclerViewAdapter(MenuContent.ITEMS, mListener);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(1, null, this);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -88,6 +102,23 @@ public class MainMenuFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public Loader<List<MenuItem>> onCreateLoader(int id, Bundle args) {
+        return new CustomLoader(getContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<MenuItem>> loader, List<MenuItem> data) {
+        adapter.setData(data);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<MenuItem>> loader) {
+        adapter.setData(new ArrayList<MenuItem>());
+        adapter.notifyDataSetChanged();
     }
 
     /**

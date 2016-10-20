@@ -19,7 +19,7 @@ import static com.sid.demoapp.MainMenuFragment.*;
  */
 public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
 
-    private final List<MenuItem> items;
+    private List<MenuItem> items;
     private final OnListFragmentInteractionListener listener;
 
     public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener listener) {
@@ -53,6 +53,10 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void setData(List<MenuItem> data) {
+        items = data;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
