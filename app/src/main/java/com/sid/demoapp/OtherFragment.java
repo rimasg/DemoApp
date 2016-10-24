@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
+import com.sid.demoapp.translations.TransitionActivityOne;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -148,6 +149,14 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnTranslation = (Button) view.findViewById(R.id.anction_translation);
+        btnTranslation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchTranslationActivity();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +164,10 @@ public class OtherFragment extends Fragment {
                 scheduleJob();
             }
         });
+    }
+
+    private void launchTranslationActivity() {
+        startActivity(new Intent(getActivity(), TransitionActivityOne.class));
     }
 
     private void startMusicService() {

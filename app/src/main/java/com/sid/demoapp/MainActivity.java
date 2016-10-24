@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements
         MainMenuFragment.OnListFragmentInteractionListener,
         GitHubFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-
     private BatteryStatusListener batteryStatus;
 
     @Override

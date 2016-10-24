@@ -11,5 +11,6 @@
     <string name="search_query_text">"You search for: %1$s"</string>
     <string name="search_hint">Search me :)</string>
     <string name="load_data_text">load data</string>
+    <string name="title_activity_translation">TranslationActivityOne</string>
 
 </resources>

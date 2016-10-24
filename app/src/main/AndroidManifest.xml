@@ -95,6 +95,17 @@
             android:enabled="true"
             android:exported="false">
         </service>
+
+        <activity
+            android:name=".translations.TransitionActivityOne"
+            android:label="@string/title_activity_translation"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".translations.TransitionActivityTwo"
+            android:label="@string/title_activity_translation"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
