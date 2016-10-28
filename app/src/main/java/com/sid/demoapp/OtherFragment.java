@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.translations.TransitionActivityOne;
@@ -157,6 +158,14 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnAsyncTask = (Button) view.findViewById(R.id.action_async_task);
+        btnAsyncTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAsynctask();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +173,10 @@ public class OtherFragment extends Fragment {
                 scheduleJob();
             }
         });
+    }
+
+    private void startAsynctask() {
+        startActivity(new Intent(getActivity(), AsyncTaskActivity.class));
     }
 
     private void launchTranslationActivity() {
