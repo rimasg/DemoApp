@@ -30,4 +30,10 @@ public class TransitionActivityTwo extends AppCompatActivity {
         final TextView activityName = (TextView) findViewById(R.id.activity_name);
         activityName.setText(this.getClass().getSimpleName());
     }
+
+    @Override
+    protected void onPause() {
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+        super.onPause();
+    }
 }

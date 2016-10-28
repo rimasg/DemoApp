@@ -45,7 +45,6 @@ public class PlayMusicService extends Service {
 
     @Override
     public void onDestroy() {
-        stopSelf(startId);
         if (player != null) {
             player.stop();
             player.release();

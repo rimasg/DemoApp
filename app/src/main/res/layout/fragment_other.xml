@@ -79,14 +79,14 @@
         <Button
             android:id="@+id/action_play_music"
             android:text="Start Music Service"
-            style="@style/ButtonStyle"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/action_stop_music"
             android:text="Stop Music Service"
-            style="@style/ButtonStyle"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
