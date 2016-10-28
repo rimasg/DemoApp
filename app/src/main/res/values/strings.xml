@@ -12,5 +12,6 @@
     <string name="search_hint">Search me :)</string>
     <string name="load_data_text">load data</string>
     <string name="title_activity_translation">TranslationActivityOne</string>
+    <string name="in_progress">Process in progress...</string>
 
 </resources>
