@@ -97,18 +97,5 @@ public class MainActivity extends AppCompatActivity implements
                 Log.i(TAG, "dummyMethod: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
             } while (cursor.moveToNext());
         }
-//        final SQLiteDatabase db = openOrCreateDatabase("MyDB", MODE_PRIVATE, null);
-//        db.execSQL("CREATE TABLE IF NOT EXISTS MyTable (FirstName VARCHAR, LastName VARCHAR, Age INT(3))");
-//        db.execSQL("INSERT INTO MyTable VALUES ('Jonas', 'Batonas', '66')");
-/*
-        final Cursor c = db.rawQuery("SELECT * FROM MyTable", null);
-
-        if (c.moveToFirst()) {
-            do {
-                Log.i(TAG, "dummyMethod: " + c.getString(c.getColumnIndex("FirstName")));
-            } while (c.moveToNext());
-        }
-*/
-//        db.close();
     }
 }
