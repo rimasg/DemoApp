@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.sid.demoapp.dummy.MenuContent;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
-import com.sid.demoapp.scheduledjobs.ScheduleAlarmManager;
+import com.sid.demoapp.scheduledjobs.AlarmManagerHelper;
 import com.sid.demoapp.utils.BatteryStatusListener;
 
 import java.lang.reflect.InvocationTargetException;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void scheduleAlarmJobAfter(int seconds) {
         Toast.makeText(this, "Job Scheduled to start after " + seconds + " seconds", Toast.LENGTH_SHORT).show();
-        new ScheduleAlarmManager(this).scheduleAlarmAfter(seconds);
+        new AlarmManagerHelper(this).scheduleAlarmAfter(seconds);
     }
 
     private void dummyMethod() {

@@ -10,11 +10,11 @@ import android.content.Intent;
  * Created by Okis on 2016.09.04 @ 09:53.
  */
 
-public final class ScheduleAlarmManager {
+public final class AlarmManagerHelper {
     private static AlarmManager manager = null;
     private Activity activity;
 
-    public ScheduleAlarmManager(Activity activity) {
+    public AlarmManagerHelper(Activity activity) {
         this.activity = activity;
         if (manager == null) {
             manager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
