@@ -98,5 +98,5 @@ public class MainActivity extends AppCompatActivity implements
             } while (cursor.moveToNext());
         }
     }
-    // Comments
+    // Comments not important
 }
