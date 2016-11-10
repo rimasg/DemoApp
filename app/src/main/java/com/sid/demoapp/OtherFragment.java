@@ -1,5 +1,6 @@
 package com.sid.demoapp;
 
+import android.animation.ObjectAnimator;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -19,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sid.demoapp.async.AsyncTaskActivity;
@@ -89,6 +92,16 @@ public class OtherFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        final LinearLayout slideMenu = (LinearLayout) view.findViewById(R.id.slide_menu);
+        final ImageView btnOpenClose = (ImageView) view.findViewById(R.id.action_open_close);
+        btnOpenClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCloseSlideMenu(slideMenu, btnOpenClose);
+            }
+        });
+
         final Button btnBoltsTask = (Button) view.findViewById(R.id.btnBoltsTask);
         assert btnBoltsTask != null;
         btnBoltsTask.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +188,19 @@ public class OtherFragment extends Fragment {
         });
     }
 
+    private void openCloseSlideMenu(View view, ImageView btnOpenClose) {
+        ObjectAnimator animator;
+        if (view.getTranslationY() > 0.001f) {
+            animator = ObjectAnimator.ofFloat(view, "translationY", -view.getHeight() +
+                    btnOpenClose.getHeight());
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationY", view.getHeight() -
+                    btnOpenClose.getHeight());
+        }
+        animator.setTarget(view);
+        animator.start();
+    }
+
     private void startAsynctask() {
         startActivity(new Intent(getActivity(), AsyncTaskActivity.class));
     }
@@ -200,6 +226,7 @@ public class OtherFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
+
     private void launchActinBarActivity() {
         startActivity(new Intent(getActivity(), ActionBarActivity.class));
     }
