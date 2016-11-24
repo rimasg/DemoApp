@@ -273,6 +273,7 @@ public class OtherFragment extends Fragment {
             }
         });
     }
+
     private void listPackages(){
         int counter = 0;
         PackageManager packageManager = getActivity().getPackageManager();
