@@ -14,6 +14,11 @@
     tools:context="com.sid.demoapp.translations.TransitionActivityOne"
     tools:showIn="@layout/activity_transition">
 
+    <com.sid.demoapp.views.CalendarMonthView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
     <TextView
         android:id="@+id/activity_name"
         android:layout_centerInParent="true"
