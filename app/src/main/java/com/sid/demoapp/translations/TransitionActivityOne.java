@@ -10,10 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sid.demoapp.R;
+import com.sid.demoapp.views.CalendarMonthView;
 
-public class TransitionActivityOne extends AppCompatActivity {
+public class TransitionActivityOne extends AppCompatActivity implements CalendarMonthView.OnDateSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class TransitionActivityOne extends AppCompatActivity {
                 launchActivityTransition();
             }
         });
+        final CalendarMonthView calendarMonthView = (CalendarMonthView) findViewById(R.id.calendar_month_view);
+        calendarMonthView.setOnDateSelectedListener(this);
     }
 
     private void launchActivityTransition() {
@@ -48,5 +52,10 @@ public class TransitionActivityOne extends AppCompatActivity {
                 R.anim.slide_out_right)
                 .toBundle();
         startActivity(new Intent(TransitionActivityOne.this, TransitionActivityTwo.class), bundle);
+    }
+
+    @Override
+    public void getSelectedDate(int selectedDate) {
+        Toast.makeText(this, "Date selected: " + selectedDate, Toast.LENGTH_SHORT).show();
     }
 }
