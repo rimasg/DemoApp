@@ -2,6 +2,7 @@ package com.sid.demoapp.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewOutlineProvider;
 
 import com.sid.demoapp.R;
 
@@ -34,7 +36,9 @@ public class CalendarMonthView extends View implements OnTouchListener {
     private int height;
     private int startX;
     private int startY;
+    private int startDay;
     private Rect tmpRect;
+    private OnDateSelectedListener onDateSelectedListener;
 
     public CalendarMonthView(Context context) {
         this(context, null);
@@ -61,6 +65,8 @@ public class CalendarMonthView extends View implements OnTouchListener {
         paint.setAntiAlias(true);
         maximumDays = (calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + getMonthStartDate()) - 1;
 
+        // setOutlineProvider(new ClipOutlineProvider());
+        // setClipToOutline(true);
         setOnTouchListener(this);
     }
 
@@ -94,6 +100,10 @@ public class CalendarMonthView extends View implements OnTouchListener {
         return i;
     }
 
+    public void setOnDateSelectedListener(OnDateSelectedListener listener) {
+        onDateSelectedListener = listener;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -105,7 +115,30 @@ public class CalendarMonthView extends View implements OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        // TODO: 2016.12.11 implement onTouch()
-        return false;
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            startX = (int) (event.getX() / (float) dayViewSize) + 1;
+            startY = (int) (event.getY() / (float) dayViewSize);
+            startDay = (startX + (startY * 7)) - (getMonthStartDate() - 1);
+
+        } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+            startDay = -1;
+        }
+        if (onDateSelectedListener != null) {
+            onDateSelectedListener.getSelectedDate(startDay);
+        }
+        return true;
+    }
+
+    public interface OnDateSelectedListener {
+        void getSelectedDate(int selectedDate);
+    }
+
+    private class ClipOutlineProvider extends ViewOutlineProvider {
+
+        @Override
+        public void getOutline(View view, Outline outline) {
+            final int margin = Math.min(view.getWidth(), view.getHeight()) / 10;
+            outline.setRoundRect(margin, margin, view.getWidth() - margin, view.getHeight() - margin, margin / 2);
+        }
     }
 }
