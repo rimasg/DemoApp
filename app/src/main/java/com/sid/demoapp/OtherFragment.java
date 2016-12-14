@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
+import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
 
 import java.util.List;
@@ -179,6 +180,14 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnTabbedActivity = (Button) view.findViewById(R.id.action_tabbed_activity);
+        btnTabbedActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTabbedActivity();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +208,10 @@ public class OtherFragment extends Fragment {
         }
         animator.setTarget(view);
         animator.start();
+    }
+
+    private void startTabbedActivity() {
+        startActivity(new Intent(getActivity(), TabbedActionBarActivity.class));
     }
 
     private void startAsynctask() {
@@ -273,6 +286,7 @@ public class OtherFragment extends Fragment {
             }
         });
     }
+
     private void listPackages(){
         int counter = 0;
         PackageManager packageManager = getActivity().getPackageManager();
