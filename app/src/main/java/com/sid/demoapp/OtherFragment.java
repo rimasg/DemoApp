@@ -1,6 +1,7 @@
 package com.sid.demoapp;
 
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -9,11 +10,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,10 +80,12 @@ public class OtherFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        serviceComponent = new ComponentName(getActivity(), ScheduledJobService.class);
-        final Intent intent = new Intent(getActivity(), ScheduledJobService.class);
-        intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
-        getActivity().startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            serviceComponent = new ComponentName(getActivity(), ScheduledJobService.class);
+            final Intent intent = new Intent(getActivity(), ScheduledJobService.class);
+            intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
+            getActivity().startService(intent);
+        }
     }
 
     @Override
@@ -219,7 +224,9 @@ public class OtherFragment extends Fragment {
     }
 
     private void launchTranslationActivity() {
-        startActivity(new Intent(getActivity(), TransitionActivityOne.class));
+        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
+                getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(new Intent(getActivity(), TransitionActivityOne.class), options.toBundle());
     }
 
     private void startMusicService() {
@@ -244,13 +251,16 @@ public class OtherFragment extends Fragment {
         startActivity(new Intent(getActivity(), ActionBarActivity.class));
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void scheduleJob() {
-        final JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent)
-                .setOverrideDeadline(0)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            final JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent)
+                    .setOverrideDeadline(0)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
 
-        final JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(JOB_SCHEDULER_SERVICE);
-        jobScheduler.schedule(builder.build());
+            final JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(JOB_SCHEDULER_SERVICE);
+            jobScheduler.schedule(builder.build());
+        }
     }
 
     public void jobStarted() {

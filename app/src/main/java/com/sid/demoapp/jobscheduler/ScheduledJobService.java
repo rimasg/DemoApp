@@ -1,9 +1,11 @@
 package com.sid.demoapp.jobscheduler;
 
+import android.annotation.TargetApi;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
@@ -15,6 +17,7 @@ import com.sid.demoapp.OtherFragment;
  * Created by Okis on 2016.08.16 @ 23:12.
  */
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class ScheduledJobService extends JobService {
     private static final String TAG = "ScheduledJobService";
     public static final String MESSENGER = "messenger";

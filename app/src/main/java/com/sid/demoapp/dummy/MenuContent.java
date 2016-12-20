@@ -23,6 +23,11 @@ public class MenuContent {
         addItem(createMenuItem("GitHub", GitHubFragment.class));
         addItem(createMenuItem("Web Loader", WebLoaderFragment.class));
         addItem(createMenuItem("Other Fragment", OtherFragment.class));
+        addItem(createMenuItem("Test 1", OtherFragment.class));
+        addItem(createMenuItem("Test 2", OtherFragment.class));
+        addItem(createMenuItem("Test 3", OtherFragment.class));
+        addItem(createMenuItem("Test 4", OtherFragment.class));
+        addItem(createMenuItem("Test 5", OtherFragment.class));
     }
 
     private static void addItem(MenuItem item) {

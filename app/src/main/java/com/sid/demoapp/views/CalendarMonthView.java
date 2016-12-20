@@ -52,7 +52,7 @@ public class CalendarMonthView extends View implements OnTouchListener {
         super(context, attrs, defStyle);
         calendar = Calendar.getInstance(Locale.getDefault());
         paint = new Paint();
-        backgroundDrawable = getResources().getDrawable(R.drawable.calendar_bg, null);
+        backgroundDrawable = getResources().getDrawable(R.drawable.calendar_bg);
         tmpRect = new Rect();
         init();
     }

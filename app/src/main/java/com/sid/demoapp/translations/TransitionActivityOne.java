@@ -1,6 +1,8 @@
 package com.sid.demoapp.translations;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,7 +10,10 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +25,10 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_transition);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.GRAY);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -44,14 +50,25 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
         });
         final CalendarMonthView calendarMonthView = (CalendarMonthView) findViewById(R.id.calendar_month_view);
         calendarMonthView.setOnDateSelectedListener(this);
+        final TransitionDrawable transitionDrawable = (TransitionDrawable) getResources().getDrawable(R.drawable.color_transition);
+        ((ImageView) findViewById(R.id.color_image)).setImageDrawable(transitionDrawable);
+        transitionDrawable.startTransition(5000);
+        final ImageView imgPropeller = (ImageView) findViewById(R.id.propeller);
+        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        anim.setRepeatCount(Animation.INFINITE);
+        imgPropeller.startAnimation(anim);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
     }
 
     private void launchActivityTransition() {
-        final Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(this,
-                R.anim.slide_in_left,
-                R.anim.slide_out_right)
-                .toBundle();
-        startActivity(new Intent(TransitionActivityOne.this, TransitionActivityTwo.class), bundle);
+        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
+                this, R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(new Intent(this, TransitionActivityTwo.class), options.toBundle());
     }
 
     @Override
