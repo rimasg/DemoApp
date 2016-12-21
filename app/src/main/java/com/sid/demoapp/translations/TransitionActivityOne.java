@@ -50,9 +50,7 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
         });
         final CalendarMonthView calendarMonthView = (CalendarMonthView) findViewById(R.id.calendar_month_view);
         calendarMonthView.setOnDateSelectedListener(this);
-        final TransitionDrawable transitionDrawable = (TransitionDrawable) getResources().getDrawable(R.drawable.color_transition);
-        ((ImageView) findViewById(R.id.color_image)).setImageDrawable(transitionDrawable);
-        transitionDrawable.startTransition(5000);
+        ((TransitionDrawable) ((ImageView) findViewById(R.id.color_image)).getDrawable()).startTransition(3000);
         final ImageView imgPropeller = (ImageView) findViewById(R.id.propeller);
         final Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
         anim.setRepeatCount(Animation.INFINITE);

@@ -42,6 +42,7 @@
 
     <ImageView
         android:id="@+id/color_image"
+        android:src="@drawable/color_transition"
         android:layout_below="@+id/action"
         android:layout_width="50dp"
         android:layout_height="50dp"
