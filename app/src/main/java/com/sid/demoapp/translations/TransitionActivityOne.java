@@ -52,8 +52,7 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
         calendarMonthView.setOnDateSelectedListener(this);
         ((TransitionDrawable) ((ImageView) findViewById(R.id.color_image)).getDrawable()).startTransition(3000);
         final ImageView imgPropeller = (ImageView) findViewById(R.id.propeller);
-        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        anim.setRepeatCount(Animation.INFINITE);
+        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotation);
         imgPropeller.startAnimation(anim);
     }
 
