@@ -72,7 +72,14 @@ public class RotateView extends View {
     }
 
     private void tickScrollAnimation() {
-
+        if (!scroller.isFinished()) {
+            scroller.computeScrollOffset();
+            setImgRotation(scroller.getCurrY());
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                scrollAnimator.cancel();
+            }
+        }
     }
 
     @Override
@@ -88,8 +95,7 @@ public class RotateView extends View {
         int contentWidth = getWidth() - paddingLeft - paddingRight;
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
-
-        // Draw the drawable .
+        // Draw the drawable.
         if (drawable != null) {
             drawable.setBounds(paddingLeft, paddingTop,
                     paddingLeft + contentWidth, paddingTop + contentHeight);
