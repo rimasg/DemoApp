@@ -1,8 +1,13 @@
 <resources>
+    <attr name="drawable" format="color|reference"/>
+
     <declare-styleable name="TitleView">
         <attr name="text" format="string"/>
         <attr name="dimension" format="dimension"/>
         <attr name="color" format="color"/>
-        <attr name="drawable" format="color|reference"/>
+        <attr name="drawable"/>
+    </declare-styleable>
+    <declare-styleable name="RotateView">
+        <attr name="drawable"/>
     </declare-styleable>
 </resources>

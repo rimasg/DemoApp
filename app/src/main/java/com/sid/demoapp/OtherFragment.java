@@ -32,6 +32,7 @@ import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
+import com.sid.demoapp.ui.RotateViewActivity;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -193,6 +194,14 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnRotateView = (Button) view.findViewById(R.id.action_rotate_view);
+        btnRotateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRotateViewActivity();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,6 +226,10 @@ public class OtherFragment extends Fragment {
 
     private void startTabbedActivity() {
         startActivity(new Intent(getActivity(), TabbedActionBarActivity.class));
+    }
+
+    private void startRotateViewActivity() {
+        startActivity(new Intent(getActivity(), RotateViewActivity.class));
     }
 
     private void startAsynctask() {

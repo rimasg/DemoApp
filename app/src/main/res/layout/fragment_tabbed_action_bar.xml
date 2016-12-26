@@ -13,4 +13,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <com.sid.demoapp.views.BallView
+        android:id="@+id/ball"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/section_label"
+        android:layout_width="200px"
+        android:layout_height="200px"/>
+
+    <TextView
+        android:text="BallView Transformation"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

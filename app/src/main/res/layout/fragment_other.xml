@@ -119,6 +119,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fifth_layer"
+        android:layout_below="@+id/fourth_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/action_rotate_view"
+            android:text="View Rotation"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/slide_menu"
         android:orientation="vertical"
         android:layout_width="wrap_content"
