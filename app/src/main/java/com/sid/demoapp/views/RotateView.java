@@ -44,12 +44,15 @@ public class RotateView extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RotateView, defStyle, 0);
 
-        if (a.hasValue(R.styleable.RotateView_drawable)) {
-            drawable = a.getDrawable(R.styleable.RotateView_drawable);
-            drawable.setCallback(this);
+        try {
+            rotation = a.getInt(R.styleable.RotateView_rotation, 0);
+            if (a.hasValue(R.styleable.RotateView_drawable)) {
+                drawable = a.getDrawable(R.styleable.RotateView_drawable);
+                drawable.setCallback(this);
+            }
+        } finally {
+            a.recycle();
         }
-
-        a.recycle();
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             scroller = new Scroller(getContext());
@@ -165,7 +168,6 @@ public class RotateView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//            return super.onFling(e1, e2, velocityX, velocityY);
             float scrollTheta = vectorToScalar(
                     velocityX,
                     velocityY,
@@ -192,7 +194,6 @@ public class RotateView extends View {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//            return super.onScroll(e1, e2, distanceX, distanceY);
             float scrollTheta = vectorToScalar(
                     distanceX,
                     distanceY,

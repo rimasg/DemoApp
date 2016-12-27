@@ -9,5 +9,6 @@
     </declare-styleable>
     <declare-styleable name="RotateView">
         <attr name="drawable"/>
+        <attr name="rotation" format="integer"/>
     </declare-styleable>
 </resources>
