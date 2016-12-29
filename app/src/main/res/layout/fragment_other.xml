@@ -32,7 +32,7 @@
 
         <Button
             android:id="@+id/action_launch_calc"
-            android:text="Launch Gallery"
+            android:text="Launch Calc"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -130,6 +130,13 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/action_porter_duff"
+            android:text="Porter Duff"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <LinearLayout

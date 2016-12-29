@@ -109,6 +109,8 @@
         <activity android:name=".async.AsyncTaskActivity">
         </activity>
         <activity android:name=".ui.RotateViewActivity"/>
+        <activity android:name=".ui.PorterDuffActivity">
+        </activity>
     </application>
 
 </manifest>

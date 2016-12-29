@@ -32,6 +32,7 @@ import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
+import com.sid.demoapp.ui.PorterDuffActivity;
 import com.sid.demoapp.ui.RotateViewActivity;
 
 import java.util.List;
@@ -202,6 +203,14 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        final Button btnPorterDuff = (Button) view.findViewById(R.id.action_porter_duff);
+        btnPorterDuff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPorterDuffActivity();
+            }
+        });
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,19 +218,6 @@ public class OtherFragment extends Fragment {
                 scheduleJob();
             }
         });
-    }
-
-    private void openCloseSlideMenu(View view, ImageView btnOpenClose) {
-        ObjectAnimator animator;
-        if (view.getTranslationY() > 0.001f) {
-            animator = ObjectAnimator.ofFloat(view, "translationY", -view.getHeight() +
-                    btnOpenClose.getHeight());
-        } else {
-            animator = ObjectAnimator.ofFloat(view, "translationY", view.getHeight() -
-                    btnOpenClose.getHeight());
-        }
-        animator.setTarget(view);
-        animator.start();
     }
 
     private void startTabbedActivity() {
@@ -232,14 +228,18 @@ public class OtherFragment extends Fragment {
         startActivity(new Intent(getActivity(), RotateViewActivity.class));
     }
 
-    private void startAsynctask() {
-        startActivity(new Intent(getActivity(), AsyncTaskActivity.class));
+    private void startPorterDuffActivity() {
+        startActivity(new Intent(getActivity(), PorterDuffActivity.class));
     }
 
     private void launchTranslationActivity() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
                 getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
         startActivity(new Intent(getActivity(), TransitionActivityOne.class), options.toBundle());
+    }
+
+    private void startAsynctask() {
+        startActivity(new Intent(getActivity(), AsyncTaskActivity.class));
     }
 
     private void startMusicService() {
@@ -288,12 +288,6 @@ public class OtherFragment extends Fragment {
         btnSchedule.setBackgroundColor(Color.GREEN);
     }
 
-    private void launchCalc() {
-        final Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_GALLERY);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, "Select App to Run"));
-    }
-
     public void runBoltsTask() {
         Task.callInBackground(new Callable<String>() {
             @Override
@@ -319,5 +313,24 @@ public class OtherFragment extends Fragment {
             Log.d(TAG, counter + " Source Dir: " + applicationInfo.sourceDir);
             counter++;
         }
+    }
+
+    private void launchCalc() {
+        final Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_GALLERY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, "Select App to Run"));
+    }
+
+    private void openCloseSlideMenu(View view, ImageView btnOpenClose) {
+        ObjectAnimator animator;
+        if (view.getTranslationY() > 0.001f) {
+            animator = ObjectAnimator.ofFloat(view, "translationY", -view.getHeight() +
+                    btnOpenClose.getHeight());
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationY", view.getHeight() -
+                    btnOpenClose.getHeight());
+        }
+        animator.setTarget(view);
+        animator.start();
     }
 }
