@@ -47,12 +47,19 @@ public class PorterDuffActivity extends AppCompatActivity {
                 final Canvas canvas = new Canvas(bitmap);
                 final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP));
-                canvas.drawBitmap(dstBitmap, 0, 0, null);
-                canvas.drawBitmap(srcBitmap, 0, 0, paint);
+                int posX, posY;
+                posX = calcOffset(w, dstBitmap.getWidth()); posY = calcOffset(h, dstBitmap.getHeight()) ;
+                canvas.drawBitmap(dstBitmap, posX, posY, null);
+                posX = calcOffset(w, srcBitmap.getWidth()); posY = calcOffset(h, srcBitmap.getHeight());
+                canvas.drawBitmap(srcBitmap, posX, posY, paint);
 
                 imgView.setImageBitmap(bitmap);
             }
         });
 
+    }
+
+    private int calcOffset(int sizeOrigin, int sizeTarget) {
+        return (sizeOrigin - sizeTarget) / 2;
     }
 }
