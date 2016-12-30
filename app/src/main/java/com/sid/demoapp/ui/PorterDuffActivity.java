@@ -40,8 +40,8 @@ public class PorterDuffActivity extends AppCompatActivity {
                 final int w = imgView.getWidth();
                 final int h = imgView.getHeight();
 
-                final Bitmap dstBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(res, R.drawable.ladybug), w, h, false);
-                final Bitmap srcBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(res, R.drawable.flower_red), w, h, false);
+                final Bitmap dstBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(res, R.drawable.brunette_girl), w, h, false);
+                final Bitmap srcBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(res, R.drawable.white_pink_sakura), w, h, false);
 
                 final Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
                 final Canvas canvas = new Canvas(bitmap);
@@ -52,6 +52,11 @@ public class PorterDuffActivity extends AppCompatActivity {
                 canvas.drawBitmap(dstBitmap, posX, posY, null);
                 posX = calcOffset(w, srcBitmap.getWidth()); posY = calcOffset(h, srcBitmap.getHeight());
                 canvas.drawBitmap(srcBitmap, posX, posY, paint);
+                // Draw frame around picture
+                final Paint rectPaint = new Paint();
+                rectPaint.setStyle(Paint.Style.STROKE);
+                rectPaint.setStrokeWidth(2.0f);
+                canvas.drawRect(0, 0, w, h, rectPaint);
 
                 imgView.setImageBitmap(bitmap);
             }
