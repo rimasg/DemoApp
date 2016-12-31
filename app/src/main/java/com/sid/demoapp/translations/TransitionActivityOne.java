@@ -15,12 +15,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sid.demoapp.R;
 import com.sid.demoapp.views.CalendarMonthView;
 
 public class TransitionActivityOne extends AppCompatActivity implements CalendarMonthView.OnDateSelectedListener {
+
+    private CalendarMonthView calendarMonthView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
                 launchActivityTransition();
             }
         });
-        final CalendarMonthView calendarMonthView = (CalendarMonthView) findViewById(R.id.calendar_month_view);
+        calendarMonthView = (CalendarMonthView) findViewById(R.id.calendar_month_view);
         calendarMonthView.setOnDateSelectedListener(this);
         ((TransitionDrawable) ((ImageView) findViewById(R.id.color_image)).getDrawable()).startTransition(3000);
         final ImageView imgPropeller = (ImageView) findViewById(R.id.propeller);
@@ -70,6 +71,6 @@ public class TransitionActivityOne extends AppCompatActivity implements Calendar
 
     @Override
     public void getSelectedDate(int selectedDate) {
-        Toast.makeText(this, "Date selected: " + selectedDate, Toast.LENGTH_SHORT).show();
+        Snackbar.make(calendarMonthView, "Date selected: " + selectedDate, Snackbar.LENGTH_SHORT).show();
     }
 }

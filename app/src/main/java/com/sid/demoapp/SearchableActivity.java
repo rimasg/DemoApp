@@ -66,6 +66,7 @@ public class SearchableActivity extends AppCompatActivity {
         searchQuery.setText(String.format(getString(R.string.search_query_text), query));
     }
 
+    // NOTE: 2016.12.31 Swipe animation
     private View.OnTouchListener listener = new View.OnTouchListener() {
         private float downX;
         private float downY;
