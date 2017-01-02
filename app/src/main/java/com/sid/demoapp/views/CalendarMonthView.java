@@ -23,6 +23,7 @@ import java.util.Locale;
  */
 
 public class CalendarMonthView extends View implements OnTouchListener {
+    private static final String TAG = "CalendarMonthView";
     public static final int WEEK_DAY_COUNT = 7;
     private Calendar calendar;
     private float dayTextSize;
