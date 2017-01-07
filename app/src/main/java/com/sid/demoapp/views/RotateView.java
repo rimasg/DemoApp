@@ -152,9 +152,13 @@ public class RotateView extends View {
         scroller.forceFinished(true);
     }
 
-    public static float vectorToScalar(float dx, float dy, float x, float y) {
+    // NOTE: 2017.01.04 method to find rotation direction relative to finger movement vs picture pivot point
+    public static float vectorToScalarScroll(float dx, float dy, float x, float y) {
+        // get the length of the vector
         float l = (float) Math.sqrt(dx * dx + dy * dy);
 
+        // decide if the scalar should be negative or positive by finding
+        // the dot product of the vector perpendicular to (x,y).
         float crossX = -y;
         float crossY = x;
 
@@ -168,7 +172,7 @@ public class RotateView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            float scrollTheta = vectorToScalar(
+            float scrollTheta = vectorToScalarScroll(
                     velocityX,
                     velocityY,
                     e2.getX() - getPivotX(),
@@ -194,7 +198,7 @@ public class RotateView extends View {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            float scrollTheta = vectorToScalar(
+            float scrollTheta = vectorToScalarScroll(
                     distanceX,
                     distanceY,
                     e2.getX() - getPivotX(),

@@ -32,6 +32,7 @@ public class CalendarMonthView extends View implements OnTouchListener {
     private String name;
     private float nameTextSize;
     private Paint paint;
+    private Paint boundaryPaint;
     private Drawable backgroundDrawable;
     private int width;
     private int height;
@@ -53,6 +54,7 @@ public class CalendarMonthView extends View implements OnTouchListener {
         super(context, attrs, defStyle);
         calendar = Calendar.getInstance(Locale.getDefault());
         paint = new Paint();
+        boundaryPaint = new Paint();
         backgroundDrawable = getResources().getDrawable(R.drawable.calendar_bg);
         tmpRect = new Rect();
         init();
@@ -64,6 +66,8 @@ public class CalendarMonthView extends View implements OnTouchListener {
         nameTextSize = 24.0f;
         paint.setTextSize(dayTextSize);
         paint.setAntiAlias(true);
+        boundaryPaint.setStyle(Paint.Style.STROKE);
+        boundaryPaint.setStrokeWidth(2.0f);
         maximumDays = (calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + getMonthStartDate()) - 1;
 
         // setOutlineProvider(new ClipOutlineProvider());
@@ -74,6 +78,14 @@ public class CalendarMonthView extends View implements OnTouchListener {
     private void initCalendar() {
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
+    }
+
+    private int getMonthStartDate() {
+        final int i = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        if (i == 0) {
+            return 7;
+        }
+        return i;
     }
 
     @Override
@@ -91,14 +103,8 @@ public class CalendarMonthView extends View implements OnTouchListener {
             canvas.drawText(s, (float) ((dayViewSize - tmpRect.right) / 2), (float) ((dayViewSize - tmpRect.top) / 2), paint);
             canvas.restore();
         }
-    }
-
-    private int getMonthStartDate() {
-        final int i = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        if (i == 0) {
-            return 7;
-        }
-        return i;
+        canvas.getClipBounds(tmpRect);
+        canvas.drawRect(tmpRect, boundaryPaint);
     }
 
     public void setOnDateSelectedListener(OnDateSelectedListener listener) {
@@ -107,7 +113,6 @@ public class CalendarMonthView extends View implements OnTouchListener {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         width = MeasureSpec.getSize(widthMeasureSpec);
         dayViewSize = width / 7;
         height = (int) (((double) dayViewSize) * Math.ceil((double) (((float) maximumDays) / 7.0f)));

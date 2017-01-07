@@ -1,5 +1,6 @@
 package com.sid.demoapp.dummy;
 
+import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.ImageDragFragment;
 import com.sid.demoapp.OtherFragment;
 import com.sid.demoapp.github.GitHubFragment;
@@ -23,7 +24,7 @@ public class MenuContent {
         addItem(createMenuItem("GitHub", GitHubFragment.class));
         addItem(createMenuItem("Web Loader", WebLoaderFragment.class));
         addItem(createMenuItem("Other Fragment", OtherFragment.class));
-        addItem(createMenuItem("Test 1", OtherFragment.class));
+        addItem(createMenuItem("Card Stream", CardStreamFragment.class));
         addItem(createMenuItem("Test 2", OtherFragment.class));
         addItem(createMenuItem("Test 3", OtherFragment.class));
         addItem(createMenuItem("Test 4", OtherFragment.class));
