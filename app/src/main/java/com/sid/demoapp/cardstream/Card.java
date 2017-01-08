@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sid.demoapp.R;
@@ -47,7 +48,14 @@ public class Card {
 
         public Card build(Activity activity) {
             final LayoutInflater inflater = activity.getLayoutInflater();
-            final ViewGroup cardView = (ViewGroup) inflater.inflate(card.layoutId, (ViewGroup) activity.findViewById(R.id.card_stream), false);
+            final ViewGroup cardStreamLayout = (ViewGroup) activity.findViewById(R.id.card_stream);
+            final ViewGroup cardView = (ViewGroup) inflater.inflate(card.layoutId, cardStreamLayout, false);
+            ((ImageView) cardView.findViewById(R.id.action_delete_card)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cardStreamLayout.removeView(cardView);
+                }
+            });
 
             final View viewTitle = cardView.findViewById(R.id.card_title);
             if (card.title != null && viewTitle != null) {

@@ -8,14 +8,14 @@
     <TextView
         android:id="@+id/card_title"
         style="@android:style/TextAppearance.Medium"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Title"
         />
     <TextView
         android:id="@+id/card_description"
         style="@android:style/TextAppearance.Small"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_title"
         tools:text="Description"
@@ -25,5 +25,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/card_separator"
         android:layout_below="@id/card_description"
+        />
+    <ImageView
+        android:id="@+id/action_delete_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         />
 </RelativeLayout>
