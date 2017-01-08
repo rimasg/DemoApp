@@ -182,7 +182,6 @@ public class CardStreamLinearLayout extends LinearLayout {
     }
 
     public void addCard(View cardView) {
-        // TODO: 2017.01.07 implement method
         if (cardView.getParent() == null) {
             initCard(cardView);
 

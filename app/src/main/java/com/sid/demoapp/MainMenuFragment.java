@@ -27,9 +27,7 @@ import java.util.List;
  */
 public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<MenuItem>>{
     public static final String TAG = "MainMenuFragment";
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private MainMenuRecyclerViewAdapter adapter;

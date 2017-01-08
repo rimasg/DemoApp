@@ -9,12 +9,6 @@ import com.sid.demoapp.web.WebLoaderFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Helper class for providing sample name for user interfaces created by
- * Android template wizards.
- * <p/>
- * TODO: Replace all uses of this class before publishing your app.
- */
 public class MenuContent {
 
     public static final List<MenuItem> ITEMS = new ArrayList<>();
@@ -25,10 +19,6 @@ public class MenuContent {
         addItem(createMenuItem("Web Loader", WebLoaderFragment.class));
         addItem(createMenuItem("Other Fragment", OtherFragment.class));
         addItem(createMenuItem("Card Stream", CardStreamFragment.class));
-        addItem(createMenuItem("Test 2", OtherFragment.class));
-        addItem(createMenuItem("Test 3", OtherFragment.class));
-        addItem(createMenuItem("Test 4", OtherFragment.class));
-        addItem(createMenuItem("Test 5", OtherFragment.class));
     }
 
     private static void addItem(MenuItem item) {

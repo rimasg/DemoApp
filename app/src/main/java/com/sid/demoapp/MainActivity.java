@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onMainMenuListFragmentInteraction(MenuContent.MenuItem item) {
+        if (item.itemClass == null) return;
         try {
             final Method method = item.itemClass.getMethod("newInstance");
             final Fragment fragment = (Fragment) method.invoke(null);

@@ -12,11 +12,7 @@ import java.util.List;
 
 import static com.sid.demoapp.MainMenuFragment.*;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link MenuItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
 
     private List<MenuItem> items;

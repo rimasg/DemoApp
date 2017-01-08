@@ -72,7 +72,6 @@ public class OtherFragment extends Fragment {
     public OtherFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static OtherFragment newInstance() {
         OtherFragment fragment = new OtherFragment();

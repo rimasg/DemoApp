@@ -30,7 +30,6 @@ public class PorterDuffActivity extends AppCompatActivity {
         applyPorterDuff();
     }
 
-    // TODO: 2016.12.29 implement method correctly functioning
     private void applyPorterDuff() {
         imgView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

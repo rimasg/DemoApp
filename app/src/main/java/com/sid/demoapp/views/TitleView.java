@@ -12,13 +12,10 @@ import android.view.View;
 
 import com.sid.demoapp.R;
 
-/**
- * TODO: document your custom view class.
- */
 public class TitleView extends View {
-    private String text; // TODO: use a default from R.string...
-    private int color = Color.RED; // TODO: use a default from R.color...
-    private float dimension = 0; // TODO: use a default from R.dimen...
+    private String text;
+    private int color = Color.RED;
+    private float dimension = 0;
     private Drawable drawable;
 
     private TextPaint textPaint;
