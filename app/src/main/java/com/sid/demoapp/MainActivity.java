@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
 /*
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements
             final Fragment fragment = (Fragment) method.invoke(null);
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.slide_in_left, R.anim.slide_out_right,
+                            R.anim.slide_in_right, R.anim.slide_out_left)
                     .replace(R.id.fragment_main_container, fragment)
                     .addToBackStack(null)
                     .commit();
