@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.sid.demoapp.dummy.MenuContent;
+import com.sid.demoapp.menu.MenuContent;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 import com.sid.demoapp.scheduledjobs.AlarmManagerHelper;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 */
         final Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar.setTitle("");
         setSupportActionBar(mainToolbar);
         final MainMenuFragment fragment = MainMenuFragment.newInstance();
         getSupportFragmentManager()

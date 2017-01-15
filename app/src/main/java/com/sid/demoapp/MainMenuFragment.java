@@ -9,12 +9,14 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sid.demoapp.dummy.MenuContent.MenuItem;
 import com.sid.demoapp.loaders.CustomLoader;
+import com.sid.demoapp.menu.MenuContent.MenuItem;
+import com.sid.demoapp.menu.OnStartDragListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +27,14 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<MenuItem>>{
+public class MainMenuFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<List<MenuItem>>, OnStartDragListener{
     public static final String TAG = "MainMenuFragment";
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private MainMenuRecyclerViewAdapter adapter;
+    private ItemTouchHelper itemTouchHelper;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,9 +76,12 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            adapter = new MainMenuRecyclerViewAdapter(new ArrayList<MenuItem>(), mListener);
-//            adapter = new MainMenuRecyclerViewAdapter(MenuContent.ITEMS, mListener);
+            adapter = new MainMenuRecyclerViewAdapter(new ArrayList<MenuItem>(), mListener, this);
             recyclerView.setAdapter(adapter);
+
+            final MainMenuItemTouchHelperCallback callback = new MainMenuItemTouchHelperCallback(adapter);
+            itemTouchHelper = new ItemTouchHelper(callback);
+            itemTouchHelper.attachToRecyclerView(recyclerView);
         }
         return view;
     }
@@ -117,6 +124,11 @@ public class MainMenuFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoaderReset(Loader<List<MenuItem>> loader) {
         adapter.setData(new ArrayList<MenuItem>());
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        itemTouchHelper.startDrag(viewHolder);
     }
 
     /**

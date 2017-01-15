@@ -3,7 +3,7 @@ package com.sid.demoapp.loaders;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.sid.demoapp.dummy.MenuContent;
+import com.sid.demoapp.menu.MenuContent;
 
 import java.util.List;
 

@@ -1,26 +1,36 @@
 package com.sid.demoapp;
 
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sid.demoapp.dummy.MenuContent.MenuItem;
+import com.sid.demoapp.menu.ItemTouchHelperAdapter;
+import com.sid.demoapp.menu.MenuContent.MenuItem;
+import com.sid.demoapp.menu.OnStartDragListener;
 
+import java.util.Collections;
 import java.util.List;
 
-import static com.sid.demoapp.MainMenuFragment.*;
+import static com.sid.demoapp.MainMenuFragment.OnListFragmentInteractionListener;
 
 
-public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder> {
+public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder>
+        implements ItemTouchHelperAdapter {
 
     private List<MenuItem> items;
     private final OnListFragmentInteractionListener listener;
+    private final OnStartDragListener dragListener;
 
-    public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener listener) {
+    public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener
+            listener, OnStartDragListener dragListener) {
         this.items = items;
         this.listener = listener;
+        this.dragListener = dragListener;
     }
 
     @Override
@@ -44,6 +54,15 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
                 }
             }
         });
+        holder.handle.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                    dragListener.onStartDrag(holder);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -55,15 +74,29 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
         items = data;
     }
 
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(items, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+        return false;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        /* no-op */
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View layoutView;
         public final TextView name;
+        public final ImageView handle;
         public MenuItem menuItem;
 
         public ViewHolder(View view) {
             super(view);
             layoutView = view;
             name = (TextView) view.findViewById(R.id.name);
+            handle = (ImageView) view.findViewById(R.id.handle);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.sid.demoapp.dummy;
+package com.sid.demoapp.menu;
 
 import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.ImageDragFragment;
