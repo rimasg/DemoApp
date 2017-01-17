@@ -11,5 +11,5 @@
     android:layout_marginRight="16dp"
     android:background="@drawable/rounded_corners"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.sid.demoapp.MainMenuFragment"
+    tools:context="com.sid.demoapp.menu.MainMenuFragment"
     tools:listitem="@layout/fragment_mainmenu_item"/>

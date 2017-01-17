@@ -1,10 +1,8 @@
-package com.sid.demoapp;
+package com.sid.demoapp.menu;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-
-import com.sid.demoapp.menu.ItemTouchHelperAdapter;
 
 /**
  * Created by Okis on 2017.01.15.

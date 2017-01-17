@@ -1,4 +1,4 @@
-package com.sid.demoapp;
+package com.sid.demoapp.menu;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sid.demoapp.R;
 import com.sid.demoapp.loaders.CustomLoader;
 import com.sid.demoapp.menu.MenuContent.MenuItem;
-import com.sid.demoapp.menu.OnStartDragListener;
 
 import java.util.ArrayList;
 import java.util.List;

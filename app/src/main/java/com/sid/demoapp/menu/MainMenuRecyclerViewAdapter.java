@@ -1,4 +1,4 @@
-package com.sid.demoapp;
+package com.sid.demoapp.menu;
 
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sid.demoapp.menu.ItemTouchHelperAdapter;
+import com.sid.demoapp.R;
 import com.sid.demoapp.menu.MenuContent.MenuItem;
-import com.sid.demoapp.menu.OnStartDragListener;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.sid.demoapp.MainMenuFragment.OnListFragmentInteractionListener;
+import static com.sid.demoapp.menu.MainMenuFragment.OnListFragmentInteractionListener;
 
 
 public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRecyclerViewAdapter.ViewHolder>
@@ -26,8 +25,10 @@ public class MainMenuRecyclerViewAdapter extends RecyclerView.Adapter<MainMenuRe
     private final OnListFragmentInteractionListener listener;
     private final OnStartDragListener dragListener;
 
-    public MainMenuRecyclerViewAdapter(List<MenuItem> items, OnListFragmentInteractionListener
-            listener, OnStartDragListener dragListener) {
+    public MainMenuRecyclerViewAdapter(
+            List<MenuItem> items,
+            OnListFragmentInteractionListener listener,
+            OnStartDragListener dragListener) {
         this.items = items;
         this.listener = listener;
         this.dragListener = dragListener;

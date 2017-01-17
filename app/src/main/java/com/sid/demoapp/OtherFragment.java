@@ -141,7 +141,7 @@ public class OtherFragment extends Fragment {
         bntAnimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), DummyActivity.class));
+                startActivity(new Intent(getActivity(), WebDataFetchActivity.class));
             }
         });
 

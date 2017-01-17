@@ -60,7 +60,7 @@
         <receiver android:name=".scheduledjobs.AlarmNotificationReceiver">
         </receiver>
 
-        <activity android:name=".DummyActivity">
+        <activity android:name=".WebDataFetchActivity">
         </activity>
 
         <service
