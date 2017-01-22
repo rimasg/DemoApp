@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <com.sid.demoapp.views.RotateView
+        android:id="@+id/rotate_view"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:background="#ccc"
