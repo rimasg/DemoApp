@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.sid.demoapp"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
@@ -60,6 +60,9 @@ dependencies {
     compile 'joda-time:joda-time:2.9.7'
     compile 'com.google.dagger:dagger:2.8'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.2.22'
 }
