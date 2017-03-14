@@ -5,7 +5,9 @@ package com.sid.demoapp.dagger;
  */
 
 public class DaggerInjector {
-    private static CustomComponent component = DaggerCustomComponent.builder().build();
+    private static CustomComponent component = DaggerCustomComponent.builder()
+            .dataModule(new DataModule())
+            .build();
 
     public static CustomComponent get() {
         return component;

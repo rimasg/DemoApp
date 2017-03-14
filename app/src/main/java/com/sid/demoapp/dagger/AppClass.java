@@ -10,6 +10,7 @@ import dagger.Component;
 
 public class AppClass {
     @Inject PrintClass printClass;
+    @Inject OtherClass otherClass;
     @Inject DrawClass drawClass;
 
     public AppClass() {
@@ -27,6 +28,10 @@ public class AppClass {
         printClass.print();
     }
 
+    public void otherPrint() {
+        printClass.print();
+    }
+
     public void draw() {
         drawClass.draw();
     }
@@ -35,6 +40,7 @@ public class AppClass {
         // Two different implementations: via internal and external @Component
         final AppClass appClass = new AppClass();
         appClass.print();
+        appClass.otherPrint();
         appClass.draw();
 
         final AppComponent component = DaggerAppClass_AppComponent.builder().build();
