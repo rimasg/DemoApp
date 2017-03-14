@@ -1,5 +1,6 @@
 package com.sid.demoapp.menu;
 
+import com.sid.demoapp.ScrollViewFragment;
 import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.ImageDragFragment;
 import com.sid.demoapp.OtherFragment;
@@ -19,6 +20,7 @@ public class MenuContent {
         addItem(createMenuItem("Web Loader", WebLoaderFragment.class));
         addItem(createMenuItem("Other Fragment", OtherFragment.class));
         addItem(createMenuItem("Card Stream", CardStreamFragment.class));
+        addItem(createMenuItem("Scroll View", ScrollViewFragment.class));
     }
 
     private static void addItem(MenuItem item) {
