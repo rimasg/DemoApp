@@ -1,28 +1,96 @@
-<ScrollView
+<com.github.ksoichiro.android.observablescrollview.ObservableScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context="com.sid.demoapp.ScrollViewFragment">
 
     <LinearLayout
-        android:id="@+id/scroll_view"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/header_image"
+            android:src="@drawable/ladybug"
+            android:scaleType="fitCenter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="160dp"/>
 
-        <TextureView
-            android:id="@+id/content"
-            android:textAlignment="@string/placeholder_movie_plot"
+        <TextView
+            android:text="@string/placeholder_movie_plot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:text="@string/placeholder_movie_plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
 
     </LinearLayout>
 
-</ScrollView>
+</com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

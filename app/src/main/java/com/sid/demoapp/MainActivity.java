@@ -30,18 +30,20 @@ public class MainActivity extends AppCompatActivity implements
         GitHubFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private BatteryStatusListener batteryStatus;
+    private Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_new);
+        setContentView(R.layout.activity_main_transparent_toolbar);
+//        setContentView(R.layout.activity_main_new);
 /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 */
-        final Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         mainToolbar.setTitle("");
         setSupportActionBar(mainToolbar);
         final MainMenuFragment fragment = MainMenuFragment.newInstance();
@@ -101,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements
     private void scheduleAlarmJobAfter(int seconds) {
         Toast.makeText(this, "Job Scheduled to start after " + seconds + " seconds", Toast.LENGTH_SHORT).show();
         new AlarmManagerHelper(this).scheduleAlarmAfter(seconds);
+    }
+
+    public Toolbar getToolbar() {
+        return mainToolbar;
     }
 
     private void dummyMethod() {
