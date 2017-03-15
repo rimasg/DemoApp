@@ -16,6 +16,18 @@ allprojects {
     repositories {
         jcenter()
     }
+    ext {
+        // Sdk and tools
+        min_sdk_version = 15
+        target_sdk_version = 25
+        compile_sdk_version = 25
+        build_tools_version = '25.0.2'
+
+        // App dependencies
+        support_lib_version = '25.3.0'
+
+        gms_library_version = '9.4.0'
+    }
 }
 
 task clean(type: Delete) {
