@@ -1,4 +1,4 @@
-package com.sid.commons;
+package com.fortislabs.androidcommonslib;
 
 import org.junit.Test;
 

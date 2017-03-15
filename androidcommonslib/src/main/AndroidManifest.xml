@@ -1,4 +1,4 @@
-<manifest package="com.sid.commons"
+<manifest package="com.fortislabs.androidcommonslib"
 
           xmlns:android="http://schemas.android.com/apk/res/android"
 >

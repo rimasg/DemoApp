@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidCommonsLib</string>
+
+    <string name="permission_rationale_location">Access is required to run this App.</string>
+    <string name="location_permission_denied">This App requires the permission. Please try again
+        and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings.</string>
+    <string name="permission_required_toast">Permission is required for this App.</string>
+</resources>

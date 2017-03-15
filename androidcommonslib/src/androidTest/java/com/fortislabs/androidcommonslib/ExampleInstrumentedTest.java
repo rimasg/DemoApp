@@ -1,4 +1,4 @@
-package com.sid.commons;
+package com.fortislabs.androidcommonslib;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.sid.commons.test", appContext.getPackageName());
+        assertEquals("com.fortislabs.androidcommonslib.test", appContext.getPackageName());
     }
 }
