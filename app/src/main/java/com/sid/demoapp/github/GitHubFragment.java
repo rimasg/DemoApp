@@ -9,17 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sid.demoapp.R;
+import com.sid.demoapp.dagger.DaggerInjector;
 import com.sid.demoapp.github.data.RepoData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A fragment representing a list of Items.
@@ -27,13 +29,14 @@ import retrofit2.Response;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class GitHubFragment extends Fragment implements Callback<List<RepoData>> {
+public class GitHubFragment extends Fragment {
     public static final String TAG = "GitHubFragment";
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private List<RepoData> mItems = new ArrayList<>();
     private RecyclerView recyclerView;
+    @Inject GitHubService gitHubService;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,13 +58,26 @@ public class GitHubFragment extends Fragment implements Callback<List<RepoData>>
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        DaggerInjector.get().inject(this);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        GitHubService gitHubService = new GitHubService(this);
-        gitHubService.getRepos();
+        initGitHubService();
+    }
+
+    private void initGitHubService() {
+        gitHubService.getRepos()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<RepoData>>() {
+                    @Override
+                    public void accept(List<RepoData> repoData) throws Exception {
+                        final RepoItemRecyclerViewAdapter adapter = (RepoItemRecyclerViewAdapter) recyclerView.getAdapter();
+                        adapter.setValues(repoData);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     @Override
@@ -98,22 +114,6 @@ public class GitHubFragment extends Fragment implements Callback<List<RepoData>>
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onResponse(Call<List<RepoData>> call, Response<List<RepoData>> response) {
-        if (response.isSuccessful()) {
-            final List<RepoData> repoDatas = response.body();
-            final RepoItemRecyclerViewAdapter adapter = (RepoItemRecyclerViewAdapter) recyclerView.getAdapter();
-            adapter.setValues(repoDatas);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<List<RepoData>> call, Throwable t) {
-        Toast.makeText(getActivity(), "Getting Repos failed!\nTray again later.", Toast
-                .LENGTH_SHORT).show();
     }
 
     /**

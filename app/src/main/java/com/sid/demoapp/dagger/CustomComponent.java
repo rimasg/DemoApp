@@ -1,5 +1,7 @@
 package com.sid.demoapp.dagger;
 
+import com.sid.demoapp.github.GitHubFragment;
+
 import dagger.Component;
 
 /**
@@ -9,6 +11,7 @@ import dagger.Component;
 @Component(modules = {DataModule.class})
 public interface CustomComponent {
     void inject(AppClass appClass);
+    void inject(GitHubFragment fragment);
 
     OtherPrintClass getPrintClass();
 }
