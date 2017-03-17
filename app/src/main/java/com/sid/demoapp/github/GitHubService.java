@@ -1,5 +1,7 @@
 package com.sid.demoapp.github;
 
+import android.support.annotation.NonNull;
+
 import com.sid.demoapp.github.data.RepoData;
 
 import java.util.List;
@@ -25,16 +27,20 @@ public class GitHubService {
     public GitHubService() { }
 
     public Observable<List<RepoData>> getRepos() {
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        final GitHubAPI gitHubAPI = retrofit.create(GitHubAPI.class);
+        final GitHubAPI gitHubAPI = getRetrofit().create(GitHubAPI.class);
         return gitHubAPI.listRepos(REPO_NAME)
                 .retry(2)
                 .timeout(5, TimeUnit.SECONDS)
                 .cache();
+    }
+
+    @NonNull
+    private Retrofit getRetrofit() {
+        return new Retrofit.Builder()
+                    .baseUrl(API_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
     }
 
     public interface GitHubAPI {

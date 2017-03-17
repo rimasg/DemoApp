@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_transparent_toolbar);
-//        setContentView(R.layout.activity_main_new);
+//        setContentView(R.layout.activity_main_transparent_toolbar);
+        setContentView(R.layout.activity_main_new);
 /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
