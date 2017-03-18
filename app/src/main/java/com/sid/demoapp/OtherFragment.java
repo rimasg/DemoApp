@@ -1,5 +1,6 @@
 package com.sid.demoapp;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo;
@@ -15,9 +16,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.fortislabs.commons.utils.PermissionUtils;
+import com.fortislabs.commons.utils.StorageUtils;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.services.PlayMusicService;
@@ -35,6 +41,12 @@ import com.sid.demoapp.translations.TransitionActivityOne;
 import com.sid.demoapp.ui.PorterDuffActivity;
 import com.sid.demoapp.ui.RotateViewActivity;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -44,6 +56,8 @@ import bolts.Task;
 import static android.content.Context.JOB_SCHEDULER_SERVICE;
 
 public class OtherFragment extends Fragment {
+    private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 968;
+
     public static final String TAG = "MainMenuFragment";
     public static final int MSG_START = 1;
     public static final int MSG_END = 2;
@@ -300,13 +314,36 @@ public class OtherFragment extends Fragment {
     }
 
     private void listPackages(){
-        int counter = 0;
+        ArrayList<String> apkList = new ArrayList<>();
+
         PackageManager packageManager = getActivity().getPackageManager();
         List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo applicationInfo : installedApplications) {
-            Log.d(TAG, counter + " Package Name: " + applicationInfo.packageName);
-            Log.d(TAG, counter + " Source Dir: " + applicationInfo.sourceDir);
-            counter++;
+            final String apk =
+                    "Package: " + applicationInfo.packageName +
+                    " # SourceDir: " + applicationInfo.sourceDir;
+            apkList.add(apk);
+        }
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            PermissionUtils.requestPermission((AppCompatActivity) getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE, false);
+            return;
+        } else {
+            final File outputFile = StorageUtils.getOutputMediaFile(getActivity(), StorageUtils.MEDIA_TYPE_TEXT, "apk.txt");
+            if (null == outputFile) return;
+            try {
+                final FileOutputStream fos = new FileOutputStream(outputFile);
+                final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+                for (String apkItem : apkList) {
+                    writer.append(apkItem);
+                    writer.newLine();
+                }
+                writer.close();
+                fos.close();
+                Toast.makeText(getActivity(), "Packages loaded :)", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Log.w("ExternalStorage", "Error writing " + outputFile, e);
+            }
         }
     }
 
@@ -327,5 +364,17 @@ public class OtherFragment extends Fragment {
         }
         animator.setTarget(view);
         animator.start();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE:
+                if (PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    listPackages();
+                }
+                break;
+        }
     }
 }

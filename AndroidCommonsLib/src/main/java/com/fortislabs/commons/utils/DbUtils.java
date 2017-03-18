@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.fortislabs.androidcommonslib.utils;
+package com.fortislabs.commons.utils;
 
 import android.database.Cursor;
 
@@ -30,12 +30,12 @@ public final class DbUtils {
         return getInt(cursor, columnName) == BOOLEAN_TRUE;
     }
 
-    public static long getLong(Cursor cursor, String columnName) {
-        return cursor.getLong(cursor.getColumnIndexOrThrow(columnName));
-    }
-
     public static int getInt(Cursor cursor, String columnName) {
         return cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
+    }
+
+    public static long getLong(Cursor cursor, String columnName) {
+        return cursor.getLong(cursor.getColumnIndexOrThrow(columnName));
     }
 
     public static double getDouble(Cursor cursor, String columnName) {
