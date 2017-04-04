@@ -24,7 +24,7 @@ allprojects {
         build_tools_version = '25.0.2'
 
         // App dependencies
-        support_lib_version = '25.3.0'
+        support_lib_version = '25.3.1'
 
         gms_library_version = '10.2.0'
     }
