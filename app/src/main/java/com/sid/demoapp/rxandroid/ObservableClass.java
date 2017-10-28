@@ -3,13 +3,6 @@ package com.sid.demoapp.rxandroid;
 
 import android.support.annotation.NonNull;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -22,10 +15,8 @@ import io.reactivex.functions.Predicate;
 public class ObservableClass {
 
     private final String[] items = new String[]{"A", "B", "C", "X", "Y"};
-    private final ExecutorService executor;
 
     public ObservableClass() {
-        executor = Executors.newSingleThreadExecutor();
     }
 
     public static void main(String[] args) {
@@ -39,7 +30,6 @@ public class ObservableClass {
         mapObservable();
         filterObservable();
         countObservable();
-        asyncCountObservable();
     }
 
     @NonNull
@@ -97,30 +87,6 @@ public class ObservableClass {
                         System.out.println("Total Observables: " + aLong + "\n");
                     }
                 });
-    }
-
-    @NonNull
-    private void asyncCountObservable() {
-        final long startTime = System.currentTimeMillis();
-        final long delay = 3000L;
-
-        System.out.println("Start Observables (async): " + startTime);
-        final Future<List<String>> futureList = executor.submit(new Callable<List<String>>() {
-            @Override
-            public List<String> call() throws Exception {
-                return Arrays.asList(items);
-            }
-        });
-
-        Observable.fromFuture(futureList)
-                .subscribe(new Consumer<List<String>>() {
-                    @Override
-                    public void accept(List<String> strings) throws Exception {
-                        System.out.println("Total Observables (async): " + strings.toString());
-                    }
-                });
-
-        elapsedTime(startTime);
     }
 
     private void elapsedTime(long startTime) {

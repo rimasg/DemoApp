@@ -321,7 +321,7 @@ public class OtherFragment extends Fragment {
         for (ApplicationInfo applicationInfo : installedApplications) {
             final String apk =
                     "Package: " + applicationInfo.packageName +
-                    " # SourceDir: " + applicationInfo.sourceDir;
+                    " # SrcDir: " + applicationInfo.sourceDir;
             apkList.add(apk);
         }
 
@@ -329,7 +329,7 @@ public class OtherFragment extends Fragment {
             PermissionUtils.requestPermission((AppCompatActivity) getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE, false);
             return;
         } else {
-            final File outputFile = StorageUtils.getOutputMediaFile(getActivity(), StorageUtils.MEDIA_TYPE_TEXT, "apk.txt");
+            final File outputFile = StorageUtils.getOutputMediaFile(getActivity(), StorageUtils.MEDIA_TYPE_TEXT, "apk-list.txt");
             if (null == outputFile) return;
             try {
                 final FileOutputStream fos = new FileOutputStream(outputFile);
