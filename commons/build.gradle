@@ -36,7 +36,7 @@ android {
 
 dependencies {
     if (!hasProperty('support_lib_version')) {
-        ext.support_lib_version = '27.0.0'
+        ext.support_lib_version = '27.0.1'
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
