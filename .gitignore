@@ -45,7 +45,10 @@ tmp/
 .gradle
 gradle-app.setting
 build/
+gradlew
+gradlew.bat
 gradle.properties
+commons/gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties
