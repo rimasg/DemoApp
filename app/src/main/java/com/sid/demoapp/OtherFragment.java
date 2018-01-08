@@ -112,113 +112,51 @@ public class OtherFragment extends Fragment {
 
         final LinearLayout slideMenu = (LinearLayout) view.findViewById(R.id.slide_menu);
         final ImageView btnOpenClose = (ImageView) view.findViewById(R.id.action_open_close);
-        btnOpenClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCloseSlideMenu(slideMenu, btnOpenClose);
-            }
-        });
+        btnOpenClose.setOnClickListener(v -> openCloseSlideMenu(slideMenu, btnOpenClose));
 
         final Button btnBoltsTask = (Button) view.findViewById(R.id.btnBoltsTask);
         assert btnBoltsTask != null;
-        btnBoltsTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runBoltsTask();
-            }
-        });
+        btnBoltsTask.setOnClickListener(v -> runBoltsTask());
 
         final Button btnListPackages = (Button) view.findViewById(R.id.action_list_packages);
         assert btnListPackages != null;
-        btnListPackages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listPackages();
-            }
-        });
+        btnListPackages.setOnClickListener(v -> listPackages());
 
         final Button btnLaunchCalc = (Button) view.findViewById(R.id.action_launch_calc);
         assert btnLaunchCalc != null;
-        btnLaunchCalc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCalc();
-            }
-        });
+        btnLaunchCalc.setOnClickListener(v -> launchCalc());
 
         final Button bntAnimate = (Button) view.findViewById(R.id.action_fetch_data_from_web);
         assert bntAnimate != null;
-        bntAnimate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), WebDataFetchActivity.class));
-            }
-        });
+        bntAnimate.setOnClickListener(v -> startActivity(new Intent(getActivity(), WebDataFetchActivity.class)));
 
         final Button btnActionBar = (Button) view.findViewById(R.id.action_bar_activity);
         assert btnActionBar != null;
-        btnActionBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchActinBarActivity();
-            }
-        });
+        btnActionBar.setOnClickListener(v -> launchActinBarActivity());
 
         final Button btnPlayMusicService = (Button) view.findViewById(R.id.action_play_music);
-        btnPlayMusicService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startMusicService();
-            }
-        });
+        btnPlayMusicService.setOnClickListener(v -> startMusicService());
 
         final Button btnStopMusicService = (Button) view.findViewById(R.id.action_stop_music);
-        btnStopMusicService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopMusicService();
-            }
-        });
+        btnStopMusicService.setOnClickListener(v -> stopMusicService());
 
         final Button btnTranslation = (Button) view.findViewById(R.id.anction_translation);
-        btnTranslation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchTranslationActivity();
-            }
-        });
+        btnTranslation.setOnClickListener(v -> launchTranslationActivity());
 
         final Button btnAsyncTask = (Button) view.findViewById(R.id.action_async_task);
-        btnAsyncTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAsynctask();
-            }
-        });
+        btnAsyncTask.setOnClickListener(v -> startAsynctask());
 
         final Button btnTabbedActivity = (Button) view.findViewById(R.id.action_tabbed_activity);
-        btnTabbedActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startTabbedActivity();
-            }
-        });
+        btnTabbedActivity.setOnClickListener(v -> startTabbedActivity());
 
         final Button btnRotateView = (Button) view.findViewById(R.id.action_rotate_view);
-        btnRotateView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startRotateViewActivity();
-            }
-        });
+        btnRotateView.setOnClickListener(v -> startRotateViewActivity());
 
         final Button btnPorterDuff = (Button) view.findViewById(R.id.action_porter_duff);
-        btnPorterDuff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPorterDuffActivity();
-            }
-        });
+        btnPorterDuff.setOnClickListener(v -> startPorterDuffActivity());
+
+        final Button btnActivityChooser = (Button) view.findViewById(R.id.action_activity_chooser);
+        btnActivityChooser.setOnClickListener(v -> startActivityChooser());
 
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +177,12 @@ public class OtherFragment extends Fragment {
 
     private void startPorterDuffActivity() {
         startActivity(new Intent(getActivity(), PorterDuffActivity.class));
+    }
+
+    private void startActivityChooser() {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        final Intent chooser = Intent.createChooser(intent, "Select App to run:");
+        startActivity(chooser);
     }
 
     private void launchTranslationActivity() {

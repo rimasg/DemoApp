@@ -5,7 +5,7 @@ android {
         ext.compile_sdk_version = 27
     }
     if (!hasProperty('build_tools_version')) {
-        ext.build_tools_version = '27.0.0'
+        ext.build_tools_version = '27.0.3'
     }
 
     compileSdkVersion compile_sdk_version
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     if (!hasProperty('support_lib_version')) {
-        ext.support_lib_version = '27.0.1'
+        ext.support_lib_version = '27.0.2'
     }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

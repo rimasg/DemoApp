@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 import com.sid.demoapp.menu.MainMenuFragment;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements
     private static final String TAG = "MainActivity";
     private BatteryStatusListener batteryStatus;
     private Toolbar mainToolbar;
+    private InterstitialAd interstitialAd;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main_transparent_toolbar);
         setContentView(R.layout.activity_main_new);
+        // MobileAds.initialize(this, null);
 /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
