@@ -158,6 +158,9 @@ public class OtherFragment extends Fragment {
         final Button btnActivityChooser = (Button) view.findViewById(R.id.action_activity_chooser);
         btnActivityChooser.setOnClickListener(v -> startActivityChooser());
 
+        final Button btnKotlin = (Button) view.findViewById(R.id.action_kotlin);
+        btnKotlin.setOnClickListener(v -> startKotlinActivity());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +186,10 @@ public class OtherFragment extends Fragment {
         final Intent intent = new Intent(Intent.ACTION_VIEW);
         final Intent chooser = Intent.createChooser(intent, "Select App to run:");
         startActivity(chooser);
+    }
+
+    private void startKotlinActivity() {
+        startActivity(new Intent(getActivity(), KotlinActivity.class));
     }
 
     private void launchTranslationActivity() {
@@ -285,6 +292,7 @@ public class OtherFragment extends Fragment {
                 writer.close();
                 fos.close();
                 Toast.makeText(getActivity(), "Packages loaded :)", Toast.LENGTH_SHORT).show();
+                Log.d("ExternalStorage", outputFile.getAbsolutePath());
             } catch (IOException e) {
                 Log.w("ExternalStorage", "Error writing " + outputFile, e);
             }

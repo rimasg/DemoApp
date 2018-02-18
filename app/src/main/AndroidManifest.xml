@@ -114,6 +114,11 @@
         <activity android:name=".ui.RotateViewActivity"/>
         <activity android:name=".ui.PorterDuffActivity">
         </activity>
+        <activity
+            android:name=".KotlinActivity"
+            android:label="@string/title_activity_kotlin"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
