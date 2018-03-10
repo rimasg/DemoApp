@@ -276,6 +276,10 @@ public class OtherFragment extends Fragment {
             apkList.add(apk);
         }
 
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+
+        }
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             PermissionUtils.requestPermission((AppCompatActivity) getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE, false);
             return;
@@ -294,7 +298,9 @@ public class OtherFragment extends Fragment {
                 Toast.makeText(getActivity(), "Packages loaded :)", Toast.LENGTH_SHORT).show();
                 Log.d("ExternalStorage", outputFile.getAbsolutePath());
             } catch (IOException e) {
-                Log.w("ExternalStorage", "Error writing " + outputFile, e);
+                final String errorMsg = "Error writing " + outputFile;
+                Log.w("ExternalStorage", errorMsg, e);
+                Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
             }
         }
     }
