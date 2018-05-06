@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.41'
     repositories {
         google()
         jcenter()
@@ -30,8 +30,9 @@ allprojects {
 
         // App dependencies
         support_lib_version = '27.0.2'
-
         gms_library_version = '11.6.0'
+
+        koin_version = '0.9.2'
     }
 }
 

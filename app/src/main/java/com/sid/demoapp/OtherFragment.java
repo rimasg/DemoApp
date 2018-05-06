@@ -161,13 +161,11 @@ public class OtherFragment extends Fragment {
         final Button btnKotlin = (Button) view.findViewById(R.id.action_kotlin);
         btnKotlin.setOnClickListener(v -> startKotlinActivity());
 
+        final Button btnSimpleModel = (Button) view.findViewById(R.id.action_simple_model);
+        btnSimpleModel.setOnClickListener(v -> startSimpleModelActivity());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
-        btnSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scheduleJob();
-            }
-        });
+        btnSchedule.setOnClickListener(v -> scheduleJob());
     }
 
     private void startTabbedActivity() {
@@ -190,6 +188,10 @@ public class OtherFragment extends Fragment {
 
     private void startKotlinActivity() {
         startActivity(new Intent(getActivity(), KotlinActivity.class));
+    }
+
+    private void startSimpleModelActivity() {
+        startActivity(new Intent(getActivity(), SimpleModelActivity.class));
     }
 
     private void launchTranslationActivity() {
