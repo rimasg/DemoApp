@@ -5,12 +5,13 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.sid.demoapp.kotllin.DummyDataSet
 import com.sid.demoapp.kotllin.KotlinRecycleViewAdapter
 import kotlinx.android.synthetic.main.activity_kotlin.*
 import kotlinx.android.synthetic.main.content_kotlin.*
 
-class KotlinActivity : AppCompatActivity() {
+class KotlinActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewAdapter: KotlinRecycleViewAdapter
@@ -41,5 +42,22 @@ class KotlinActivity : AppCompatActivity() {
                     .make(view, "Say 'Hi!' to Kotlin", Snackbar.LENGTH_SHORT)
                     .setAction("Hi, Kotlin", null).show()
         }
+
+        btn_one.setOnClickListener(this)
+        btn_two.setOnClickListener(this)
     }
+
+    private fun displayMessage(view: View, msg: String) {
+        Snackbar
+                .make(view, msg, Snackbar.LENGTH_SHORT)
+                .setAction(msg, null).show()
+    }
+
+    override fun onClick(view: View?) {
+        when(view!!.id) {
+            R.id.btn_one -> displayMessage(view, "Button One clicked")
+            R.id.btn_two -> displayMessage(view, "Button Two clicked")
+        }
+    }
+
 }

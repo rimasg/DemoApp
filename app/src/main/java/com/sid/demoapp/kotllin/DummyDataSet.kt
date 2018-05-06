@@ -5,16 +5,11 @@ package com.sid.demoapp.kotllin
  */
 object DummyDataSet {
 
-    private val data = ArrayList<String>()
-
     val dataSet: ArrayList<String> by lazy {
-        initDataSet()
-        data
-    }
-
-    private fun initDataSet() {
+        val data = ArrayList<String>()
         for (i in 0..20) {
             data.add("Item #$i")
         }
+        data
     }
 }
