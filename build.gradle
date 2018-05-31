@@ -30,8 +30,8 @@ allprojects {
         build_tools_version = '27.0.3'
 
         // App dependencies
-        support_lib_version = '27.0.2'
-        gms_library_version = '11.6.0'
+        support_lib_version = '27.1.1'
+        gms_library_version = '15.0.1'
 
         koin_version = '0.9.2'
     }
