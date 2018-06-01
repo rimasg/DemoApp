@@ -8,6 +8,7 @@ object DummyDataSet {
     val dataSet: ArrayList<String> by lazy {
         val data = ArrayList<String>()
         for (i in 0..20) {
+
             data.add("Item #$i")
         }
         data
