@@ -1,5 +1,6 @@
 package com.sid.demoapp;
 
+import android.arch.lifecycle.LifecycleObserver;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,6 +19,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
+import com.sid.demoapp.lifecycleobserver.TestLifecycleObserver;
 import com.sid.demoapp.menu.MainMenuFragment;
 import com.sid.demoapp.menu.MenuContent;
 import com.sid.demoapp.scheduledjobs.AlarmManagerHelper;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main_transparent_toolbar);
         setContentView(R.layout.activity_main_new);
+        getLifecycle().addObserver(new TestLifecycleObserver());
         // MobileAds.initialize(this, null);
 /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
