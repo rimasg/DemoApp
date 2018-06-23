@@ -40,7 +40,7 @@ public class ScheduledJobService extends JobService {
     @Override
     public boolean onStartJob(final JobParameters params) {
         fragment.jobStarted();
-        new JobTask().execute(params);
+        new JobTask(this).execute(params);
         return true;
     }
 
@@ -54,8 +54,13 @@ public class ScheduledJobService extends JobService {
         this.fragment = fragment;
     }
 
-    private class JobTask extends AsyncTask<JobParameters, Void, Void> {
+    private static class JobTask extends AsyncTask<JobParameters, Void, Void> {
+        private ScheduledJobService jobService;
         protected JobParameters param;
+
+        public JobTask(ScheduledJobService jobService) {
+            this.jobService = jobService;
+        }
 
         @Override
         protected Void doInBackground(JobParameters... params) {
@@ -76,7 +81,7 @@ public class ScheduledJobService extends JobService {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            jobFinished(param, false);
+            jobService.jobFinished(param, false);
         }
     }
 }

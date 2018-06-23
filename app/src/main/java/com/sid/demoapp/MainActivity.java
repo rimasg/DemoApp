@@ -1,6 +1,5 @@
 package com.sid.demoapp;
 
-import android.arch.lifecycle.LifecycleObserver;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
