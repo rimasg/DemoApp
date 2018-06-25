@@ -26,6 +26,11 @@ import com.sid.demoapp.utils.BatteryStatusListener;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements
         ImageDragFragment.OnFragmentInteractionListener,
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main_transparent_toolbar);
         setContentView(R.layout.activity_main_new);
+//        getWindow().setBackgroundDrawableResource(R.drawable.ladybug);
         getLifecycle().addObserver(new TestLifecycleObserver());
         // MobileAds.initialize(this, null);
 /*
@@ -126,6 +132,32 @@ public class MainActivity extends AppCompatActivity implements
                 Log.i(TAG, "dummyMethod: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
             } while (cursor.moveToNext());
         }
+    }
+
+    private void dummyMethodRx() {
+        Single.fromCallable(() -> "Subscribed to Single")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    System.out.println("Callable result: " + s);
+                });
+
+        Single.fromCallable(() -> new String[]{"A", "B", "C", "D"})
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(strings -> {
+                    ArrayList<String> stringList = new ArrayList<>();
+                    for (String string : strings) {
+                        stringList.add(string + " - mapped.");
+                    }
+                    return stringList.toArray(new String[stringList.size()]);
+                })
+                .subscribe(result -> {
+                    System.out.println("dummyMethodRx result:");
+                    for (String string : result) {
+                        System.out.println(string);
+                    }
+                });
     }
 
     @Override
