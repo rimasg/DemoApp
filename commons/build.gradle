@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 
 android {
     if (!hasProperty('compile_sdk_version')) {
-        ext.compile_sdk_version = 27
+        ext.compile_sdk_version = 28
     }
     if (!hasProperty('build_tools_version')) {
-        ext.build_tools_version = '28.0.0'
+        ext.build_tools_version = '28.0.1'
     }
 
     compileSdkVersion compile_sdk_version
@@ -17,7 +17,7 @@ android {
             ext.min_sdk_version = 15
         }
         if (!hasProperty('target_sdk_version')) {
-            ext.target_sdk_version = 27
+            ext.target_sdk_version = 28
         }
 
         minSdkVersion min_sdk_version
