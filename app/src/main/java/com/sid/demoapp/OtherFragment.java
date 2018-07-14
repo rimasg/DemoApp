@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
+import com.sid.demoapp.model.LiveDataModel;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
@@ -78,6 +80,7 @@ public class OtherFragment extends Fragment {
             }
         }
     };
+    private LiveDataModel liveDataModel;
 
     public OtherFragment() {
     }
@@ -97,12 +100,24 @@ public class OtherFragment extends Fragment {
             intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
             getActivity().startService(intent);
         }
+        liveDataModel = ViewModelProviders.of(getActivity()).get(LiveDataModel.class);
+
+        initLiveData();
+    }
+
+    private void initLiveData() {
+        liveDataModel.msg.observe(this, this::newLiveDateMsg);
+    }
+
+    private void newLiveDateMsg(String  msg) {
+        Log.i(TAG, "newLiveDateMsg: " + msg);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
+        liveDataModel.msg.setValue("View created");
         return view;
     }
 
