@@ -5,6 +5,7 @@ import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.ImageDragFragment;
 import com.sid.demoapp.OtherFragment;
 import com.sid.demoapp.github.GitHubFragment;
+import com.sid.demoapp.views.TypeWriterFragment;
 import com.sid.demoapp.web.WebLoaderFragment;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MenuContent {
         addItem(createMenuItem("Other Fragment", OtherFragment.class));
         addItem(createMenuItem("Card Stream", CardStreamFragment.class));
         addItem(createMenuItem("Scroll View", ScrollViewFragment.class));
+        addItem(createMenuItem("Type Writer", TypeWriterFragment.class));
     }
 
     private static void addItem(MenuItem item) {
