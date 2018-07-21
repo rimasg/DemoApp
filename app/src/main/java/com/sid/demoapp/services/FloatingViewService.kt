@@ -5,7 +5,6 @@ import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.IBinder
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import com.sid.demoapp.MainActivity
@@ -79,7 +78,6 @@ class FloatingViewService : Service() {
 
                         lastAction = event.action
 
-                        Log.i(TAG, "Action: Down")
                         return true
                     }
                     MotionEvent.ACTION_UP -> {
@@ -93,7 +91,6 @@ class FloatingViewService : Service() {
 
                         lastAction = event.action
 
-                        Log.i(TAG, "Action: Up")
                         return true
                     }
                     MotionEvent.ACTION_MOVE -> {
@@ -103,7 +100,6 @@ class FloatingViewService : Service() {
                         windowManager.updateViewLayout(floatingView, params)
                         lastAction = event.action
 
-                        Log.i(TAG, "Action: Move - x: ${params.x}, y: ${params.y}")
                         return true
                     }
                 }
