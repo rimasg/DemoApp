@@ -12,11 +12,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -37,6 +39,7 @@ import com.fortislabs.commons.utils.StorageUtils;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.model.LiveDataModel;
+import com.sid.demoapp.services.FloatingViewService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
@@ -55,10 +58,12 @@ import java.util.concurrent.Callable;
 import bolts.Continuation;
 import bolts.Task;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.JOB_SCHEDULER_SERVICE;
 
 public class OtherFragment extends Fragment {
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 968;
+    private static final int DRAW_OVER_OTHER_APP_PERMISSION = 254;
 
     public static final String TAG = "MainMenuFragment";
     public static final int MSG_START = 1;
@@ -179,6 +184,9 @@ public class OtherFragment extends Fragment {
         final Button btnSimpleModel = (Button) view.findViewById(R.id.action_simple_model);
         btnSimpleModel.setOnClickListener(v -> startSimpleModelActivity());
 
+        final Button btnFloatingView = (Button) view.findViewById(R.id.action_floating_view);
+        btnFloatingView.setOnClickListener(v -> startFloatingViewService());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
     }
@@ -207,6 +215,18 @@ public class OtherFragment extends Fragment {
 
     private void startSimpleModelActivity() {
         startActivity(new Intent(getActivity(), SimpleModelActivity.class));
+    }
+
+    private void startFloatingViewService() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getActivity())) {
+            Intent intent = new Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getActivity().getPackageName()));
+            getActivity().startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
+        } else {
+            getActivity().startService(new Intent(getActivity(), FloatingViewService.class));
+            getActivity().finish();
+        }
     }
 
     private void launchTranslationActivity() {
@@ -350,6 +370,19 @@ public class OtherFragment extends Fragment {
                     listPackages();
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == DRAW_OVER_OTHER_APP_PERMISSION) {
+            if (resultCode == RESULT_OK) {
+                startFloatingViewService();
+            } else {
+                Toast.makeText(getActivity(), "Draw over other app permission not available.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }
