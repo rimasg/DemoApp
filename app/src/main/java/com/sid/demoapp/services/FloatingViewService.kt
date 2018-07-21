@@ -26,17 +26,7 @@ class FloatingViewService : Service() {
         super.onCreate()
         floatingView = LayoutInflater.from(this).inflate(R.layout.service_floating_view, null)
 
-        val params = WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT
-        )
-
-        params.gravity = Gravity.TOP or Gravity.LEFT
-        params.x = 0
-        params.y = 100
+        val params = initViewParams()
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
@@ -52,6 +42,22 @@ class FloatingViewService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         windowManager.removeView(floatingView)
+    }
+
+    private fun initViewParams(): WindowManager.LayoutParams {
+        val params = WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT
+        )
+
+        params.gravity = Gravity.TOP or Gravity.LEFT
+        params.x = 0
+        params.y = 100
+
+        return params
     }
 
     @SuppressLint("ClickableViewAccessibility")
