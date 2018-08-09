@@ -6,7 +6,7 @@ android {
         ext.compile_sdk_version = 28
     }
     if (!hasProperty('build_tools_version')) {
-        ext.build_tools_version = '28.0.1'
+        ext.build_tools_version = '28.0.2'
     }
 
     compileSdkVersion compile_sdk_version
