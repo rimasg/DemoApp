@@ -5,17 +5,20 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -35,6 +38,8 @@ import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
+import com.sid.demoapp.model.LiveDataModel;
+import com.sid.demoapp.services.FloatingViewService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
@@ -57,10 +62,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.JOB_SCHEDULER_SERVICE;
 
 public class OtherFragment extends Fragment {
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 968;
+    private static final int DRAW_OVER_OTHER_APP_PERMISSION = 254;
 
     public static final String TAG = "MainMenuFragment";
     public static final int MSG_START = 1;
@@ -82,6 +89,7 @@ public class OtherFragment extends Fragment {
             }
         }
     };
+    private LiveDataModel liveDataModel;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private PublishSubject<String> publishSubject = PublishSubject.create();
@@ -104,6 +112,17 @@ public class OtherFragment extends Fragment {
             intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
             getActivity().startService(intent);
         }
+        liveDataModel = ViewModelProviders.of(getActivity()).get(LiveDataModel.class);
+
+        initLiveData();
+    }
+
+    private void initLiveData() {
+        liveDataModel.msg.observe(this, this::newLiveDateMsg);
+    }
+
+    private void newLiveDateMsg(String  msg) {
+        Log.i(TAG, "newLiveDateMsg: " + msg);
     }
 
     private void initViews() {
@@ -117,6 +136,7 @@ public class OtherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
+        liveDataModel.msg.setValue("View created");
         return view;
     }
 
@@ -178,6 +198,9 @@ public class OtherFragment extends Fragment {
         final Button btnSimpleModel = (Button) view.findViewById(R.id.action_simple_model);
         btnSimpleModel.setOnClickListener(v -> startSimpleModelActivity());
 
+        final Button btnFloatingView = (Button) view.findViewById(R.id.action_floating_view);
+        btnFloatingView.setOnClickListener(v -> startFloatingViewService());
+
         final Button btnPublishSubject = (Button) view.findViewById(R.id.action_publish_subject);
         btnPublishSubject.setOnClickListener(v -> publishSubject());
 
@@ -209,6 +232,18 @@ public class OtherFragment extends Fragment {
 
     private void startSimpleModelActivity() {
         startActivity(new Intent(getActivity(), SimpleModelActivity.class));
+    }
+
+    private void startFloatingViewService() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getActivity())) {
+            Intent intent = new Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getActivity().getPackageName()));
+            getActivity().startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
+        } else {
+            getActivity().startService(new Intent(getActivity(), FloatingViewService.class));
+            getActivity().finish();
+        }
     }
 
     private void publishSubject() {
@@ -362,6 +397,19 @@ public class OtherFragment extends Fragment {
                     listPackages();
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == DRAW_OVER_OTHER_APP_PERMISSION) {
+            if (resultCode == RESULT_OK) {
+                startFloatingViewService();
+            } else {
+                Toast.makeText(getActivity(), "Draw over other app permission not available.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }
