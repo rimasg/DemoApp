@@ -52,6 +52,10 @@ import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 import static android.content.Context.JOB_SCHEDULER_SERVICE;
 
@@ -79,6 +83,9 @@ public class OtherFragment extends Fragment {
         }
     };
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private PublishSubject<String> publishSubject = PublishSubject.create();
+
     public OtherFragment() {
     }
 
@@ -97,6 +104,13 @@ public class OtherFragment extends Fragment {
             intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
             getActivity().startService(intent);
         }
+    }
+
+    private void initViews() {
+        compositeDisposable.add(publishSubject
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::toast));
     }
 
     @Override
@@ -164,6 +178,9 @@ public class OtherFragment extends Fragment {
         final Button btnSimpleModel = (Button) view.findViewById(R.id.action_simple_model);
         btnSimpleModel.setOnClickListener(v -> startSimpleModelActivity());
 
+        final Button btnPublishSubject = (Button) view.findViewById(R.id.action_publish_subject);
+        btnPublishSubject.setOnClickListener(v -> publishSubject());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
     }
@@ -194,6 +211,10 @@ public class OtherFragment extends Fragment {
         startActivity(new Intent(getActivity(), SimpleModelActivity.class));
     }
 
+    private void publishSubject() {
+        publishSubject.onNext("Published Subject");
+    }
+
     private void launchTranslationActivity() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
                 getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
@@ -215,10 +236,12 @@ public class OtherFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        initViews();
     }
 
     @Override
     public void onDetach() {
+        compositeDisposable.dispose();
         super.onDetach();
     }
 
@@ -324,6 +347,10 @@ public class OtherFragment extends Fragment {
         }
         animator.setTarget(view);
         animator.start();
+    }
+
+    private void toast(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
