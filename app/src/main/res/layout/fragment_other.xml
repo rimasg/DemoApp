@@ -173,13 +173,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seventh_layer"
+        android:layout_below="@+id/sixth_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/action_publish_subject"
             android:text="Publish Subject"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
     <LinearLayout

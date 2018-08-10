@@ -57,9 +57,7 @@ import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
@@ -92,7 +90,7 @@ public class OtherFragment extends Fragment {
     private LiveDataModel liveDataModel;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private PublishSubject<String> publishSubject = PublishSubject.create();
+    private PublishSubject<String> clickSubject = PublishSubject.create();
 
     public OtherFragment() {
     }
@@ -126,9 +124,7 @@ public class OtherFragment extends Fragment {
     }
 
     private void initViews() {
-        compositeDisposable.add(publishSubject
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        compositeDisposable.add(clickSubject
                 .subscribe(this::toast));
     }
 
@@ -247,7 +243,7 @@ public class OtherFragment extends Fragment {
     }
 
     private void publishSubject() {
-        publishSubject.onNext("Published Subject");
+        clickSubject.onNext("Published Subject");
     }
 
     private void launchTranslationActivity() {
