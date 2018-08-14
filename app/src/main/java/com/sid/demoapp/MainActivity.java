@@ -6,6 +6,8 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +37,8 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements
         ImageDragFragment.OnFragmentInteractionListener,
         MainMenuFragment.OnListFragmentInteractionListener,
-        GitHubFragment.OnListFragmentInteractionListener {
+        GitHubFragment.OnListFragmentInteractionListener,
+        BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
     private BatteryStatusListener batteryStatus;
     private Toolbar mainToolbar;
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements
         mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         mainToolbar.setTitle("");
         setSupportActionBar(mainToolbar);
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
         final MainMenuFragment fragment = MainMenuFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
@@ -160,6 +165,10 @@ public class MainActivity extends AppCompatActivity implements
                 });
     }
 
+    private void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
@@ -177,5 +186,20 @@ public class MainActivity extends AppCompatActivity implements
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        toast(item.getTitle().toString());
+
+        switch (item.getItemId()) {
+            case R.id.action_news:
+                break;
+            case R.id.action_reminder:
+                break;
+            case R.id.action_info:
+                break;
+        }
+        return true;
     }
 }
