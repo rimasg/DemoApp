@@ -132,6 +132,12 @@
             android:enabled="true"
             android:exported="false">
         </service>
+
+        <activity
+            android:name=".FlipViewActivity"
+            android:label="@string/title_activity_flip_view"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

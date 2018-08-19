@@ -11,8 +11,7 @@ import android.widget.TextView
 class KotlinRecycleViewAdapter(private val dataSet: ArrayList<String>) : RecyclerView.Adapter<KotlinRecycleViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val layout = LayoutInflater.from(parent!!.context).inflate(android.R.layout
-                .simple_list_item_1, parent, false) as TextView
+        val layout = LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false) as TextView
         return ViewHolder(layout)
     }
 

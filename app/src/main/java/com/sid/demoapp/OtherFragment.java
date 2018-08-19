@@ -200,6 +200,9 @@ public class OtherFragment extends Fragment {
         final Button btnPublishSubject = (Button) view.findViewById(R.id.action_publish_subject);
         btnPublishSubject.setOnClickListener(v -> publishSubject());
 
+        final Button btnFlipView = (Button) view.findViewById(R.id.action_flip);
+        btnFlipView.setOnClickListener(v -> flipView());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
     }
@@ -244,6 +247,10 @@ public class OtherFragment extends Fragment {
 
     private void publishSubject() {
         clickSubject.onNext("Published Subject");
+    }
+
+    private void flipView() {
+        startActivity(new Intent(getActivity(), FlipViewActivity.class));
     }
 
     private void launchTranslationActivity() {
