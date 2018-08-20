@@ -45,13 +45,8 @@ class FlipView : FrameLayout {
         }
         a.recycle()
         //
-        if (topView != null) {
-            ivTopView.setImageDrawable(topView)
-        }
-
-        if (backView != null) {
-            ivBackView.setImageDrawable(backView)
-        }
+        if (topView != null) ivTopView.setImageDrawable(topView)
+        if (backView != null) ivBackView.setImageDrawable(backView)
     }
 
     fun flip() {
@@ -65,8 +60,8 @@ class FlipView : FrameLayout {
     class FlipAnimation(private var fromView: View, private var toView: View) : Animation() {
         private lateinit var camera: Camera
 
-        private var centerX: Float = 0.0f
-        private var centerY: Float = 0.0f
+        private var centerX = 0.0f
+        private var centerY = 0.0f
 
         private var forward = true
 
