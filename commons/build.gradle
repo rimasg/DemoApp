@@ -2,10 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    if (!hasProperty('compile_sdk_version')) {
+    if (!project.hasProperty('compile_sdk_version')) {
         ext.compile_sdk_version = 28
     }
-    if (!hasProperty('build_tools_version')) {
+    if (!project.hasProperty('build_tools_version')) {
         ext.build_tools_version = '28.0.2'
     }
 
@@ -13,10 +13,10 @@ android {
     buildToolsVersion build_tools_version
 
     defaultConfig {
-        if (!hasProperty('min_sdk_version')) {
+        if (!project.hasProperty('min_sdk_version')) {
             ext.min_sdk_version = 15
         }
-        if (!hasProperty('target_sdk_version')) {
+        if (!project.hasProperty('target_sdk_version')) {
             ext.target_sdk_version = 28
         }
 
@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    if (!hasProperty('support_lib_version')) {
+    if (!project.hasProperty('support_lib_version')) {
         ext.support_lib_version = '27.1.1'
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
