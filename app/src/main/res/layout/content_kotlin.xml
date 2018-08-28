@@ -13,54 +13,56 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/action_say_hi"
-        app:layout_constraintStart_toStartOf="@+id/action_say_hi"
-        app:layout_constraintEnd_toEndOf="@+id/action_say_hi"
+        app:layout_constraintEnd_toEndOf="@+id/button_set"
+        app:layout_constraintStart_toStartOf="@+id/button_set"
+        app:layout_constraintTop_toBottomOf="@+id/button_set"
         tools:listitem="@android:layout/simple_list_item_1">
     </android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/tv_kotlin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Kotlin Activity"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <Button
-        android:id="@+id/action_say_hi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="say hi"
-        app:layout_constraintStart_toStartOf="@+id/tv_kotlin"
-        app:layout_constraintEnd_toEndOf="@+id/tv_kotlin"
-        app:layout_constraintTop_toBottomOf="@+id/tv_kotlin"/>
 
     <LinearLayout
         android:id="@+id/button_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/action_say_hi">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_one"
+        <TextView
+            android:id="@+id/tv_kotlin"
+            android:text="Kotlin Activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="one"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
 
         <Button
-            android:id="@+id/btn_two"
+            android:id="@+id/action_say_hi"
+            android:text="say hi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="two"/>
+            android:layout_gravity="center"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/action_say_hi">
+
+            <Button
+                android:id="@+id/btn_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="one"/>
+
+            <Button
+                android:id="@+id/btn_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="two"/>
+
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
