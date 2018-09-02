@@ -1,17 +1,22 @@
 package com.sid.demoapp
 
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.fortislabs.commons.utils.ext.viewModelProvider
 import com.sid.demoapp.kotllin.DummyDataSet
 import com.sid.demoapp.kotllin.KotlinRecycleViewAdapter
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_kotlin.*
 import kotlinx.android.synthetic.main.content_kotlin.*
+import javax.inject.Inject
 
-class KotlinActivity : AppCompatActivity(), View.OnClickListener {
+class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewAdapter: KotlinRecycleViewAdapter
@@ -20,6 +25,9 @@ class KotlinActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
         setSupportActionBar(toolbar)
+
+        val viewModel: KotlinViewModel = viewModelProvider(viewModelFactory)
+        title = viewModel.modelName
 
         viewManager = LinearLayoutManager(this).apply {
             orientation = LinearLayoutManager.VERTICAL
