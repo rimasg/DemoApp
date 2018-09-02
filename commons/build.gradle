@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     if (!project.hasProperty('compile_sdk_version')) {
@@ -47,6 +49,16 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${support_lib_version}"
     implementation "com.android.support:support-v4:${support_lib_version}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Architecture Components
+    implementation "android.arch.lifecycle:extensions:${lifecycle_version}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
