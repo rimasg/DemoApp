@@ -37,6 +37,9 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.model.LiveDataModel;
@@ -207,6 +210,9 @@ public class OtherFragment extends Fragment {
         final Button btnCrashApp = (Button) view.findViewById(R.id.action_crash_app);
         btnCrashApp.setOnClickListener(v -> crashApp());
 
+        final Button btnGenerateMessagingToken = (Button) view.findViewById(R.id.action_generate_messaging_token);
+        btnGenerateMessagingToken.setOnClickListener(v -> generateMessagingToken());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
     }
@@ -259,6 +265,23 @@ public class OtherFragment extends Fragment {
 
     private void crashApp() {
         Crashlytics.getInstance().crash();
+    }
+
+    private void generateMessagingToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Get Firebase Messaging Token failed");
+                            return;
+                        }
+
+                        String token = task.getResult().getToken();
+
+                        Log.d(TAG, String.format("Firebase Messaging Token: %s", token));
+                    }
+                });
     }
 
     private void launchTranslationActivity() {
