@@ -1,9 +1,9 @@
 package com.sid.demoapp.menu;
 
-import com.sid.demoapp.ScrollViewFragment;
-import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.ImageDragFragment;
 import com.sid.demoapp.OtherFragment;
+import com.sid.demoapp.ScrollViewFragment;
+import com.sid.demoapp.cardstream.CardStreamFragment;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.views.TypeWriterFragment;
 import com.sid.demoapp.web.WebLoaderFragment;
@@ -16,10 +16,10 @@ public class MenuContent {
     public static final List<MenuItem> ITEMS = new ArrayList<>();
 
     static {
+        addItem(createMenuItem("Playground", OtherFragment.class));
         addItem(createMenuItem("Image Drag", ImageDragFragment.class));
         addItem(createMenuItem("GitHub", GitHubFragment.class));
         addItem(createMenuItem("Web Loader", WebLoaderFragment.class));
-        addItem(createMenuItem("Other Fragment", OtherFragment.class));
         addItem(createMenuItem("Card Stream", CardStreamFragment.class));
         addItem(createMenuItem("Scroll View", ScrollViewFragment.class));
         addItem(createMenuItem("Type Writer", TypeWriterFragment.class));

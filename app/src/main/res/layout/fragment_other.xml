@@ -202,9 +202,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/eigth_layer"
+        android:layout_below="@+id/seventh_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/action_generate_messaging_token"
             android:text="Generate Messaging Token"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/action_coroutine_activity"
+            android:text="Coroutine Activity"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

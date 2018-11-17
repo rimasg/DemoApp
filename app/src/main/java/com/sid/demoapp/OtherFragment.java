@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
+import com.sid.demoapp.corountines.CoroutineActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.model.LiveDataModel;
 import com.sid.demoapp.services.FloatingViewService;
@@ -144,6 +145,7 @@ public class OtherFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //region Button listeners
         final LinearLayout slideMenu = (LinearLayout) view.findViewById(R.id.slide_menu);
         final ImageView btnOpenClose = (ImageView) view.findViewById(R.id.action_open_close);
         btnOpenClose.setOnClickListener(v -> openCloseSlideMenu(slideMenu, btnOpenClose));
@@ -213,8 +215,12 @@ public class OtherFragment extends Fragment {
         final Button btnGenerateMessagingToken = (Button) view.findViewById(R.id.action_generate_messaging_token);
         btnGenerateMessagingToken.setOnClickListener(v -> generateMessagingToken());
 
+        final Button btnCoroutineActivity = view.findViewById(R.id.action_coroutine_activity);
+        btnCoroutineActivity.setOnClickListener(v -> startCoroutineActivity());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
+        //endregion
     }
 
     private void startTabbedActivity() {
@@ -284,6 +290,9 @@ public class OtherFragment extends Fragment {
                 });
     }
 
+    private void startCoroutineActivity() {
+        startActivity(new Intent(getActivity(), CoroutineActivity.class));
+    }
     private void launchTranslationActivity() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
                 getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
