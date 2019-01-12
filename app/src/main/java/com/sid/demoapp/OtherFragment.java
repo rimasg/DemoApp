@@ -6,6 +6,8 @@ import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +49,7 @@ import com.sid.demoapp.model.LiveDataModel;
 import com.sid.demoapp.services.FloatingViewService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
+import com.sid.demoapp.todo.tasks.TasksActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
 import com.sid.demoapp.ui.PorterDuffActivity;
 import com.sid.demoapp.ui.RotateViewActivity;
@@ -218,6 +221,9 @@ public class OtherFragment extends Fragment {
         final Button btnCoroutineActivity = view.findViewById(R.id.action_coroutine_activity);
         btnCoroutineActivity.setOnClickListener(v -> startCoroutineActivity());
 
+        final Button btnTodoActivity = (Button) view.findViewById(R.id.action_todo);
+        btnTodoActivity.setOnClickListener(v -> startTodoActivity());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
         //endregion
@@ -293,6 +299,11 @@ public class OtherFragment extends Fragment {
     private void startCoroutineActivity() {
         startActivity(new Intent(getActivity(), CoroutineActivity.class));
     }
+
+    private void startTodoActivity() {
+        startActivity(new Intent(getActivity(), TasksActivity.class));
+    }
+
     private void launchTranslationActivity() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
                 getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
@@ -394,11 +405,13 @@ public class OtherFragment extends Fragment {
                 }
                 writer.close();
                 fos.close();
-                Toast.makeText(getActivity(), "Packages loaded :)", Toast.LENGTH_SHORT).show();
-                Log.d("ExternalStorage", outputFile.getAbsolutePath());
+                String filePath = outputFile.getAbsolutePath();
+                copyTextToClipboard("List of Packages", filePath);
+                Log.i("ListPackages", filePath);
+                Toast.makeText(getActivity(), "Packages loaded. Check file location in Clipboard :)", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 final String errorMsg = "Error writing " + outputFile;
-                Log.w("ExternalStorage", errorMsg, e);
+                Log.w("ListPackages", errorMsg, e);
                 Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
             }
         }
@@ -450,5 +463,11 @@ public class OtherFragment extends Fragment {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void copyTextToClipboard(String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clipData);
     }
 }
