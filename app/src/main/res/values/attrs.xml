@@ -11,4 +11,7 @@
         <attr name="drawable"/>
         <attr name="rotation" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="ScrollChildSwipeRefreshLayout">
+        <attr name="refreshing" format="boolean" />
+    </declare-styleable>
 </resources>
