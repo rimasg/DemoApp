@@ -153,6 +153,8 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".corountines.CoroutineActivity"/>
+        <activity android:name=".corountines.CoroutineDataActivity"/>
+
         <activity android:name=".todo.tasks.TasksActivity"/>
         <activity android:name=".todo.addedittask.AddEditTaskActivity"/>
         <activity android:name=".todo.taskdetail.TaskDetailActivity"/>

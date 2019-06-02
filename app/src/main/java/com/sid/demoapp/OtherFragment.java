@@ -45,6 +45,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.corountines.CoroutineActivity;
+import com.sid.demoapp.corountines.CoroutineDataActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.model.LiveDataModel;
 import com.sid.demoapp.services.FloatingViewService;
@@ -228,6 +229,9 @@ public class OtherFragment extends Fragment {
         final Button btnAnimatedDialog = (Button) view.findViewById(R.id.action_animated_dialog);
         btnAnimatedDialog.setOnClickListener(v -> startAnimatedDialog());
 
+        final Button btnCoroutine = (Button) view.findViewById(R.id.action_coroutine);
+        btnCoroutine.setOnClickListener(v -> startCoroutine());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
         //endregion
@@ -314,6 +318,10 @@ public class OtherFragment extends Fragment {
         dialog.setMessage("Hey, see the animation!");
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.show();
+    }
+
+    private void startCoroutine() {
+        startActivity(new Intent(getActivity(), CoroutineDataActivity.class));
     }
 
     private void launchTranslationActivity() {

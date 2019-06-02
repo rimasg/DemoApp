@@ -1,6 +1,7 @@
 package com.sid.demoapp
 
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.sid.demoapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber

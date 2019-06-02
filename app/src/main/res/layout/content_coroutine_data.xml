@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sid.demoapp.corountines.CoroutineDataActivity"
+    tools:showIn="@layout/activity_coroutine_data">
+
+    <TextView
+        android:id="@+id/coroutine_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:text="No Data"
+        tools:text="@tools:sample/lorem"/>
+
+    <Button
+        android:id="@+id/action_get_coroutine_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coroutine_result"
+        android:text="Get Coroutine Data"/>
+
+    <Button
+        android:id="@+id/action_reset_coroutine_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_get_coroutine_data"
+        android:text="Reset Coroutine Data"/>
+
+
+</android.support.constraint.ConstraintLayout>
