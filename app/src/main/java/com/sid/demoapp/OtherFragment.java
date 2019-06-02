@@ -225,8 +225,8 @@ public class OtherFragment extends Fragment {
         final Button btnTodoActivity = (Button) view.findViewById(R.id.action_todo);
         btnTodoActivity.setOnClickListener(v -> startTodoActivity());
 
-        final Button btnAnimated_dialog = (Button) view.findViewById(R.id.action_animated_dialog);
-        btnAnimated_dialog.setOnClickListener(v -> startAnimatedDialog());
+        final Button btnAnimatedDialog = (Button) view.findViewById(R.id.action_animated_dialog);
+        btnAnimatedDialog.setOnClickListener(v -> startAnimatedDialog());
 
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
@@ -313,7 +313,6 @@ public class OtherFragment extends Fragment {
         dialog.setTitle("Dialog Animation");
         dialog.setMessage("Hey, see the animation!");
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.show();
     }
 
