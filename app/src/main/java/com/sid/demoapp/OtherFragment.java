@@ -26,6 +26,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -224,6 +225,9 @@ public class OtherFragment extends Fragment {
         final Button btnTodoActivity = (Button) view.findViewById(R.id.action_todo);
         btnTodoActivity.setOnClickListener(v -> startTodoActivity());
 
+        final Button btnAnimated_dialog = (Button) view.findViewById(R.id.action_animated_dialog);
+        btnAnimated_dialog.setOnClickListener(v -> startAnimatedDialog());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
         //endregion
@@ -302,6 +306,15 @@ public class OtherFragment extends Fragment {
 
     private void startTodoActivity() {
         startActivity(new Intent(getActivity(), TasksActivity.class));
+    }
+
+    private void startAnimatedDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.setTitle("Dialog Animation");
+        dialog.setMessage("Hey, see the animation!");
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.show();
     }
 
     private void launchTranslationActivity() {

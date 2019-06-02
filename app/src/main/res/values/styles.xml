@@ -33,4 +33,9 @@
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/grow_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/shrink_fade_out</item>
+    </style>
+
 </resources>
