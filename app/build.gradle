@@ -96,6 +96,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.google.guava:guava:24.1-jre'
     implementation 'joda-time:joda-time:2.9.7'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.jakewharton.threetenabp:threetenabp:1.1.1'
     // Dagger
     implementation "com.google.dagger:dagger-android:$dagger"
     implementation "com.google.dagger:dagger-android-support:$dagger"
