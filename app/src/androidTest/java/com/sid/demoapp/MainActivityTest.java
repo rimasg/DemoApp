@@ -1,11 +1,11 @@
 package com.sid.demoapp;
 
 
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Rule;
 import org.junit.runner.RunWith;
+
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {

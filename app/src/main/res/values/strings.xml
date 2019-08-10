@@ -21,4 +21,34 @@
     <string name="msg_enter_text">Enter Text</string>
     <string name="lipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscin.</string>
 
+    <string name="task_marked_complete">Task marked complete</string>
+    <string name="task_marked_active">Task marked active</string>
+    <string name="completed_tasks_cleared">Completed tasks cleared</string>
+    <string name="label_all">All TO-DOs</string>
+    <string name="label_active">Active TO-DOs</string>
+    <string name="label_completed">Completed TO-DOs</string>
+    <string name="no_tasks_all">You have no TO-DOs!</string>
+    <string name="no_tasks_active">You have no active TO-DOs!</string>
+    <string name="no_tasks_completed">You have no completed TO-DOs!</string>
+    <string name="navigation_view_header_title">TO-DOs</string>
+    <string name="list_title">TO-DO List</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="no_tasks_add">Add a TO-DO item +</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_clear">Clear completed</string>
+    <string name="refresh">Refresh</string>
+    <string name="nav_all">All</string>
+    <string name="nav_active">Active</string>
+    <string name="nav_completed">Completed</string>
+    <string name="empty_task_message">TO DOs cannot be empty</string>
+    <string name="add_task">New TO-DO</string>
+    <string name="edit_task">Edit TO-DO</string>
+    <string name="menu_delete_task">Delete task</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Enter your TO-DO here.</string>
+    <string name="no_data">No data</string>
+    <string name="loading">LOADING</string>
+    <string name="successfully_saved_task_message">TO-DO saved</string>
+    <string name="successfully_deleted_task_message">Task was deleted</string>
+    <string name="successfully_added_task_message">TO-DO added</string>
 </resources>

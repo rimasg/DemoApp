@@ -1,7 +1,7 @@
 package com.sid.demoapp.corountines
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.sid.demoapp.corountines.util.FakeNertworkCall
 import com.sid.demoapp.corountines.util.FakeNetworkError
 import com.sid.demoapp.corountines.util.FakeNetworkException

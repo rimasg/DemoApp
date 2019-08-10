@@ -1,6 +1,5 @@
 package com.sid.demoapp.github;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import com.sid.demoapp.R;
 import com.sid.demoapp.github.data.RepoData;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.sid.demoapp.github.GitHubFragment.OnListFragmentInteractionListener;
 

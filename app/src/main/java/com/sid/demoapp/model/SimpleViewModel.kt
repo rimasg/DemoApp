@@ -1,6 +1,6 @@
 package com.sid.demoapp.model
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sid.demoapp.kotllin.DummyDataSet
 
 /**

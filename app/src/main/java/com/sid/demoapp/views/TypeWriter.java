@@ -2,14 +2,15 @@ package com.sid.demoapp.views;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 
 import com.sid.demoapp.R;
+
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 
 
 

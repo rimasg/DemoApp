@@ -1,7 +1,5 @@
 package com.sid.demoapp.github;
 
-import android.support.annotation.NonNull;
-
 import com.sid.demoapp.github.data.RepoData;
 
 import java.util.List;
@@ -9,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

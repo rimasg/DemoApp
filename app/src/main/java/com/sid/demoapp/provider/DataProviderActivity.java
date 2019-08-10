@@ -1,16 +1,12 @@
 package com.sid.demoapp.provider;
 
 import android.app.LoaderManager;
-import android.content.ContentProviderOperation;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +18,9 @@ import android.widget.SimpleCursorAdapter;
 
 import com.sid.demoapp.R;
 import com.sid.demoapp.databinding.ActivityDataProviderBinding;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 public class DataProviderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 

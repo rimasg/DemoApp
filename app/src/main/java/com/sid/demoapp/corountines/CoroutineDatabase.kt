@@ -1,8 +1,8 @@
 package com.sid.demoapp.corountines
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Entity
 data class Title(val title: String, @PrimaryKey val id: Int = 0)

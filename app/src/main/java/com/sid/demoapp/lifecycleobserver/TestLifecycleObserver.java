@@ -1,13 +1,13 @@
 package com.sid.demoapp.lifecycleobserver;
 
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
-import static android.arch.lifecycle.Lifecycle.Event.ON_CREATE;
-import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
-import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
-import static android.arch.lifecycle.Lifecycle.Event.ON_START;
-import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
+import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 /**
  * Created by rgaina on 09/06/2018.

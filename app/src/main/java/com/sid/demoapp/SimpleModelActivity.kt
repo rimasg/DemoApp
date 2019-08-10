@@ -1,8 +1,8 @@
 package com.sid.demoapp
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.sid.demoapp.kotllin.KotlinRecycleViewAdapter
 import com.sid.demoapp.model.SimpleViewModel
 import kotlinx.android.synthetic.main.activity_simple_model.*

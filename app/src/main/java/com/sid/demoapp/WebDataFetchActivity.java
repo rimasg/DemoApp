@@ -3,16 +3,17 @@ package com.sid.demoapp;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.sid.demoapp.databinding.ActivityDummyBinding;
 import com.sid.demoapp.services.WebDataFetchService;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 public class WebDataFetchActivity extends AppCompatActivity implements View.OnClickListener, BaseView<BasePresenter> {
 

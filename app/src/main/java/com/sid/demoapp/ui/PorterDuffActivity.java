@@ -8,11 +8,12 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.sid.demoapp.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PorterDuffActivity extends AppCompatActivity {
 

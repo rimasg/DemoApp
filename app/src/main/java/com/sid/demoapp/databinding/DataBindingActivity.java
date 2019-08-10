@@ -1,10 +1,11 @@
 package com.sid.demoapp.databinding;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.sid.demoapp.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 public class DataBindingActivity extends AppCompatActivity {
 

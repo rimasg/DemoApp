@@ -1,12 +1,12 @@
 package com.sid.demoapp
 
-import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fortislabs.commons.utils.ext.viewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.sid.demoapp.kotllin.DummyDataSet
 import com.sid.demoapp.kotllin.KotlinRecycleViewAdapter
 import dagger.android.support.DaggerAppCompatActivity
@@ -18,7 +18,7 @@ class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var viewAdapter: KotlinRecycleViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
         title = viewModel.modelName
 
         viewManager = LinearLayoutManager(this).apply {
-            orientation = LinearLayoutManager.VERTICAL
+            orientation = RecyclerView.VERTICAL
         }
         viewAdapter = KotlinRecycleViewAdapter(DummyDataSet.dataSet)
 

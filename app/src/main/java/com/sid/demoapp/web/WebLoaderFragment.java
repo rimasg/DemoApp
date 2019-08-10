@@ -4,9 +4,7 @@ package com.sid.demoapp.web;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.os.ResultReceiver;
+import android.os.ResultReceiver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sid.demoapp.R;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.

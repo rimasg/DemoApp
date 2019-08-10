@@ -1,6 +1,6 @@
 package com.sid.demoapp.menu;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Okis on 2017.01.15.

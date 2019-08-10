@@ -3,8 +3,6 @@ package com.sid.demoapp;
 import android.content.ClipData;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,6 +13,9 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 
 /**

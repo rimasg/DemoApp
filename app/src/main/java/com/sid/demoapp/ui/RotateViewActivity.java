@@ -1,10 +1,11 @@
 package com.sid.demoapp.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.sid.demoapp.R;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by Okis on 2016.12.26.

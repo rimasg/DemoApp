@@ -1,7 +1,5 @@
 package com.sid.demoapp.menu;
 
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +12,9 @@ import com.sid.demoapp.menu.MenuContent.MenuItem;
 
 import java.util.Collections;
 import java.util.List;
+
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.sid.demoapp.menu.MainMenuFragment.OnListFragmentInteractionListener;
 

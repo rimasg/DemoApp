@@ -2,21 +2,20 @@ package com.sid.demoapp.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.ViewOutlineProvider;
 
 import com.sid.demoapp.R;
 
 import java.util.Calendar;
 import java.util.Locale;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * Created by Okis on 2016.12.11.
@@ -70,8 +69,6 @@ public class CalendarMonthView extends View implements OnTouchListener {
         boundaryPaint.setStrokeWidth(2.0f);
         maximumDays = (calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + getMonthStartDate()) - 1;
 
-        // setOutlineProvider(new ClipOutlineProvider());
-        // setClipToOutline(true);
         setOnTouchListener(this);
     }
 
@@ -139,12 +136,4 @@ public class CalendarMonthView extends View implements OnTouchListener {
         void getSelectedDate(int selectedDate);
     }
 
-    private class ClipOutlineProvider extends ViewOutlineProvider {
-
-        @Override
-        public void getOutline(View view, Outline outline) {
-            final int margin = Math.min(view.getWidth(), view.getHeight()) / 10;
-            outline.setRoundRect(margin, margin, view.getWidth() - margin, view.getHeight() - margin, margin / 2);
-        }
-    }
 }

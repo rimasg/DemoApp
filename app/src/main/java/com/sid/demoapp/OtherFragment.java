@@ -5,7 +5,8 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-import android.arch.lifecycle.ViewModelProviders;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -19,12 +20,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,11 +37,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.corountines.CoroutineActivity;
+import com.sid.demoapp.corountines.CoroutineDataActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
 import com.sid.demoapp.model.LiveDataModel;
 import com.sid.demoapp.services.FloatingViewService;
 import com.sid.demoapp.services.PlayMusicService;
 import com.sid.demoapp.tabbed.TabbedActionBarActivity;
+import com.sid.demoapp.todo.tasks.TasksActivity;
 import com.sid.demoapp.translations.TransitionActivityOne;
 import com.sid.demoapp.ui.PorterDuffActivity;
 import com.sid.demoapp.ui.RotateViewActivity;
@@ -60,6 +57,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import bolts.Continuation;
 import bolts.Task;
 import io.reactivex.disposables.CompositeDisposable;
@@ -218,6 +223,15 @@ public class OtherFragment extends Fragment {
         final Button btnCoroutineActivity = view.findViewById(R.id.action_coroutine_activity);
         btnCoroutineActivity.setOnClickListener(v -> startCoroutineActivity());
 
+        final Button btnTodoActivity = (Button) view.findViewById(R.id.action_todo);
+        btnTodoActivity.setOnClickListener(v -> startTodoActivity());
+
+        final Button btnAnimatedDialog = (Button) view.findViewById(R.id.action_animated_dialog);
+        btnAnimatedDialog.setOnClickListener(v -> startAnimatedDialog());
+
+        final Button btnCoroutine = (Button) view.findViewById(R.id.action_coroutine);
+        btnCoroutine.setOnClickListener(v -> startCoroutine());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
         //endregion
@@ -293,6 +307,23 @@ public class OtherFragment extends Fragment {
     private void startCoroutineActivity() {
         startActivity(new Intent(getActivity(), CoroutineActivity.class));
     }
+
+    private void startTodoActivity() {
+        startActivity(new Intent(getActivity(), TasksActivity.class));
+    }
+
+    private void startAnimatedDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.setTitle("Dialog Animation");
+        dialog.setMessage("Hey, see the animation!");
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.show();
+    }
+
+    private void startCoroutine() {
+        startActivity(new Intent(getActivity(), CoroutineDataActivity.class));
+    }
+
     private void launchTranslationActivity() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(
                 getActivity(), R.anim.slide_in_left, R.anim.slide_out_right);
@@ -394,11 +425,13 @@ public class OtherFragment extends Fragment {
                 }
                 writer.close();
                 fos.close();
-                Toast.makeText(getActivity(), "Packages loaded :)", Toast.LENGTH_SHORT).show();
-                Log.d("ExternalStorage", outputFile.getAbsolutePath());
+                String filePath = outputFile.getAbsolutePath();
+                copyTextToClipboard("List of Packages", filePath);
+                Log.i("ListPackages", filePath);
+                Toast.makeText(getActivity(), "Packages loaded. Check file location in Clipboard :)", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 final String errorMsg = "Error writing " + outputFile;
-                Log.w("ExternalStorage", errorMsg, e);
+                Log.w("ListPackages", errorMsg, e);
                 Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
             }
         }
@@ -450,5 +483,11 @@ public class OtherFragment extends Fragment {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void copyTextToClipboard(String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clipData);
     }
 }

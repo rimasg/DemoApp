@@ -40,7 +40,7 @@ allprojects {
 
         koin_version = '0.9.3'
 
-        dagger = "2.16"
+        dagger = "2.21"
     }
 }
 
