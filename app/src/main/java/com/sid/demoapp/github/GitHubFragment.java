@@ -20,7 +20,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -70,13 +69,10 @@ public class GitHubFragment extends Fragment {
         gitHubService.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<RepoData>>() {
-                    @Override
-                    public void accept(List<RepoData> repoData) throws Exception {
-                        final RepoItemRecyclerViewAdapter adapter = (RepoItemRecyclerViewAdapter) recyclerView.getAdapter();
-                        adapter.setValues(repoData);
-                        adapter.notifyDataSetChanged();
-                    }
+                .subscribe(repoData -> {
+                    final RepoItemRecyclerViewAdapter adapter = (RepoItemRecyclerViewAdapter) recyclerView.getAdapter();
+                    adapter.setValues(repoData);
+                    adapter.notifyDataSetChanged();
                 });
     }
 
