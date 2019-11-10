@@ -6,7 +6,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class DemoFirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage?.from}")
 
         remoteMessage?.data?.isNotEmpty()?.let {
@@ -18,7 +18,7 @@ class DemoFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    override fun onNewToken(token: String?) {
+    override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
     }
 

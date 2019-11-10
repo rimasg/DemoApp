@@ -30,7 +30,7 @@ class TasksFragment : Fragment() {
         viewDataBinding.viewmodel?.start()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_tasks_fragment, menu)
     }
 
