@@ -19,6 +19,13 @@
                 motion:percentY="-0.25"
                 motion:framePosition="50"
                 motion:motionTarget="@id/movable_view"/>
+
+            <KeyAttribute
+                android:rotation="-45"
+                android:scaleX="2"
+                android:scaleY="2"
+                motion:framePosition="50"
+                motion:motionTarget="@id/movable_view"/>
         </KeyFrameSet>
     </Transition>
 
@@ -30,6 +37,9 @@
                 motion:layout_constraintTop_toTopOf="parent"
                 motion:layout_constraintBottom_toBottomOf="parent"
                 motion:layout_constraintStart_toStartOf="parent" />
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#E91E63"/>
         </Constraint>
     </ConstraintSet>
 
@@ -42,6 +52,9 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 motion:layout_constraintEnd_toEndOf="parent"/>
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#9999FF"/>
         </Constraint>
     </ConstraintSet>
 </MotionScene>
