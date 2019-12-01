@@ -256,6 +256,21 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/tenth_layer"
+        android:layout_below="@+id/ninth_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/action_motion_layout"
+        android:text="Motion Layout"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/slide_menu"
         android:orientation="vertical"
         android:layout_width="wrap_content"

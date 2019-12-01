@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.sid.demoapp"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sid.demoapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".MainApplication"
@@ -16,12 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".MotionLayoutActivity"
+            android:label="@string/title_activity_motion_layout"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@android:drawable/ic_notification_overlay"/>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent"/>
+            android:resource="@color/colorAccent" />
 
         <activity
             android:name=".MainActivity"
@@ -69,11 +74,9 @@
             android:exported="false">
         </service>
 
-        <receiver android:name=".scheduledjobs.AlarmNotificationReceiver">
-        </receiver>
+        <receiver android:name=".scheduledjobs.AlarmNotificationReceiver"></receiver>
 
-        <activity android:name=".WebDataFetchActivity">
-        </activity>
+        <activity android:name=".WebDataFetchActivity"></activity>
 
         <service
             android:name=".services.WebDataFetchService"
@@ -120,11 +123,9 @@
             android:label="@string/title_activity_translation"
             android:theme="@style/AppTheme.ActionBar.Transparent">
         </activity>
-        <activity android:name=".async.AsyncTaskActivity">
-        </activity>
-        <activity android:name=".ui.RotateViewActivity"/>
-        <activity android:name=".ui.PorterDuffActivity">
-        </activity>
+        <activity android:name=".async.AsyncTaskActivity"></activity>
+        <activity android:name=".ui.RotateViewActivity"></activity>
+        <activity android:name=".ui.PorterDuffActivity"></activity>
         <activity
             android:name=".KotlinActivity"
             android:label="@string/title_activity_kotlin"
@@ -154,7 +155,6 @@
         </activity>
         <activity android:name=".corountines.CoroutineActivity"/>
         <activity android:name=".corountines.CoroutineDataActivity"/>
-
         <activity android:name=".todo.tasks.TasksActivity"/>
         <activity android:name=".todo.addedittask.AddEditTaskActivity"/>
         <activity android:name=".todo.taskdetail.TaskDetailActivity"/>

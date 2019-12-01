@@ -29,6 +29,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.crashlytics.android.Crashlytics;
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
@@ -57,14 +66,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import bolts.Continuation;
 import bolts.Task;
 import io.reactivex.disposables.CompositeDisposable;
@@ -232,6 +233,9 @@ public class OtherFragment extends Fragment {
         final Button btnCoroutine = (Button) view.findViewById(R.id.action_coroutine);
         btnCoroutine.setOnClickListener(v -> startCoroutine());
 
+        final Button btnMotionLayoutActivity = (Button) view.findViewById(R.id.action_motion_layout);
+        btnMotionLayoutActivity.setOnClickListener(v -> startMotionMayoutActivity());
+
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
         //endregion
@@ -322,6 +326,10 @@ public class OtherFragment extends Fragment {
 
     private void startCoroutine() {
         startActivity(new Intent(getActivity(), CoroutineDataActivity.class));
+    }
+
+    private void startMotionMayoutActivity() {
+        startActivity(new Intent(getActivity(), MotionLayoutActivity.class));
     }
 
     private void launchTranslationActivity() {
