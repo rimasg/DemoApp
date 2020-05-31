@@ -8,7 +8,7 @@ android {
         ext.compile_sdk_version = 28
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '29.0.2'
+        ext.build_tools_version = '29.0.3'
     }
 
     compileSdkVersion compile_sdk_version
@@ -51,7 +51,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Architecture Components
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Dagger
     implementation "com.google.dagger:dagger-android:${dagger}"
@@ -62,5 +62,5 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }
