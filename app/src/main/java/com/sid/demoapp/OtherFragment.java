@@ -38,7 +38,6 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.crashlytics.android.Crashlytics;
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -288,7 +287,7 @@ public class OtherFragment extends Fragment {
     }
 
     private void crashApp() {
-        Crashlytics.getInstance().crash();
+        throw new RuntimeException("Test Crash");
     }
 
     private void generateMessagingToken() {
