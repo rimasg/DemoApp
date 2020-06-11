@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.sid.demoapp.todo.ViewModelFactory
 
 const val ADD_EDIT_RESULT_OK = Activity.RESULT_FIRST_USER + 1
@@ -35,7 +35,7 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
 }
 
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+        ViewModelProvider(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
 
 private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     beginTransaction().apply {

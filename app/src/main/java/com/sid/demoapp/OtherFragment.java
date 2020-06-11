@@ -36,7 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
@@ -120,7 +120,7 @@ public class OtherFragment extends Fragment {
             intent.putExtra(ScheduledJobService.MESSENGER, new Messenger(handler));
             getActivity().startService(intent);
         }
-        liveDataModel = ViewModelProviders.of(getActivity()).get(LiveDataModel.class);
+        liveDataModel = new ViewModelProvider(getActivity()).get(LiveDataModel.class);
 
         initLiveData();
     }
