@@ -29,7 +29,10 @@ class TaskDetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewDataBinding.viewmodel?.start(arguments!!.getString(ARGUMENT_TASK_ID))
+        val taskId = arguments?.getString(ARGUMENT_TASK_ID)
+        if (taskId != null) {
+            viewDataBinding.viewmodel?.start(taskId)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
