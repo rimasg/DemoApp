@@ -3,7 +3,7 @@ package com.sid.demoapp.web;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.os.ResultReceiver;
+import android.os.ResultReceiver;
 
 public class FetchDataFromWebService extends IntentService {
     public static final String KEY_RESULT_RECEIVER = "RESULT_RECEIVER";

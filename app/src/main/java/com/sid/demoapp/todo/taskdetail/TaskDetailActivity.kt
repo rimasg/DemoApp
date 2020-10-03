@@ -32,7 +32,7 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
     }
 
     private fun findOrCreateViewFragment() = supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-            TaskDetailFragment.newInstance(intent.getStringExtra(EXTRA_TASK_ID))
+            TaskDetailFragment.newInstance(intent.getStringExtra(EXTRA_TASK_ID)!!)
 
     private fun subscribeToNavigationChanges(viewModel: TaskDetailViewModel) {
         val activity = this@TaskDetailActivity
@@ -47,6 +47,7 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_EDIT_TASK) {
             if (resultCode == ADD_EDIT_RESULT_OK) {
                 setResult(EDIT_RESULT_OK)

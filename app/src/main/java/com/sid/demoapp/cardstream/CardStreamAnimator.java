@@ -18,10 +18,10 @@ public class CardStreamAnimator {
 
     public ObjectAnimator getDisappearingAnimator(Context context) {
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(new Object(),
-                PropertyValuesHolder.ofFloat("alpha", 1.f, 0.f),
-                PropertyValuesHolder.ofFloat("scaleX", 1.f, 0.f),
-                PropertyValuesHolder.ofFloat("scaleY", 1.f, 0.f),
-                PropertyValuesHolder.ofFloat("rotation", 0.f, 270.f));
+                PropertyValuesHolder.ofFloat(View.ALPHA, 1.f, 0.f),
+                PropertyValuesHolder.ofFloat(View.SCALE_X, 1.f, 0.f),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.f, 0.f),
+                PropertyValuesHolder.ofFloat(View.ROTATION, 1.f, 0.f));
 
         animator.setDuration((long) (200 * speedFactor));
         return animator;
@@ -33,9 +33,9 @@ public class CardStreamAnimator {
         wm.getDefaultDisplay().getSize(outPoint);
 
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(new Object(),
-                PropertyValuesHolder.ofFloat("alpha", 0.f, 1.f),
-                PropertyValuesHolder.ofFloat("translationY", outPoint.y / 2.f, 0.f),
-                PropertyValuesHolder.ofFloat("rotation", -45.f, 0.f));
+                PropertyValuesHolder.ofFloat(View.ALPHA, 0.f, 1.f),
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0.f, 1.f),
+                PropertyValuesHolder.ofFloat(View.ROTATION, outPoint.y / 2.f, 0.f));
 
         animator.setDuration((long) (200 * speedFactor));
         return animator;
