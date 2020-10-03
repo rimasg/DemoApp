@@ -5,10 +5,10 @@ apply plugin: 'kotlin-kapt'
 
 android {
     if (!project.hasProperty('compile_sdk_version')) {
-        ext.compile_sdk_version = 29
+        ext.compile_sdk_version = 30
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '30.0.0'
+        ext.build_tools_version = '30.0.2'
     }
 
     compileSdkVersion compile_sdk_version
@@ -19,7 +19,7 @@ android {
             ext.min_sdk_version = 18
         }
         if (!project.hasProperty('target_sdk_version')) {
-            ext.target_sdk_version = 29
+            ext.target_sdk_version = 30
         }
 
         minSdkVersion min_sdk_version
@@ -46,7 +46,7 @@ dependencies {
         ext.support_lib_version = '28.0.0'
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
