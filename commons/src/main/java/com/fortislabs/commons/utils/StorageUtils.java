@@ -50,13 +50,13 @@ public class StorageUtils {
         } else {
             switch (type) {
                 case MEDIA_TYPE_IMAGE:
-                    outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                    outputDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
                     break;
                 case MEDIA_TYPE_AUDIO:
-                    outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+                    outputDir = context.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
                     break;
                 case MEDIA_TYPE_TEXT:
-                    outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                    outputDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
                     break;
             }
         }
