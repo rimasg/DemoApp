@@ -8,7 +8,7 @@ android {
         ext.compile_sdk_version = 30
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '30.0.2'
+        ext.build_tools_version = '30.0.3'
     }
 
     compileSdkVersion compile_sdk_version
