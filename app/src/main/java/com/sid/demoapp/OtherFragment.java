@@ -44,6 +44,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
+import com.sid.demoapp.collapsingtoolbar.CollapsingToolbarActivity;
 import com.sid.demoapp.corountines.CoroutineActivity;
 import com.sid.demoapp.corountines.CoroutineDataActivity;
 import com.sid.demoapp.jobscheduler.ScheduledJobService;
@@ -233,7 +234,10 @@ public class OtherFragment extends Fragment {
         btnCoroutine.setOnClickListener(v -> startCoroutine());
 
         final Button btnMotionLayoutActivity = (Button) view.findViewById(R.id.action_motion_layout);
-        btnMotionLayoutActivity.setOnClickListener(v -> startMotionMayoutActivity());
+        btnMotionLayoutActivity.setOnClickListener(v -> startMotionLayoutActivity());
+
+        final Button btnCollapsingToolbarActivity = (Button) view.findViewById(R.id.action_collapsing_toolbar);
+        btnCollapsingToolbarActivity.setOnClickListener(v -> startCollapsingToolbarActivity());
 
         btnSchedule = (Button) view.findViewById(R.id.action_job_scheduler);
         btnSchedule.setOnClickListener(v -> scheduleJob());
@@ -327,8 +331,12 @@ public class OtherFragment extends Fragment {
         startActivity(new Intent(getActivity(), CoroutineDataActivity.class));
     }
 
-    private void startMotionMayoutActivity() {
+    private void startMotionLayoutActivity() {
         startActivity(new Intent(getActivity(), MotionLayoutActivity.class));
+    }
+
+    private void startCollapsingToolbarActivity() {
+        startActivity(new Intent(getActivity(), CollapsingToolbarActivity.class));
     }
 
     private void launchTranslationActivity() {

@@ -261,12 +261,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/action_motion_layout"
-        android:text="Motion Layout"
-        style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/action_motion_layout"
+            android:text="Motion Layout"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/action_collapsing_toolbar"
+            android:text="Collapsing Toolbar"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
