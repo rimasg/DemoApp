@@ -136,18 +136,17 @@
         <activity
             android:name=".FlipViewActivity"
             android:label="@string/title_activity_flip_view"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".corountines.CoroutineActivity" />
         <activity android:name=".corountines.CoroutineDataActivity" />
         <activity android:name=".todo.tasks.TasksActivity" />
         <activity android:name=".todo.addedittask.AddEditTaskActivity" />
         <activity android:name=".todo.taskdetail.TaskDetailActivity" />
-        <activity android:name=".collapsingtoolbar.CollapsingToolbarActivity"></activity>
         <activity
             android:name=".MotionLayoutActivity"
             android:label="@string/title_activity_motion_layout"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".collapsingtoolbar.CollapsingToolbarActivity"></activity>
     </application>
 
 </manifest>
