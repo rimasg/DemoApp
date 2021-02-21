@@ -11,7 +11,19 @@
            <KeyPosition
                motion:keyPositionType="pathRelative"
                motion:percentY="-0.15"
+               motion:framePosition="25"
+               motion:motionTarget="@+id/movable_view" />
+
+           <KeyPosition
+               motion:keyPositionType="pathRelative"
+               motion:percentY="0.15"
                motion:framePosition="50"
+               motion:motionTarget="@+id/movable_view" />
+
+           <KeyPosition
+               motion:keyPositionType="pathRelative"
+               motion:percentY="-0.15"
+               motion:framePosition="75"
                motion:motionTarget="@id/movable_view"/>
 
            <KeyAttribute
@@ -24,7 +36,6 @@
                android:rotation="-180"
                motion:framePosition="100"
                motion:motionTarget="@id/movable_view"/>
-
        </KeyFrameSet>
     </Transition>
 
