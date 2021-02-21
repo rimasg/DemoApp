@@ -15,11 +15,16 @@
                motion:motionTarget="@id/movable_view"/>
 
            <KeyAttribute
-               android:rotation="-45"
                android:scaleX="2"
                android:scaleY="2"
                motion:framePosition="50"
                motion:motionTarget="@id/movable_view"/>
+
+           <KeyAttribute
+               android:rotation="-180"
+               motion:framePosition="100"
+               motion:motionTarget="@id/movable_view"/>
+
        </KeyFrameSet>
     </Transition>
 
@@ -28,7 +33,6 @@
             <Layout
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                motion:layout_constraintTop_toTopOf="parent"
                 motion:layout_constraintBottom_toBottomOf="parent"
                 motion:layout_constraintStart_toStartOf="parent" />
             <CustomAttribute
