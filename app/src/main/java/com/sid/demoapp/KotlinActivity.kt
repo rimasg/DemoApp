@@ -26,8 +26,8 @@ class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityKotlinBinding.inflate(layoutInflater)
-        contentRecyclerViewBinding = binding.contentKotlin
         val view = binding.root
+        contentRecyclerViewBinding = ContentKotlinBinding.bind(view)
         setContentView(view)
         setSupportActionBar(binding.toolbar)
 

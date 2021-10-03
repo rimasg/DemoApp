@@ -18,8 +18,8 @@ class CoroutineDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCoroutineDataBinding.inflate(layoutInflater)
-        contentCoroutineDataBinding = binding.contentCoroutineData
         val view = binding.root
+        contentCoroutineDataBinding = ContentCoroutineDataBinding.bind(view)
         setContentView(view)
         setSupportActionBar(binding.toolbar)
 

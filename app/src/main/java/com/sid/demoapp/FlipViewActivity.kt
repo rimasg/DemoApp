@@ -13,8 +13,8 @@ class FlipViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFlipViewBinding.inflate(layoutInflater)
-        contentFlipViewBinding = binding.contentFlipView
         val view = binding.root
+        contentFlipViewBinding = ContentFlipViewBinding.bind(view)
         setContentView(view)
         setSupportActionBar(binding.toolbar)
 

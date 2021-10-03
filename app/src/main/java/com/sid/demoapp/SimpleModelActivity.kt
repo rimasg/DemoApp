@@ -20,8 +20,8 @@ class SimpleModelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySimpleModelBinding.inflate(layoutInflater)
-        contentSimpleModelBinding = binding.contentSimpleModel
         val view = binding.root
+        contentSimpleModelBinding = ContentSimpleModelBinding.bind(view)
         setContentView(view)
         setSupportActionBar(binding.toolbar)
 
