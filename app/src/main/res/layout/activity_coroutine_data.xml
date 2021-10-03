@@ -21,7 +21,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_coroutine_data"/>
+    <include
+        android:id="@+id/content_coroutine_data"
+        layout="@layout/content_coroutine_data"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

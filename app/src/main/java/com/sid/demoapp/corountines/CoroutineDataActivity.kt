@@ -3,9 +3,8 @@ package com.sid.demoapp.corountines
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.sid.demoapp.R
-import kotlinx.android.synthetic.main.activity_coroutine_data.*
-import kotlinx.android.synthetic.main.content_coroutine_data.*
+import com.sid.demoapp.databinding.ActivityCoroutineDataBinding
+import com.sid.demoapp.databinding.ContentCoroutineDataBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,31 +12,37 @@ import kotlinx.coroutines.withContext
 
 class CoroutineDataActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityCoroutineDataBinding
+    private lateinit var contentCoroutineDataBinding: ContentCoroutineDataBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coroutine_data)
-        setSupportActionBar(toolbar)
+        binding = ActivityCoroutineDataBinding.inflate(layoutInflater)
+        contentCoroutineDataBinding = binding.contentCoroutineData
+        val view = binding.root
+        setContentView(view)
+        setSupportActionBar(binding.toolbar)
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        action_get_coroutine_data.setOnClickListener {
-            action_get_coroutine_data.isEnabled = false
+        contentCoroutineDataBinding.actionGetCoroutineData.setOnClickListener {
+            contentCoroutineDataBinding.actionGetCoroutineData.isEnabled = false
             GlobalScope.launch {
                 val dataRepository = DataRepository()
                 val data = dataRepository.getDataFromRepository()
 
                 withContext(Dispatchers.Main) {
-                    coroutine_result.text = data
-                    action_get_coroutine_data.isEnabled = true
+                    contentCoroutineDataBinding.coroutineResult.text = data
+                    contentCoroutineDataBinding.actionGetCoroutineData.isEnabled = true
                 }
             }
         }
 
-        action_reset_coroutine_data.setOnClickListener {
-            coroutine_result.text = "No Data"
+        contentCoroutineDataBinding.actionResetCoroutineData.setOnClickListener {
+            contentCoroutineDataBinding.coroutineResult.text = "No Data"
         }
     }
 

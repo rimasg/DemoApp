@@ -21,7 +21,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_simple_model"/>
+    <include
+        android:id="@+id/content_simple_model"
+        layout="@layout/content_simple_model"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

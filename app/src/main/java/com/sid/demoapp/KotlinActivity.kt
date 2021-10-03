@@ -7,24 +7,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fortislabs.commons.utils.ext.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.sid.demoapp.databinding.ActivityKotlinBinding
+import com.sid.demoapp.databinding.ContentKotlinBinding
 import com.sid.demoapp.kotllin.DummyDataSet
 import com.sid.demoapp.kotllin.KotlinRecycleViewAdapter
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_kotlin.*
-import kotlinx.android.synthetic.main.content_kotlin.*
 import javax.inject.Inject
 
 class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var binding: ActivityKotlinBinding
+    private lateinit var contentRecyclerViewBinding: ContentKotlinBinding
+    private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewAdapter: KotlinRecycleViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin)
-        setSupportActionBar(toolbar)
+        binding = ActivityKotlinBinding.inflate(layoutInflater)
+        contentRecyclerViewBinding = binding.contentKotlin
+        val view = binding.root
+        setContentView(view)
+        setSupportActionBar(binding.toolbar)
 
         val viewModel: KotlinViewModel = viewModelProvider(viewModelFactory)
         title = viewModel.modelName
@@ -34,25 +39,25 @@ class KotlinActivity : DaggerAppCompatActivity(), View.OnClickListener {
         }
         viewAdapter = KotlinRecycleViewAdapter(DummyDataSet.dataSet)
 
-        recycler_view.apply {
+        contentRecyclerViewBinding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
 
-        action_say_hi.setOnClickListener { view ->
+        contentRecyclerViewBinding.actionSayHi.setOnClickListener { view ->
             Snackbar
                     .make(view, "Say 'Hi!' to Kotlin", Snackbar.LENGTH_SHORT)
                     .setAction("Hi, Kotlin", null).show()
         }
 
-        btn_one.setOnClickListener(this)
-        btn_two.setOnClickListener(this)
+        contentRecyclerViewBinding.btnOne.setOnClickListener(this)
+        contentRecyclerViewBinding.btnTwo.setOnClickListener(this)
     }
 
     private fun displayMessage(view: View, msg: String) {
