@@ -1,5 +1,8 @@
 package com.sid.demoapp;
 
+import static android.app.Activity.RESULT_OK;
+import static android.content.Context.JOB_SCHEDULER_SERVICE;
+
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
@@ -41,8 +44,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.collapsingtoolbar.CollapsingToolbarActivity;
 import com.sid.demoapp.corountines.CoroutineActivity;
@@ -70,9 +73,7 @@ import bolts.Continuation;
 import bolts.Task;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.PublishSubject;
-
-import static android.app.Activity.RESULT_OK;
-import static android.content.Context.JOB_SCHEDULER_SERVICE;
+import timber.log.Timber;
 
 public class OtherFragment extends Fragment {
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 968;
@@ -295,18 +296,19 @@ public class OtherFragment extends Fragment {
     }
 
     private void generateMessagingToken() {
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+        FirebaseInstallations.getInstance().getToken(false)
+                .addOnCompleteListener(new OnCompleteListener<InstallationTokenResult>() {
                     @Override
-                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Get Firebase Messaging Token failed");
-                            return;
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<InstallationTokenResult> task) {
+                        {
+                            if (!task.isSuccessful()) {
+                                Timber.w("Get FCM token failed");
+                                return;
+                            }
+
+                            final String token = task.getResult().getToken();
+                            Timber.d("FCM token: %s", token);
                         }
-
-                        String token = task.getResult().getToken();
-
-                        Log.d(TAG, String.format("Firebase Messaging Token: %s", token));
                     }
                 });
     }
