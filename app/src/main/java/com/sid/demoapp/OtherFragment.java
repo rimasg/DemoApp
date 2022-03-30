@@ -444,11 +444,11 @@ public class OtherFragment extends Fragment {
                 fos.close();
                 String filePath = outputFile.getAbsolutePath();
                 copyTextToClipboard("List of Packages", filePath);
-                Log.i("ListPackages", filePath);
+                Timber.i(filePath);
                 Toast.makeText(getActivity(), "Packages loaded. Check file location in Clipboard :)", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 final String errorMsg = "Error writing " + outputFile;
-                Log.w("ListPackages", errorMsg, e);
+                Timber.tag("ListPackages").w(e, errorMsg);
                 Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
             }
         }
