@@ -29,7 +29,7 @@ allprojects {
     }
     ext {
         // Sdk and tools
-        min_sdk_version = 19
+        min_sdk_version = 21
         target_sdk_version = 32
         compile_sdk_version = 32
         build_tools_version = '33.0.0-rc4'

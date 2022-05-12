@@ -116,6 +116,9 @@ dependencies {
     implementation('com.github.ksoichiro:android-observablescrollview:1.6.0') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.12.4'
 }
