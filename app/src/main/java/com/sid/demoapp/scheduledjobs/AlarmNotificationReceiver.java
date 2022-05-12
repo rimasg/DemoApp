@@ -18,7 +18,7 @@ public class AlarmNotificationReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         final Intent notificationIntent = new Intent(context, MainActivity.class);
-        final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         final Notification.Builder notificationBuilder = new Notification.Builder(context)
                 .setTicker("DemoApp started")

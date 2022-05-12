@@ -28,6 +28,6 @@ public final class AlarmManagerHelper {
 
     private PendingIntent buildNotificationReceiverIntent() {
         final Intent notificationReceiverIntent = new Intent(activity, AlarmNotificationReceiver.class);
-        return PendingIntent.getBroadcast(activity, 0, notificationReceiverIntent, 0);
+        return PendingIntent.getBroadcast(activity, 0, notificationReceiverIntent, PendingIntent.FLAG_IMMUTABLE);
     }
 }
