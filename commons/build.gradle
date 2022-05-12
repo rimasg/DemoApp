@@ -4,10 +4,10 @@ apply plugin: 'kotlin-kapt'
 
 android {
     if (!project.hasProperty('compile_sdk_version')) {
-        ext.compile_sdk_version = 30
+        ext.compile_sdk_version = 32
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '32.0.0'
+        ext.build_tools_version = '33.0.0-rc4'
     }
 
     compileSdkVersion compile_sdk_version
@@ -18,7 +18,7 @@ android {
             ext.min_sdk_version = 18
         }
         if (!project.hasProperty('target_sdk_version')) {
-            ext.target_sdk_version = 30
+            ext.target_sdk_version = 32
         }
 
         minSdkVersion min_sdk_version
@@ -59,5 +59,5 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
 }
