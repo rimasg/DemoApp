@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,13 +18,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.sid.demoapp.battery.BatteryStatusReceiver;
 import com.sid.demoapp.github.GitHubFragment;
 import com.sid.demoapp.github.data.RepoData;
 import com.sid.demoapp.lifecycleobserver.TestLifecycleObserver;
 import com.sid.demoapp.menu.MainMenuFragment;
 import com.sid.demoapp.menu.MenuContent;
 import com.sid.demoapp.scheduledjobs.AlarmManagerHelper;
-import com.sid.demoapp.utils.BatteryStatusListener;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,6 +33,7 @@ import java.util.ArrayList;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements
         ImageDragFragment.OnFragmentInteractionListener,
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements
         GitHubFragment.OnListFragmentInteractionListener,
         BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
-    private BatteryStatusListener batteryStatus;
+    private BatteryStatusReceiver batteryStatus;
     private Toolbar mainToolbar;
     private FirebaseAnalytics firebaseAnalytics;
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements
                 .commit();
 
         //
-        batteryStatus = new BatteryStatusListener();
+        batteryStatus = new BatteryStatusReceiver();
         //
         scheduleAlarmJobAfter(15);
     }
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements
                 columnsToExtract, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                Log.i(TAG, "dummyMethod: Name: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+                Timber.tag(TAG).i("dummyMethod: Name: %s", cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
             } while (cursor.moveToNext());
         }
     }
