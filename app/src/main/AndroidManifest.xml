@@ -39,11 +39,11 @@
         <activity
             android:name=".tabbed.TabbedSwipeActivity"
             android:label="@string/title_activity_tabbed_swipe"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".tabbed.TabbedActionBarActivity"
             android:label="@string/title_activity_tabbed_action_bar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".jobscheduler.ScheduledJobService"
@@ -63,11 +63,11 @@
             android:name=".provider.DataProvider"
             android:authorities="com.sid.demoapp.provider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <service
             android:name=".web.FetchDataFromWebService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <receiver android:name=".scheduledjobs.AlarmNotificationReceiver" />
 
@@ -77,7 +77,7 @@
             android:name=".services.WebDataFetchService"
             android:enabled="true"
             android:exported="false"
-            android:process=":my_process"></service>
+            android:process=":my_process" />
 
         <activity
             android:name=".ActionBarActivity"
@@ -105,32 +105,32 @@
         <service
             android:name=".services.PlayMusicService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".translations.TransitionActivityOne"
             android:label="@string/title_activity_translation"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity
             android:name=".translations.TransitionActivityTwo"
             android:label="@string/title_activity_translation"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity android:name=".async.AsyncTaskActivity" />
         <activity android:name=".ui.RotateViewActivity" />
         <activity android:name=".ui.PorterDuffActivity" />
         <activity
             android:name=".KotlinActivity"
             android:label="@string/title_activity_kotlin"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SimpleModelActivity"
             android:label="@string/title_activity_simple_model"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".services.FloatingViewService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <service android:name=".services.DemoFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
@@ -151,7 +151,7 @@
             android:name=".MotionLayoutActivity"
             android:label="@string/title_activity_motion_layout"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".collapsingtoolbar.CollapsingToolbarActivity"></activity>
+        <activity android:name=".collapsingtoolbar.CollapsingToolbarActivity" />
     </application>
 
 </manifest>
