@@ -2,17 +2,27 @@ package com.sid.demoapp.todo.taskdetail
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.sid.demoapp.R
 import com.sid.demoapp.todo.addedittask.AddEditTaskActivity
 import com.sid.demoapp.todo.addedittask.AddEditTaskFragment
-import com.sid.demoapp.todo.taskdetail.TaskDetailFragment.Companion.REQUEST_EDIT_TASK
 import com.sid.demoapp.todo.util.*
+import timber.log.Timber
 
 class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
 
     private lateinit var taskViewModel: TaskDetailViewModel
+    private val addEditTaskActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == ADD_EDIT_RESULT_OK) {
+            Timber.d("Task Added or Edited Successfully.")
+            setResult(EDIT_RESULT_OK)
+            finish()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +56,6 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_EDIT_TASK) {
-            if (resultCode == ADD_EDIT_RESULT_OK) {
-                setResult(EDIT_RESULT_OK)
-                finish()
-            }
-        }
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
@@ -71,7 +71,7 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
         val intent = Intent(this, AddEditTaskActivity::class.java).apply {
             putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId)
         }
-        startActivityForResult(intent, REQUEST_EDIT_TASK)
+        addEditTaskActivityResultLauncher.launch(intent)
     }
 
     fun obtainViewModel(): TaskDetailViewModel = obtainViewModel(TaskDetailViewModel::class.java)
