@@ -3,10 +3,10 @@ package com.sid.demoapp.todo.tasks
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import com.google.android.material.navigation.NavigationView
 import com.sid.demoapp.R
 import com.sid.demoapp.todo.addedittask.AddEditTaskActivity
@@ -14,11 +14,18 @@ import com.sid.demoapp.todo.taskdetail.TaskDetailActivity
 import com.sid.demoapp.todo.util.obtainViewModel
 import com.sid.demoapp.todo.util.replaceFragmentInActivity
 import com.sid.demoapp.todo.util.setupActionBar
+import timber.log.Timber
 
 class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var viewModel: TasksViewModel
+    private val taskDetailActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        Timber.d("Task Details displayed")
+        viewModel.handleActivityResult(result.resultCode)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +40,14 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
         setupViewFragment()
 
         viewModel = obtainViewModel().apply {
-            openTaskEvent.observe(this@TasksActivity, Observer<String> { taskId ->
+            openTaskEvent.observe(this@TasksActivity) { taskId ->
                 if (taskId != null) {
                     this@TasksActivity.openTaskDetails(taskId)
                 }
-            })
-            newTaskEvent.observe(this@TasksActivity, Observer<Void> {
+            }
+            newTaskEvent.observe(this@TasksActivity) {
                 this@TasksActivity.addNewTask()
-            })
+            }
         }
     }
 
@@ -89,16 +96,11 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        viewModel.handleActivityResult(requestCode, resultCode)
-    }
-
     override fun openTaskDetails(taskId: String) {
         val intent = Intent(this, TaskDetailActivity::class.java).apply {
             putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId)
         }
-        startActivityForResult(intent, AddEditTaskActivity.REQUEST_CODE)
+        taskDetailActivityLauncher.launch(intent)
     }
 
     override fun addNewTask() {

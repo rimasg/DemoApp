@@ -12,7 +12,6 @@ import androidx.databinding.ObservableList
 import androidx.lifecycle.AndroidViewModel
 import com.sid.demoapp.R
 import com.sid.demoapp.todo.SingleLiveEvent
-import com.sid.demoapp.todo.addedittask.AddEditTaskActivity
 import com.sid.demoapp.todo.data.source.TasksDataSource
 import com.sid.demoapp.todo.data.source.TasksRepository
 import com.sid.demoapp.todo.data.source.local.Task
@@ -101,19 +100,17 @@ class TasksViewModel(
         newTaskEvent.call()
     }
 
-    fun handleActivityResult(requestCode: Int, resultCode: Int) {
-        if (AddEditTaskActivity.REQUEST_CODE == requestCode) {
-            snackbarMessage.value =
-                    when (resultCode) {
-                        EDIT_RESULT_OK ->
-                            R.string.successfully_saved_task_message
-                        ADD_EDIT_RESULT_OK ->
-                            R.string.successfully_added_task_message
-                        DELETE_RESULT_OK ->
-                            R.string.successfully_deleted_task_message
-                        else -> return
-                    }
-        }
+    fun handleActivityResult(resultCode: Int) {
+        snackbarMessage.value =
+                when (resultCode) {
+                    EDIT_RESULT_OK ->
+                        R.string.successfully_saved_task_message
+                    ADD_EDIT_RESULT_OK ->
+                        R.string.successfully_added_task_message
+                    DELETE_RESULT_OK ->
+                        R.string.successfully_deleted_task_message
+                    else -> return
+                }
     }
 
     private fun loadTasks(forceUpdate: Boolean, showLoadingUI: Boolean) {
