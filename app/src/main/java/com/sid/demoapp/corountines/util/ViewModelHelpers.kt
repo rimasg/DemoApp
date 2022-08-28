@@ -7,7 +7,7 @@ fun <T: ViewModel, A> singleArgViewModelFactory(constructor: (A) -> T): (A) -> V
     return {arg: A ->
         object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <V : ViewModel?> create(modelClass: Class<V>): V {
+            override fun <V : ViewModel> create(modelClass: Class<V>): V {
                 return constructor(arg) as V
             }
         }
