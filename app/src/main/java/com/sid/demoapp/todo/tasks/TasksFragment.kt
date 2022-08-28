@@ -52,7 +52,7 @@ class TasksFragment : Fragment() {
             }
 
     private fun showFilteringPopUpMenu() {
-        PopupMenu(requireContext(), requireActivity().findViewById<View>(R.id.menu_filter)).run {
+        PopupMenu(requireContext(), requireActivity().findViewById(R.id.menu_filter)).run {
             menuInflater.inflate(R.menu.filter_tasks, menu)
 
             setOnMenuItemClickListener {
@@ -113,6 +113,5 @@ class TasksFragment : Fragment() {
 
     companion object {
         fun newInstance() = TasksFragment()
-        private const val TAG = "TasksFragment"
     }
 }
