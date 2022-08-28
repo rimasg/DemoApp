@@ -13,16 +13,16 @@ class TaskDetailFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentTaskDetailBinding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupFab()
         viewDataBinding.viewmodel?.let {
-            view?.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
+            view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
         }
     }
 
     private fun setupFab() {
-        activity!!.findViewById<View>(R.id.fab_edit_task).setOnClickListener {
+        requireActivity().findViewById<View>(R.id.fab_edit_task).setOnClickListener {
             viewDataBinding.viewmodel?.editTask()
         }
     }
@@ -50,12 +50,12 @@ class TaskDetailFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menu_delete -> {
                 viewDataBinding.viewmodel?.deleteTask()
-                return true
+                true
             }
-            else -> return false
+            else -> false
         }
     }
 

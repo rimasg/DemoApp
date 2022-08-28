@@ -14,7 +14,7 @@ class DummyClass {
 
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val dummyClass = DummyClass()
     dummyClass.testMethod { dummyClass.helloWorld("John") }
 }

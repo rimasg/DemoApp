@@ -1,7 +1,6 @@
 package com.sid.demoapp.todo.tasks
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -11,13 +10,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.sid.demoapp.R
 import com.sid.demoapp.databinding.FragmentTasksBinding
 import com.sid.demoapp.todo.util.setupSnackbar
+import timber.log.Timber
 
 class TasksFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentTasksBinding
     private lateinit var listAdapter: TasksAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewDataBinding = FragmentTasksBinding.inflate(inflater, container, false).apply {
             viewmodel = (activity as TasksActivity).obtainViewModel()
         }
@@ -52,7 +52,7 @@ class TasksFragment : Fragment() {
             }
 
     private fun showFilteringPopUpMenu() {
-        PopupMenu(context!!, activity!!.findViewById<View>(R.id.menu_filter)).run {
+        PopupMenu(requireContext(), requireActivity().findViewById<View>(R.id.menu_filter)).run {
             menuInflater.inflate(R.menu.filter_tasks, menu)
 
             setOnMenuItemClickListener {
@@ -71,10 +71,10 @@ class TasksFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewDataBinding.viewmodel?.let {
-            view?.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
+            view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
         }
         setupFab()
         setupListAdapter()
@@ -82,7 +82,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun setupFab() {
-        activity!!.findViewById<FloatingActionButton>(R.id.fab_add_task).run {
+        requireActivity().findViewById<FloatingActionButton>(R.id.fab_add_task).run {
             setImageResource(R.drawable.ic_add)
             setOnClickListener {
                 viewDataBinding.viewmodel?.addNewTask()
@@ -96,16 +96,16 @@ class TasksFragment : Fragment() {
             listAdapter = TasksAdapter(ArrayList(0), viewModel)
             viewDataBinding.tasksList.adapter = listAdapter
         } else {
-            Log.w(TAG, "ViewModel not initialized when attempting to set up adapter.")
+            Timber.w("ViewModel not initialized when attempting to set up adapter.")
         }
     }
 
     private fun setupRefreshLayout() {
         viewDataBinding.refreshLayout.run {
             setColorSchemeColors(
-                    ContextCompat.getColor(activity!!, R.color.colorPrimary),
-                    ContextCompat.getColor(activity!!, R.color.colorAccent),
-                    ContextCompat.getColor(activity!!, R.color.colorPrimaryDark)
+                    ContextCompat.getColor(requireActivity(), R.color.colorPrimary),
+                    ContextCompat.getColor(requireActivity(), R.color.colorAccent),
+                    ContextCompat.getColor(requireActivity(), R.color.colorPrimaryDark)
             )
             scrollUpChild = viewDataBinding.tasksList
         }

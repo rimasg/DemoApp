@@ -16,11 +16,11 @@ class AddEditTaskFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentAddTaskBinding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupFab()
         viewDataBinding.viewmodel?.let {
-            view?.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
+            view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
         }
         setupActionBar()
         loadData()
@@ -30,18 +30,17 @@ class AddEditTaskFragment : Fragment() {
         viewDataBinding.viewmodel?.start(arguments?.getString(ARGUMENT_EDIT_TASK_ID))
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val root = inflater.inflate(R.layout.fragment_add_task, container, false)
         viewDataBinding = FragmentAddTaskBinding.bind(root).apply {
             viewmodel = (activity as AddEditTaskActivity).obtainViewModel()
         }
         setHasOptionsMenu(true)
-        retainInstance = false
         return  viewDataBinding.root
     }
 
     private fun setupFab() {
-        activity!!.findViewById<FloatingActionButton>(R.id.fab_edit_task_done).apply {
+        requireActivity().findViewById<FloatingActionButton>(R.id.fab_edit_task_done).apply {
             setImageResource(R.drawable.ic_done)
             setOnClickListener { viewDataBinding.viewmodel?.saveTask() }
         }
