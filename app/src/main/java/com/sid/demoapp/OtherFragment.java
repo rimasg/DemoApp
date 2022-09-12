@@ -43,9 +43,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.fortislabs.commons.utils.PermissionUtils;
 import com.fortislabs.commons.utils.StorageUtils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.installations.FirebaseInstallations;
-import com.google.firebase.installations.InstallationTokenResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.sid.demoapp.async.AsyncTaskActivity;
 import com.sid.demoapp.collapsingtoolbar.CollapsingToolbarActivity;
 import com.sid.demoapp.corountines.CoroutineActivity;
@@ -296,20 +294,15 @@ public class OtherFragment extends Fragment {
     }
 
     private void generateMessagingToken() {
-        FirebaseInstallations.getInstance().getToken(false)
-                .addOnCompleteListener(new OnCompleteListener<InstallationTokenResult>() {
-                    @Override
-                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<InstallationTokenResult> task) {
-                        {
-                            if (!task.isSuccessful()) {
-                                Timber.w("Get FCM token failed");
-                                return;
-                            }
-
-                            final String token = task.getResult().getToken();
-                            Timber.d("FCM token: %s", token);
-                        }
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Timber.w("Get FCM token failed");
+                        return;
                     }
+
+                    final String token = task.getResult();
+                    Timber.d("FCM token: %s", token);
                 });
     }
 
