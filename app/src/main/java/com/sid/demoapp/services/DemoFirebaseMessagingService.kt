@@ -7,14 +7,14 @@ import timber.log.Timber
 class DemoFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Timber.d("From: " + remoteMessage.from)
+        Timber.d("FCM Message From: " + remoteMessage.from)
 
         remoteMessage.data.isNotEmpty().let {
-            Timber.d("Message Data payload: " + remoteMessage.data)
+            Timber.d("FCM Message Data payload: " + remoteMessage.data)
         }
 
         remoteMessage.notification?.let {
-            Timber.d("Message Notification Body: " + it.body)
+            Timber.d("FCM Message Notification Body: " + it.body)
         }
     }
 
