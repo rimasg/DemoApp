@@ -7,7 +7,7 @@ android {
         ext.compile_sdk_version = 32
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '33.0.0'
+        ext.build_tools_version = '33.0.2'
     }
 
     compileSdkVersion compile_sdk_version
@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         if (!project.hasProperty('min_sdk_version')) {
-            ext.min_sdk_version = 18
+            ext.min_sdk_version = 19
         }
         if (!project.hasProperty('target_sdk_version')) {
             ext.target_sdk_version = 32
@@ -43,7 +43,7 @@ dependencies {
         ext.support_lib_version = '28.0.0'
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
