@@ -3,7 +3,10 @@ package com.sid.demoapp.todo.taskdetail
 import android.os.Bundle
 import android.view.*
 import android.widget.CheckBox
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.sid.demoapp.R
 import com.sid.demoapp.databinding.FragmentTaskDetailBinding
@@ -19,12 +22,33 @@ class TaskDetailFragment : Fragment() {
         viewDataBinding.viewmodel?.let {
             view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
         }
+
+        initMenu()
     }
 
     private fun setupFab() {
         requireActivity().findViewById<View>(R.id.fab_edit_task).setOnClickListener {
             viewDataBinding.viewmodel?.editTask()
         }
+    }
+    private fun initMenu() {
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_taskdetail_fragment, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_delete -> {
+                        viewDataBinding.viewmodel?.deleteTask()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onResume() {
@@ -45,22 +69,7 @@ class TaskDetailFragment : Fragment() {
                 }
             }
         }
-        setHasOptionsMenu(true)
         return view
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_delete -> {
-                viewDataBinding.viewmodel?.deleteTask()
-                true
-            }
-            else -> false
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_taskdetail_fragment, menu)
     }
 
     companion object {
