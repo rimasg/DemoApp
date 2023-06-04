@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'com.fortislabs.androidcommonslib'
+
     if (!project.hasProperty('compile_sdk_version')) {
         ext.compile_sdk_version = 32
     }
