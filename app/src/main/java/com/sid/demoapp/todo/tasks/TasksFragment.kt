@@ -1,7 +1,12 @@
 package com.sid.demoapp.todo.tasks
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -11,6 +16,7 @@ import com.sid.demoapp.R
 import com.sid.demoapp.databinding.FragmentTasksBinding
 import com.sid.demoapp.todo.util.setupSnackbar
 import timber.log.Timber
+import java.lang.Deprecated
 
 class TasksFragment : Fragment() {
 
@@ -30,10 +36,12 @@ class TasksFragment : Fragment() {
         viewDataBinding.viewmodel?.start()
     }
 
+    @Deprecated
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_tasks_fragment, menu)
     }
 
+    @Deprecated
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
                 R.id.menu_clear -> {
