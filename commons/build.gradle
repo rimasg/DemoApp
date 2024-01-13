@@ -6,21 +6,21 @@ android {
     namespace 'com.fortislabs.androidcommonslib'
 
     if (!project.hasProperty('compile_sdk_version')) {
-        ext.compile_sdk_version = 32
+        ext.compile_sdk_version = 34
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '33.0.2'
+        ext.build_tools_version = '34.0.0'
     }
 
-    compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
+    compileSdk compile_sdk_version
+    buildToolsVersion = build_tools_version
 
     defaultConfig {
         if (!project.hasProperty('min_sdk_version')) {
             ext.min_sdk_version = 19
         }
         if (!project.hasProperty('target_sdk_version')) {
-            ext.target_sdk_version = 32
+            ext.target_sdk_version = 34
         }
 
         minSdkVersion min_sdk_version
