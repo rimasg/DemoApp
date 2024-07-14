@@ -86,29 +86,29 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.firebase:firebase-messaging:24.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics:19.0.2'
+    implementation 'com.google.firebase:firebase-crashlytics:19.0.3'
     implementation 'com.google.firebase:firebase-analytics:22.0.2'
 
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    kapt 'androidx.lifecycle:lifecycle-common-java8:2.8.2'
+    kapt 'androidx.lifecycle:lifecycle-common-java8:2.8.3'
 
     implementation 'androidx.room:room-runtime:2.6.1'
     ksp 'androidx.room:room-compiler:2.6.1'
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
 
     implementation 'com.parse.bolts:bolts-tasks:1.4.0'
     implementation 'com.parse.bolts:bolts-applinks:1.4.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.google.guava:guava:31.1-android'
-    implementation 'joda-time:joda-time:2.9.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.11.0'
+    implementation 'com.google.guava:guava:33.2.1-android'
+    implementation 'joda-time:joda-time:2.12.7'
     implementation 'com.jakewharton.timber:timber:5.0.1'
     api 'com.jakewharton.threetenabp:threetenabp:1.4.7'
     // Dagger
@@ -117,9 +117,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger"
     kapt "com.google.dagger:dagger-android-processor:$dagger"
 
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation('com.github.ksoichiro:android-observablescrollview:1.6.0') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
@@ -127,5 +127,5 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-core:5.12.0'
 }

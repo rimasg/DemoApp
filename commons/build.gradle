@@ -9,7 +9,7 @@ android {
         ext.compile_sdk_version = 34
     }
     if (!project.hasProperty('build_tools_version')) {
-        ext.build_tools_version = '34.0.0'
+        ext.build_tools_version = '35.0.0'
     }
 
     compileSdk compile_sdk_version
@@ -58,7 +58,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${dagger}"
     kapt "com.google.dagger:dagger-android-processor:${dagger}"
 
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.6.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.13.2'
